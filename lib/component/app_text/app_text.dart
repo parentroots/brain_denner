@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../uitls/constants/appColors/app_colors.dart';
+
 class AppText extends StatelessWidget {
   final String text;
   final double fontSize;
@@ -15,7 +17,7 @@ class AppText extends StatelessWidget {
     this.fontSize = 16,
     this.fontWeight = FontWeight.normal,
     this.gradient,
-    this.color,
+    this.color=AppColors.white,
     this.textAlign,
     this.maxLines,
     this.overflow,

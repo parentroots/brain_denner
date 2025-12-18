@@ -2,6 +2,8 @@ import 'package:brain_denner/component/app_button/app_button.dart';
 import 'package:brain_denner/component/app_text/app_text.dart';
 import 'package:brain_denner/component/app_text_field/app_text_field.dart';
 import 'package:brain_denner/config/appRoutes/app_routes.dart';
+import 'package:brain_denner/features/auth/presentation/controller/sign_in_controller.dart';
+import 'package:brain_denner/features/auth/presentation/screen/sign_up_screen.dart';
 import 'package:brain_denner/features/auth/presentation/widget/auth_bg_widget.dart';
 import 'package:brain_denner/uitls/constants/appColors/app_colors.dart';
 import 'package:brain_denner/uitls/constants/appIcons/app_icons.dart';
@@ -29,91 +31,96 @@ bool isChecked = false;
 class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.primaryColor,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            AuthBgWidget(
-              headerTextSize: 24,
-              headerText: AppString.signInToFirstFood,
+   return GetBuilder<SignInController>(builder: (controller){
 
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 24),
-                    AppText(
-                      text: AppString.emailAddress,
-                      color: AppColors.white,
-                    ),
-                    SizedBox(height: 14),
-                    AppTextField(
-                      controller: emailTEController,
-                      hintText: 'Enter email address',
-                    ),
-                    SizedBox(height: 16),
-                    AppText(text: AppString.password, color: AppColors.white),
+     return  Scaffold(
+       backgroundColor: AppColors.primaryColor,
+       body: SingleChildScrollView(
+         child: Column(
+           children: [
+             AuthBgWidget(
+               headerTextSize: 24,
+               headerText: AppString.signInToFirstFood,
 
-                    Column(
-                      children: [
-                        SizedBox(height: 14),
-                        AppTextField(
-                          suffixIcon: Icons.remove_red_eye_outlined,
-                          controller: passwordTEController,
-                          hintText: 'Enter password',
-                        ),
-                      ],
-                    ),
+               child: Padding(
+                 padding: EdgeInsets.symmetric(horizontal: 16.w),
+                 child: Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                   children: [
+                     SizedBox(height: 24),
+                     AppText(
+                       text: AppString.emailAddress,
+                       color: AppColors.white,
+                     ),
+                     SizedBox(height: 14),
+                     AppTextField(
+                       controller: emailTEController,
+                       hintText: 'Enter email address',
+                     ),
+                     SizedBox(height: 16),
+                     AppText(text: AppString.password, color: AppColors.white),
 
-                    SizedBox(height: 24.h),
+                     Column(
+                       children: [
+                         SizedBox(height: 14),
+                         AppTextField(
+                           obscureText: controller.isShowPassword,
+                           onSuffixTap: controller.isPasswordToggle,
+                           suffixIcon: controller.isShowPassword?Icons.visibility_off_outlined:Icons.visibility_outlined,
+                           controller: passwordTEController,
+                           hintText: 'Enter password',
+                         ),
+                       ],
+                     ),
 
-                    buildRememBerMeSection(),
+                     SizedBox(height: 24.h),
 
-                    SizedBox(height: 24),
+                     buildRememBerMeSection(),
 
-                    AppButton(
-                      text: AppString.login,
-                      onPressed: () {
-                        debugPrint("Logged in===>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                      },
-                    ),
-                    SizedBox(height: 41),
+                     SizedBox(height: 24),
 
-                    buildORSection(),
+                     AppButton(
+                       text: AppString.login,
+                       onPressed: () {
+                         debugPrint("Logged in===>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                       },
+                     ),
+                     SizedBox(height: 41),
 
-                    SizedBox(height: 24.h),
+                     buildORSection(),
 
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //===================continue with google
-                        ContinueWithSocialMediaSection(
-                          title: 'Google',
-                          imagePath: AppIcons.googleLogo,
-                        ),
+                     SizedBox(height: 24.h),
 
-                        //=================continue with apple
-                        ContinueWithSocialMediaSection(
-                          title: 'Apple',
-                          imagePath: AppIcons.appleLogo,
-                        ),
-                      ],
-                    ),
+                     Row(
+                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       children: [
+                         //===================continue with google
+                         ContinueWithSocialMediaSection(
+                           title: 'Google',
+                           imagePath: AppIcons.googleLogo,
+                         ),
 
-                    SizedBox(height: 45.h),
-                    buildRichText(),
+                         //=================continue with apple
+                         ContinueWithSocialMediaSection(
+                           title: 'Apple',
+                           imagePath: AppIcons.appleLogo,
+                         ),
+                       ],
+                     ),
 
-                    SizedBox(height: 93.h),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+                     SizedBox(height: 45.h),
+                     buildRichText(),
+
+                     SizedBox(height: 93.h),
+                   ],
+                 ),
+               ),
+             ),
+           ],
+         ),
+       ),
+     );
+   });
 
   }
 
@@ -199,7 +206,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     );
                   }
                   return const BorderSide(
-                    color: Colors.grey, // ❌ unchecked → gray
+                    color: Colors.grey,
                     width: 1,
                   );
                 }),
@@ -222,16 +229,22 @@ class _SignInScreenState extends State<SignInScreen> {
           ],
         ),
 
-        AppText(
-          text: AppString.forgotPassword,
-          color: AppColors.blue,
-          fontSize: 12,
-          fontWeight: FontWeight.w400,
+        InkWell(
+          onTap: onTapForgotPasswordButton,
+          child: AppText(
+            text: AppString.forgotPassword,
+            color: AppColors.blue,
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+          ),
         ),
       ],
     );
   }
 
+  void onTapForgotPasswordButton(){
+     Get.toNamed(AppRoute.forgotPasswordScreen);
+  }
 
   void onTapSignUpText(){
 

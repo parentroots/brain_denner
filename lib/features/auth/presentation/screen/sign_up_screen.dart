@@ -13,7 +13,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 
 import '../../../../uitls/constants/appString/app_string.dart';
-import '../sign_up_controller.dart';
+import '../controller/sign_up_controller.dart';
 import '../widget/continue_with_social_media_widget.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -108,7 +108,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     AppButton(
                       text: AppString.signUp,
                       onPressed: () {
-                        debugPrint("Logged in===>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        debugPrint("Sign Up===>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                       },
                     ),
 

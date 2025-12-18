@@ -37,10 +37,13 @@ dependencies:
   flutter_svg: ^2.2.3
   get: ^4.7.3
   flutter_screenutil: ^5.9.3
+  pinput: ^6.0.1
+  pin_code_fields: ^8.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

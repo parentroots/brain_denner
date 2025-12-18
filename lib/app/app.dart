@@ -17,7 +17,7 @@ class App extends StatelessWidget {
       builder: (_,child){
        return GetMaterialApp(
          debugShowCheckedModeBanner: false,
-         initialRoute: AppRoute.splashScreen,
+         initialRoute: AppRoute.mainBottomNavScreen,
          getPages: AppRoute.routes,
          
 

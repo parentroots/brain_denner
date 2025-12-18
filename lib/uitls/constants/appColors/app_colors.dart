@@ -8,4 +8,5 @@ static const Color skyBlueColor=Color(0xFF65CEFD);
 static const Color whiteGrey=Color(0xFFE7E7E7);
 static const Color white=Color(0xFFFEFEFE);
 static const Color blue=Color(0xFF00D4FF);
+static const Color orangeColor=Color(0xFFFF6D00);
 }
