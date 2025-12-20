@@ -37,7 +37,7 @@ class _OnBoardingThirdScreenState extends State<OnBoardingThirdScreen> {
                 child: Column(
                   children: [
                     AppButton(
-                      text: AppString.next,
+                      text: 'Find Food',
                       onPressed: () {
                         onTapNextButton();
                       },

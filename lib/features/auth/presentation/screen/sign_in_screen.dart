@@ -83,6 +83,7 @@ class _SignInScreenState extends State<SignInScreen> {
                        text: AppString.login,
                        onPressed: () {
                          debugPrint("Logged in===>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                         Get.toNamed(AppRoute.homeScreen);
                        },
                      ),
                      SizedBox(height: 41),

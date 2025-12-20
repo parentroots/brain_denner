@@ -52,7 +52,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: AppText(
-                            text: AppString.emailAddress,
+                            text:'Enter code',
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
                           ),
@@ -86,7 +86,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           borderRadius: BorderRadius.circular(12),
 
                           fieldHeight: 60,
-                          fieldWidth: 56,
+                          fieldWidth: 56.w,
 
 
                           // 🔹 Border Color

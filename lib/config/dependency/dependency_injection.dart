@@ -4,7 +4,14 @@ import 'package:brain_denner/features/auth/presentation/controller/sign_in_contr
 import 'package:brain_denner/features/auth/presentation/controller/sign_up_controller.dart';
 import 'package:brain_denner/features/auth/presentation/controller/forgot_password_controller.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/controller/main_bottom_nav_controller.dart';
+import 'package:brain_denner/features/bottom_nav/presentation/screen/home_screen/presentation/controller/nutrition_details_controller.dart';
+import 'package:brain_denner/features/bottom_nav/presentation/screen/progress_screen/controller/progress_screen_controller.dart';
+
 import 'package:get/get.dart';
+
+import '../../features/bottom_nav/presentation/screen/home_screen/presentation/controller/home_screen_controller.dart';
+import '../../features/bottom_nav/presentation/screen/home_screen/presentation/controller/restaurant_details_controller.dart';
+import '../../features/bottom_nav/presentation/screen/home_screen/presentation/controller/restaurant_list_controller.dart';
 
 class DependencyInjection extends Bindings{
   @override
@@ -18,6 +25,11 @@ class DependencyInjection extends Bindings{
      Get.lazyPut(() => SetNewPasswordController(), fenix: true);
      Get.lazyPut(() => SignInController(), fenix: true);
      Get.lazyPut(() => MainBottomNavController(), fenix: true);
+     Get.lazyPut(() => HomeScreenController(), fenix: true);
+     Get.lazyPut(() => RestaurantListController(), fenix: true);
+     Get.lazyPut(() => RestaurantDetailsController(), fenix: true);
+     Get.lazyPut(() => NutritionDetailsController(), fenix: true);
+     Get.lazyPut(() => ProgressScreenController(), fenix: true);
 
   }
 }

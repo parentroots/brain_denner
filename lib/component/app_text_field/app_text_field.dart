@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -6,7 +8,12 @@ class AppTextField extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final IconData? suffixIcon;
+  final IconData? prefixIcon;
   final VoidCallback? onSuffixTap;
+  final VoidCallback? onPrefixTap;
+  final Color? hintColor;
+  final double? hintSize;
+
 
   const AppTextField({
     super.key,
@@ -15,6 +22,10 @@ class AppTextField extends StatelessWidget {
     this.obscureText = false,
     this.suffixIcon,
     this.onSuffixTap,
+    this.prefixIcon,
+    this.onPrefixTap,
+    this.hintColor,
+    this.hintSize,
   });
 
   @override
@@ -26,39 +37,44 @@ class AppTextField extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            const Color(0xFF00243F),
-            const Color(0xFF082A45),
-          ],
+          colors: [const Color(0xFF00243F), const Color(0xFF082A45)],
         ),
       ),
       child: TextField(
         controller: controller,
         obscureText: obscureText,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 16,
-        ),
+        style: const TextStyle(color: Colors.white, fontSize: 16),
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(
-            color: Colors.white.withOpacity(0.6),
+              color: hintColor,
+            fontSize: hintSize,
           ),
           border: InputBorder.none,
-          contentPadding:
-          const EdgeInsets.symmetric(horizontal: 22, vertical: 18),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 22,
+            vertical: 18,
+          ),
           suffixIcon: suffixIcon != null
               ? GestureDetector(
-            onTap: onSuffixTap,
-            child: SizedBox(
-              height: 20.h,
-              width: 20.w,
-              child: Icon(
-                suffixIcon,
-                color: const Color(0xff8E8E8E),
-              ),
-            ),
-          )
+                  onTap: onSuffixTap,
+                  child: SizedBox(
+                    height: 20.h,
+                    width: 20.w,
+                    child: Icon(suffixIcon, color: const Color(0xff8E8E8E)),
+                  ),
+                )
+              : null,
+
+          prefixIcon:prefixIcon != null
+              ? GestureDetector(
+                  onTap: onPrefixTap,
+                  child: SizedBox(
+                    height: 20.h,
+                    width: 20.w,
+                    child: Icon(prefixIcon, color: const Color(0xFF00D4FF)),
+                  ),
+                )
               : null,
         ),
       ),
