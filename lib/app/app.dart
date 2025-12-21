@@ -16,6 +16,7 @@ class App extends StatelessWidget {
       splitScreenMode: true,
       builder: (_,child){
        return GetMaterialApp(
+         defaultTransition: Transition.fade,
          debugShowCheckedModeBanner: false,
          initialRoute: AppRoute.splashScreen,
          getPages: AppRoute.routes,

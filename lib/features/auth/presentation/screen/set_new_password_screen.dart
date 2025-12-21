@@ -9,68 +9,82 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class SetNewPasswordScreen extends StatefulWidget {
+class SetNewPasswordScreen extends StatelessWidget {
   const SetNewPasswordScreen({super.key});
 
   @override
-  State<SetNewPasswordScreen> createState() => _SetNewPasswordScreenState();
-}
-
-class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
-  @override
   Widget build(BuildContext context) {
     return GetBuilder<SetNewPasswordController>(
+      init: SetNewPasswordController(),
       builder: (controller) {
         return Scaffold(
           backgroundColor: AppColors.primaryColor,
-          body: AuthBgWidget(
-            headerText: AppString.setNewPassword,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.h),
+            child: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                  SizedBox(height: 32.h),
-                    
-                    AppText(text: 'New Password',fontSize: 14,fontWeight: FontWeight.w400,),
-                    SizedBox(height: 14.h,),
-                    AppTextField(
-                      suffixIcon: controller.isNewPasswordShow?Icons.visibility_off_outlined:Icons.visibility_outlined,
-                      obscureText: controller.isNewPasswordShow,
-                        onSuffixTap: controller.isNewPasswordShowToggle,
-                        controller: controller.newPasswordTEController, hintText: 'Enter Password'),
-
-                    SizedBox(height: 16,),
-
-
-                    AppText(text: 'Confirm New Password',fontSize: 14,fontWeight: FontWeight.w400,),
-                    SizedBox(height: 14.h,),
-                    AppTextField(
-                        obscureText: controller.isConfirmNewPasswordShow,
-                        onSuffixTap: controller.isConfirmNewPasswordShowToggle,
-                        suffixIcon: controller.isConfirmNewPasswordShow?Icons.visibility_off_outlined:Icons.visibility_outlined,
-                        controller: controller.confirmNewPasswordTEController, hintText: 'Enter Password'),
-                    
-                    
-                    SizedBox(height: 40.h,),
-                    
-                    
-                    AppButton(text: AppString.update, onPressed: (){
-                      controller.onTapUpdateButton();
-                    })
-
-              
-              
-              ]),
+                children: [
+                  AuthBgWidget(
+                    headerText: AppString.setNewPassword,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 32.h),
+                        
+                        /// New Password
+                        AppText(
+                          text: 'New Password',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        SizedBox(height: 14.h),
+                        AppTextField(
+                          controller: controller.newPasswordTEController,
+                          hintText: 'Enter Password',
+                          obscureText: controller.isNewPasswordShow,
+                          suffixIcon: controller.isNewPasswordShow
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
+                          onSuffixTap: controller.isNewPasswordShowToggle,
+                        ),
+                        
+                        SizedBox(height: 16.h),
+                        
+                        /// Confirm Password
+                        AppText(
+                          text: 'Confirm New Password',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        SizedBox(height: 14.h),
+                        AppTextField(
+                          controller: controller.confirmNewPasswordTEController,
+                          hintText: 'Enter Password',
+                          obscureText: controller.isConfirmNewPasswordShow,
+                          suffixIcon: controller.isConfirmNewPasswordShow
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
+                          onSuffixTap: controller.isConfirmNewPasswordShowToggle,
+                        ),
+                        
+                        SizedBox(height: 40.h),
+                        
+                        /// Update Button
+                        AppButton(
+                          text: AppString.update,
+                          onPressed: controller.onTapUpdateButton,
+                        ),
+                        
+                        SizedBox(height: 60.h),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
       },
     );
   }
-
-
-
-
-
 }

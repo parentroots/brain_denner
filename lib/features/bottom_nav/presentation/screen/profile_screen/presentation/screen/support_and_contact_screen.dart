@@ -37,61 +37,63 @@ class SupportAndContactScreen extends StatelessWidget {
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Column(
-              children: [
-                SizedBox(height: 40.h),
-
-                AppText(
-                  text:
-                      'If you’re experiencing any Issues, Please let us know. We’ll try to solve them as soon as possible',
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-
-                SizedBox(height: 57.h),
-
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: AppText(
-                    text: 'Title',
-                    color: AppColors.white,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: 40.h),
+              
+                  AppText(
+                    text:
+                        'If you’re experiencing any Issues, Please let us know. We’ll try to solve them as soon as possible',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
                   ),
-                ),
-
-                SizedBox(height: 14,),
-                AppTextField(
-                  controller: controller.titleTEController,
-                  hintText: 'Title',
-                ),
-
-                SizedBox(height: 47.h),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: AppText(
-                    text: 'Explain the issues',
-                    color: AppColors.white,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
+              
+                  SizedBox(height: 57.h),
+              
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: AppText(
+                      text: 'Title',
+                      color: AppColors.white,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-
-                SizedBox(height: 14,),
-                AppTextField(
-                  maxLine: 6,
-                  controller: controller.titleTEController,
-                  hintText: 'Title',
-                ),
-
-                SizedBox(height: 40.h,),
-
-
-                AppButton(text: 'Submit', onPressed: (){
-                  print('❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️');
-                })
-
-              ],
+              
+                  SizedBox(height: 14,),
+                  AppTextField(
+                    controller: controller.titleTEController,
+                    hintText: 'Title',
+                  ),
+              
+                  SizedBox(height: 47.h),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: AppText(
+                      text: 'Explain the issues',
+                      color: AppColors.white,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+              
+                  SizedBox(height: 14,),
+                  AppTextField(
+                    maxLine: 6,
+                    controller: controller.titleTEController,
+                    hintText: 'Title',
+                  ),
+              
+                  SizedBox(height: 40.h,),
+              
+              
+                  AppButton(text: 'Submit', onPressed: (){
+                    print('❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️');
+                  })
+              
+                ],
+              ),
             ),
           ),
         );

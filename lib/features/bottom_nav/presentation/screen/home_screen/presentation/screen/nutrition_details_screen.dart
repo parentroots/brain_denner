@@ -216,7 +216,7 @@ class NutritionDetailsScreen extends StatelessWidget {
 
   Container buildNutritionInfoSection() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 35.w, vertical: 32.h),
+      padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
       height: 351.h,
       width: 3987.w,
       decoration: BoxDecoration(

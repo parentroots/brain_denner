@@ -1,5 +1,4 @@
 import 'package:brain_denner/component/app_button/app_button.dart';
-import 'package:brain_denner/features/auth/presentation/screen/sign_up_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/controller/change_password_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,26 +14,29 @@ class ChangePasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChangePasswordScreenController>(
+      init: ChangePasswordScreenController(),
       builder: (controller) {
         return Scaffold(
           backgroundColor: AppColors.primaryColor,
           appBar: AppBar(
             centerTitle: true,
+            backgroundColor: AppColors.primaryColor,
             title: AppText(
               text: 'Change Password',
-              color: Color(0xFFFEFEFE),
+              color: const Color(0xFFFEFEFE),
               fontSize: 24.sp,
             ),
-            backgroundColor: AppColors.primaryColor,
           ),
-          body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.h),
+
+          body: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 38.h),
 
+                /// Current Password
                 AppText(
                   text: 'Current Password',
                   fontSize: 14,
@@ -42,17 +44,18 @@ class ChangePasswordScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 14.h),
                 AppTextField(
+                  controller: controller.currentPasswordTEController,
+                  hintText: 'Enter current Password',
+                  obscureText: controller.currentPasswordIsShow,
                   suffixIcon: controller.currentPasswordIsShow
                       ? Icons.visibility_off_outlined
                       : Icons.visibility_outlined,
-                  obscureText: controller.currentPasswordIsShow,
                   onSuffixTap: controller.currentPasswordToggle,
-                  controller: controller.currentPasswordTEController,
-                  hintText: 'Enter current Password',
                 ),
 
-                SizedBox(height: 16),
+                SizedBox(height: 16.h),
 
+                /// New Password
                 AppText(
                   text: 'New Password',
                   fontSize: 14,
@@ -60,17 +63,18 @@ class ChangePasswordScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 14.h),
                 AppTextField(
+                  controller: controller.newPasswordTEController,
+                  hintText: 'Enter New Password',
                   obscureText: controller.newPasswordIsShow,
-                  onSuffixTap: controller.newPasswordToggle,
                   suffixIcon: controller.newPasswordIsShow
                       ? Icons.visibility_off_outlined
                       : Icons.visibility_outlined,
-                  controller: controller.newPasswordTEController,
-                  hintText: 'Enter New Password',
+                  onSuffixTap: controller.newPasswordToggle,
                 ),
 
-                SizedBox(height: 16),
+                SizedBox(height: 16.h),
 
+                /// Confirm Password
                 AppText(
                   text: 'Confirm New Password',
                   fontSize: 14,
@@ -78,26 +82,26 @@ class ChangePasswordScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 14.h),
                 AppTextField(
+                  controller: controller.confirmNewPasswordTEController,
+                  hintText: 'Enter Confirm Password',
                   obscureText: controller.confirmNewPasswordIsShow,
-                  onSuffixTap: controller.confirmNewPasswordToggle,
                   suffixIcon: controller.confirmNewPasswordIsShow
                       ? Icons.visibility_off_outlined
                       : Icons.visibility_outlined,
-                  controller: controller.confirmNewPasswordTEController,
-                  hintText: 'Enter Confirm Password',
+                  onSuffixTap: controller.confirmNewPasswordToggle,
                 ),
-                
-                
-                Spacer(),
-                
-                AppButton(text: 'Change Password', onPressed: (){
 
-                }),
+                SizedBox(height: 80.h),
 
-                SizedBox(height: 90.h,),
-                
-                
-                
+                /// Button
+                AppButton(
+                  text: 'Change Password',
+                  onPressed: () {
+                    // TODO: change password logic
+                  },
+                ),
+
+                SizedBox(height: 90.h),
               ],
             ),
           ),

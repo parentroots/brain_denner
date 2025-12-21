@@ -29,16 +29,18 @@ class PrivacyPolicyScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: Column(
-          children: [
-            AppText(
-              maxLines: null,
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              text:
-                  'We created this app with one mission — to help you understand your health in a simple, clear, and meaningful way.  Your daily data deserves more than just numbers. Our goal is to turn it into insights you can trust, progress you can track, and habits you can build for a healthier lifestyle. From fitness tracking to heart health, sleep, stress, and overall well-being, every feature is designed to guide you, motivate you, and support your journey — one day at a time. We believe that good health should be accessible, empowering, and easy to manage.  That’s why we combine smart technology with an intuitive design to give you a complete view of your body and mind. Your health. Your progress. Your journey — made smarter.',
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              AppText(
+                maxLines: null,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                text:
+                    'We created this app with one mission — to help you understand your health in a simple, clear, and meaningful way.  Your daily data deserves more than just numbers. Our goal is to turn it into insights you can trust, progress you can track, and habits you can build for a healthier lifestyle. From fitness tracking to heart health, sleep, stress, and overall well-being, every feature is designed to guide you, motivate you, and support your journey — one day at a time. We believe that good health should be accessible, empowering, and easy to manage.  That’s why we combine smart technology with an intuitive design to give you a complete view of your body and mind. Your health. Your progress. Your journey — made smarter.',
+              ),
+            ],
+          ),
         ),
       ),
     );
