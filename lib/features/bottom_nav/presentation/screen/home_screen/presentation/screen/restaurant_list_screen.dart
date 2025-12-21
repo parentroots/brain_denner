@@ -18,6 +18,8 @@ class RestaurantListScreen extends StatefulWidget {
 }
 
 class _RestaurantListScreenState extends State<RestaurantListScreen> {
+
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RestaurantListController>(
@@ -29,7 +31,9 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
             leading: SizedBox(
               height: 31.31.w,
               width: 31.31.w,
-              child: Image.asset(AppImages.backImage),
+              child: InkWell(
+                onTap: Get.back,
+                  child: Image.asset(AppImages.backImage)),
             ),
             backgroundColor: AppColors.primaryColor,
             centerTitle: true,

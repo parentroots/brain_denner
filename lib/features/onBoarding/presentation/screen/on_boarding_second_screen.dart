@@ -59,7 +59,7 @@ class _OnBoardingSecondScreenState extends State<OnBoardingSecondScreen> {
   }
 
   void onTapSkipButton(){
-    Get.toNamed(AppRoute.signInScreen);
+    Get.offAllNamed(AppRoute.signInScreen);
   }
 
 

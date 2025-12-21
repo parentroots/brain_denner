@@ -3,9 +3,11 @@ import 'package:brain_denner/features/auth/presentation/screen/otp_verification_
 import 'package:brain_denner/features/auth/presentation/screen/sign_in_screen.dart';
 import 'package:brain_denner/features/auth/presentation/screen/sign_up_screen.dart';
 import 'package:brain_denner/features/bottom_nav/main_bottom_nav_screen.dart';
-import 'package:brain_denner/features/bottom_nav/presentation/screen/favourite_screen/favourite_screen.dart';
+import 'package:brain_denner/features/bottom_nav/presentation/screen/favourite_screen/presentation/screen/favourite_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/home_screen/presentation/screen/nutrition_details_screen.dart';
-import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/profile_screen.dart';
+import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/presentation/screen/history_screen.dart';
+import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/presentation/screen/profile_screen.dart';
+import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/presentation/screen/support_and_contact_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/progress_screen/presentaion/screen/progress_screen.dart';
 import 'package:brain_denner/features/onBoarding/presentation/screen/on_boarding_first_screen.dart';
 import 'package:brain_denner/features/onBoarding/presentation/screen/on_boarding_third_screen.dart';
@@ -15,6 +17,11 @@ import '../../features/auth/presentation/screen/set_new_password_screen.dart';
 import '../../features/bottom_nav/presentation/screen/home_screen/presentation/screen/home_screen.dart';
 import '../../features/bottom_nav/presentation/screen/home_screen/presentation/screen/restaurant_details_screen.dart';
 import '../../features/bottom_nav/presentation/screen/home_screen/presentation/screen/restaurant_list_screen.dart';
+import '../../features/bottom_nav/presentation/screen/profile_screen/presentation/screen/account_settings.dart' show AccountSettings;
+import '../../features/bottom_nav/presentation/screen/profile_screen/presentation/screen/change_password_screen.dart';
+import '../../features/bottom_nav/presentation/screen/profile_screen/presentation/screen/privacy_policy_screen.dart';
+import '../../features/bottom_nav/presentation/screen/profile_screen/presentation/screen/rating_screen.dart';
+import '../../features/bottom_nav/presentation/screen/profile_screen/presentation/screen/terms_and_service_screen.dart';
 import '../../features/onBoarding/presentation/screen/on_boarding_second_screen.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
 
@@ -48,6 +55,13 @@ class AppRoute {
     static const String  restaurantListScreen = "/RestaurantListScreen";
     static const String  restaurantDetailsScreen = "/RestaurantDetailsScreen";
     static const String  nutritionDetailsScreen = "/NutritionDetailsScreen";
+    static const String  accountSettings= "/AccountSettings";
+    static const String  historyScreen= "/HistoryScreen";
+    static const String  changePasswordScreen= "/ChangePasswordScreen";
+    static const String  ratingScreen= "/RatingScreen";
+    static const String  supportAndContactScreen= "/SupportAndContactScreen";
+    static const String  termsAndServicesScreen= "/TermsAndServiceScreen";
+    static const String  privacyPolicyScreen= "/PrivacyPolicyScreen";
 
 
 
@@ -77,6 +91,15 @@ class AppRoute {
        GetPage(name: restaurantListScreen, page: () => const RestaurantListScreen()),
        GetPage(name: restaurantDetailsScreen, page: () => const RestaurantDetailsScreen()),
        GetPage(name: nutritionDetailsScreen, page: () => const NutritionDetailsScreen()),
+
+    ///====================  Profile Routes ====================
+    GetPage(name: accountSettings, page: () => const AccountSettings()),
+    GetPage(name: historyScreen, page: () => const HistoryScreen()),
+    GetPage(name: changePasswordScreen, page: () => const ChangePasswordScreen()),
+    GetPage(name: ratingScreen, page: () => const RatingScreen()),
+    GetPage(name: supportAndContactScreen, page: () => const SupportAndContactScreen()),
+    GetPage(name: termsAndServicesScreen, page: () => const TermsAndServiceScreen()),
+    GetPage(name: privacyPolicyScreen, page: () => const PrivacyPolicyScreen()),
 
 
   ];

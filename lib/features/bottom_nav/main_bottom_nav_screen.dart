@@ -5,8 +5,8 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../uitls/constants/appColors/app_colors.dart';
 import '../../uitls/constants/appIcons/app_icons.dart';
-import 'presentation/screen/favourite_screen/favourite_screen.dart';
-import 'presentation/screen/profile_screen/profile_screen.dart';
+import 'presentation/screen/favourite_screen/presentation/screen/favourite_screen.dart';
+import 'presentation/screen/profile_screen/presentation/screen/profile_screen.dart';
 import 'presentation/screen/progress_screen/presentaion/screen/progress_screen.dart';
 
 class MainBottomNavScreen extends StatefulWidget {

@@ -18,4 +18,14 @@ static const String serveImage='assets/images/serve.png';
 static const String minusImage='assets/images/minus.png';
 static const String weightImage='assets/images/weight.png';
 static const String whatImage='assets/images/what.png';
+static const String arrowRight='assets/images/arrowright.png';
+static const String person='assets/images/person.png';
+static const String terms='assets/images/terms.png';
+static const String support='assets/images/support.png';
+static const String privacy='assets/images/privacy.png';
+static const String rate='assets/images/rate.png';
+static const String history='assets/images/history.png';
+static const String sms='assets/images/sms.png';
+static const String  lock='assets/images/lock.png';
+static const String  heart='assets/images/heart.png';
 }

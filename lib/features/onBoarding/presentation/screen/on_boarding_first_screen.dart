@@ -34,6 +34,7 @@ class _OnBoardingFirstScreenState extends State<OnBoardingFirstScreen> {
                 bodyTextSize: 20.sp,
                  onTap: () {
 
+                  Get.offNamed(AppRoute.signInScreen);
                  },
                 child: Column(
                   children: [AppButton(text: AppString.next, onPressed: () {
