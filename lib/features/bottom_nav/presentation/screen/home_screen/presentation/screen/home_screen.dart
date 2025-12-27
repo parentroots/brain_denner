@@ -31,8 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   SizedBox(height: 40.h),
                   SizedBox(
-                    width: 430.w,
-                    height: 265.h,
+                    width: 440.w,
+                    height: 280.h,
                     child: Image.asset(AppImages.logoWithName),
                   ),
               
@@ -44,7 +44,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.w600,
                     color: AppColors.white,
                   ),
-              
+
+                  SizedBox(height: 10.h),
+
+                  AppText(
+                    text: AppString.letsthinklhrough,
+                    fontSize: 20.sp,
+                    color: AppColors.nextmealcolor,
+                  ),
+
+
                   SizedBox(height: 24.h),
               
                   SearchBoxWidget(
@@ -52,9 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     hintText: 'Search Food or Restaurants',
                   ),
               
-                  SizedBox(height: 25.h),
-              
-                  buildDailyCard(),
+                  SizedBox(height: 10.h),
+
+                // buildDailyCard(),
               
                   SizedBox(height: 24.h),
                   AppButton(
@@ -65,26 +74,110 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                   ),
                   SizedBox(height: 34.h),
-              
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 24.w,
-                        width: 24.w,
-                        child: Image.asset(AppImages.star1Image),
-                      ),
-                      SizedBox(height: 8.w),
-                      AppText(
-                        text: AppString.updatedMenusAvailable,
-                        color: AppColors.blue,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ],
+
+
+
+                  Column(children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Divider(
+                            color:AppColors.whiteGrey45,
+                            thickness: 1,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          "Recently checked",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Divider(
+                            color: AppColors.whiteGrey45,
+                            thickness: 1,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],),
+
+              SizedBox(height: 20.h,),
+
+              Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF062F4F),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Column(
+                      children: [
+
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.restaurant,
+                              color: Colors.orange,
+                              size: 22,
+                            ),
+                            const SizedBox(width: 12),
+                            const Expanded(
+                              child: Text(
+                                "Fries",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            const Icon(
+                              Icons.chevron_right,
+                              color: Colors.white54,
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 12),
+                        const Divider(color: Colors.white24, height: 1),
+                        const SizedBox(height: 12),
+
+
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.lunch_dining,
+                              color: Colors.orange,
+                              size: 22,
+                            ),
+                            const SizedBox(width: 12),
+                            const Expanded(
+                              child: Text(
+                                "Chicken Sandwich",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            const Icon(
+                              Icons.chevron_right,
+                              color: Colors.white54,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
-              ),
+              )],),
             ),
           ),
         );

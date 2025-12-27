@@ -17,13 +17,13 @@ class RestaurantListController extends GetxController {
   final PageController pageController = PageController();
 
   List<Map<String, dynamic>> restaurantList = [
-    {'image': AppImages.stallImage, 'name': AppString.rioCafeRestaurant},
-    {'image': AppImages.stallImage, 'name': AppString.durbinBanglaRestaurant},
+    {'image': AppImages.stallImage, 'name': AppString.mealIntake},
+    {'image': AppImages.stallImage, 'name': AppString.wendys},
 
-    {'image': AppImages.stallImage, 'name': AppString.trumpCafe},
+    {'image': AppImages.stallImage, 'name': AppString.tacobell},
 
-    {'image': AppImages.stallImage, 'name': AppString.aquaTowerCafe},
+    {'image': AppImages.stallImage, 'name': AppString.zaxby},
 
-    {'image': AppImages.stallImage, 'name': AppString.rituVaterHotel},
+    {'image': AppImages.stallImage, 'name': AppString.popeye},
   ];
 }

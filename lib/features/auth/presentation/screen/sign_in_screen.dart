@@ -79,6 +79,11 @@ class _SignInScreenState extends State<SignInScreen> {
 
                      SizedBox(height: 24),
 
+                     Center(child: Text("You don’t have to get it right — just check in.",style: TextStyle(color: AppColors.mosttextcolors),)),
+
+                     SizedBox(height: 20),
+
+
                      AppButton(
                        text: AppString.login,
                        onPressed: () {
@@ -141,9 +146,9 @@ class _SignInScreenState extends State<SignInScreen> {
               TextSpan(
                 text: "  Sign Up",
                 style: TextStyle(
-                  color: AppColors.blue,
+                  color: AppColors.forgetcolor,
                   fontWeight: FontWeight.w400,
-                  fontSize: 14,
+                  fontSize: 17,
                 ),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
@@ -181,61 +186,59 @@ class _SignInScreenState extends State<SignInScreen> {
 
   Row buildRememBerMeSection() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Row(
-          children: [
-            SizedBox(
-              height: 18,
-              width: 18,
-              child: Checkbox(
-                value: isChecked,
-                checkColor: Color(0xff00D4FF),
-                fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-                  if (states.contains(MaterialState.selected)) {
-                    return Colors.transparent; // checked fill
-                  }
-                  return Colors.transparent; // unchecked fill
-                }),
-                side: MaterialStateBorderSide.resolveWith((states) {
-                  if (states.contains(MaterialState.selected)) {
-                    return const BorderSide(
-                      color: Color(0xff00D4FF),
-                      // ✅ checked → blue
-                      width: 1,
-                    );
-                  }
-                  return const BorderSide(
-                    color: Colors.grey,
-                    width: 1,
-                  );
-                }),
-                onChanged: (bool? value) {
-                  setState(() {
-                    isChecked = value ?? false;
-                  });
-                },
-              ),
-            ),
-
-            SizedBox(width: 6),
-
-            AppText(
-              text: AppString.rememberMe,
-              fontWeight: FontWeight.w400,
-              color: AppColors.white,
-              fontSize: 12,
-            ),
-          ],
-        ),
+        // Row(
+        //   children: [
+        //     SizedBox(
+        //       height: 18,
+        //       width: 18,
+        //       child: Checkbox(
+        //         value: isChecked,
+        //         checkColor: Color(0xff00D4FF),
+        //         fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+        //           if (states.contains(MaterialState.selected)) {
+        //             return Colors.transparent; // checked fill
+        //           }
+        //           return Colors.transparent; // unchecked fill
+        //         }),
+        //         side: MaterialStateBorderSide.resolveWith((states) {
+        //           if (states.contains(MaterialState.selected)) {
+        //             return const BorderSide(
+        //               color: Color(0xff00D4FF),
+        //               width: 1,
+        //             );
+        //           }
+        //           return const BorderSide(
+        //             color: Colors.grey,
+        //             width: 1,
+        //           );
+        //         }),
+        //         onChanged: (bool? value) {
+        //           setState(() {
+        //             isChecked = value ?? false;
+        //           });
+        //         },
+        //       ),
+        //     ),
+        //
+        //     SizedBox(width: 6),
+        //
+        //     AppText(
+        //       text: AppString.rememberMe,
+        //       fontWeight: FontWeight.w400,
+        //       color: AppColors.white,
+        //       fontSize: 12,
+        //     ),
+        //   ],
+        // ),
 
         InkWell(
           onTap: onTapForgotPasswordButton,
           child: AppText(
             text: AppString.forgotPassword,
-            color: AppColors.blue,
-            fontSize: 12,
+            color: AppColors.forgetcolor,
+            fontSize: 16,
             fontWeight: FontWeight.w400,
           ),
         ),

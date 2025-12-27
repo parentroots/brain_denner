@@ -1,12 +1,12 @@
 class AppString {
-  static const String letsMakeThisEasier = 'Let’s Make This Easier';
-  static const String yourAreHereToMakeOneGoodDecisionAndThatEnough =
-      'You’re here to make one good decision\n and that’s enough.';
-  static const String next = 'Next';
+  static const String diabetesisconfusing = 'Diabetes is confusing.';
+  static const String fastfoodbuddyhelps=
+      'Fast Food Buddy™\n helps you understand\n why things happen.';
+  static const String Continue = 'Continue';
   static const String findFood = 'Find Food';
   static const String itsAboutClarity = 'It’s about clarity when food\n feels stressful — so you can feel more\n in control and keep living your life.';
-  static const String thisIsNotAboutBeingPerfect =
-      'This isn’t About Being Perfect';
+  static const String whatthsiapp =
+      'What this app does For\nYou?';
 
 
 
@@ -39,6 +39,7 @@ class AppString {
   static const String update = 'Update';
   static const String verifyAccount = 'Verify Account';
   static const String welcomeBrian = 'Welcome, Brian';
+  static const String letsthinklhrough = 'Let’s think through your next meal';
   static const String searchFoodOrRestaurants = 'Search Food or Restaurants';
   static const String showRestaurants = 'Show Restaurants';
   static const String todaysCarbs = 'Today’s Carbs';
@@ -47,13 +48,14 @@ class AppString {
   static const String updatedMenusAvailable = 'Updated menus available';
   static const String advancedCarbBreakdownAndSmarterChoices =
       'Advanced carb breakdown & Smarter choices';
-  static const String popularRestaurant = 'Popular Restaurant';
+  static const String moreresturants = 'More restaurants coming soon';
+  static const String availableresturant = 'Available Restaurant';
   static const String restaurants = 'Restaurants';
-  static const String rioCafeRestaurant = 'Rio Cafe & Restaurant';
-  static const String durbinBanglaRestaurant = 'Durbin Bangla Restaurant';
-  static const String trumpCafe = 'Trump Cafe';
-  static const String aquaTowerCafe = 'Aqua Tower Cafe';
-  static const String rituVaterHotel = 'Ritu Vater Hotel';
+  static const String McDonald = "McDonald's";
+  static const String wendys = "Wendy's";
+  static const String tacobell = 'Taco Bell';
+  static const String zaxby = "Zaxby's";
+  static const String popeye = "Popeye's";
   static const String breakfast = 'Breakfast';
   static const String lunch = 'Lunch';
   static const String snacks = 'Snacks';
@@ -116,4 +118,16 @@ class AppString {
       'You can contact us on this number- 123456789';
 
   static const String singUpToBuddy='Sign up to Fastfood Buddy';
+  static const String focusesOnPatterns='Focuses on patterns, not blame';
+  static const String supporttsLearningOver='Supports learning over time — not perfection';
+  static const String helpsExplain =' Helps explain why things might happen';
+  static const String nomorestaring='No more staring at graphs wondering why things happened.  Fast Food Buddy™ helps you think through food, timing, stress, and real life — without judgment.';
+
+
+
+
+
+
+
+
 }

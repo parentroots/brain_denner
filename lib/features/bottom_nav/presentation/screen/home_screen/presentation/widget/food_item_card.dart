@@ -1,9 +1,5 @@
-import 'package:brain_denner/component/app_text/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../../../../uitls/constants/appColors/app_colors.dart';
-
 
 class FoodItemCard extends StatelessWidget {
   const FoodItemCard({
@@ -13,7 +9,9 @@ class FoodItemCard extends StatelessWidget {
     required this.protein,
     required this.fat,
     this.isFavourite = false,
-    required this.iconPath, required this.onTap, required this.onTapItem,
+    required this.iconPath,
+    required this.onTap,
+    required this.onTapItem,
   });
 
   final String title;
@@ -43,136 +41,67 @@ class FoodItemCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-
-
+            // Icon
             Container(
-              height: 40.h,
-              width: 40.h,
+              height: 50.h,
+              width: 50.h,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(.15),
+                color: Colors.transparent,
                 shape: BoxShape.circle,
               ),
               child: Image.asset(iconPath),
             ),
+            SizedBox(width: 16.w),
 
-            SizedBox(width: 12.w),
-
-
+            // Title and Info
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  /// Title
+                  // Title
                   Text(
                     title,
                     style: TextStyle(
-                      fontSize: 18.sp,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
                   ),
-
                   SizedBox(height: 6.h),
 
-                  Row(
-                    children: [
-
-
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: '$carbs ',
-                              style: TextStyle(
-                                color: AppColors.orangeColor,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'carbs',
-                              style: TextStyle(
-                                color: Color(0xFF8E8E8E),
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-
-                      SizedBox(width: 29.w,),
-
-
-
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: protein,
-                              style: TextStyle(
-                                color: AppColors.orangeColor,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'protein',
-                              style: TextStyle(
-                                color: Color(0xFF8E8E8E),
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-
-                      SizedBox(width: 29.w,),
-
-
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: fat,
-                              style: TextStyle(
-                                color: AppColors.orangeColor,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            TextSpan(
-                              text: 'fat',
-                              style: TextStyle(
-                                color: Color(0xFF8E8E8E),
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-
-
-
-
-
-                    ],
+                  // Info Row - single line with separator
+                  Text(
+                    'Fast impact  |  Slow digestion  |  Often spikes later',
+                    style: TextStyle(
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF9CA3AF),
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                 ],
               ),
             ),
 
+            SizedBox(width: 12.w),
+
+            // Favorite icon with background
             InkWell(
               onTap: onTap,
-              child: Icon(
-                isFavourite ? Icons.favorite : Icons.favorite_border,
-                color: Colors.white,
+              child: Container(
+                height: 40.h,
+                width: 40.h,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(.25),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  isFavourite ? Icons.favorite : Icons.favorite_border,
+                  color: Colors.white,
+                  size: 20.sp,
+                ),
               ),
             ),
           ],
@@ -180,7 +109,4 @@ class FoodItemCard extends StatelessWidget {
       ),
     );
   }
-
-
-
 }
