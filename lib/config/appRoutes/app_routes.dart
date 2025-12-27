@@ -70,7 +70,7 @@ class AppRoute {
     GetPage(name: splashScreen, page: () => const SplashScreen()),
     GetPage(name: onBoardingFirstScreen, page: () => const OnBoardingFirstScreen()),
     GetPage(name: onBoardingSecondScreen, page: () => const OnBoardingSecondScreen()),
-    GetPage(name: onBoardingThirdScreen, page: () => const OnBoardingThirdScreen()),
+    // GetPage(name: onBoardingThirdScreen, page: () => const OnBoardingThirdScreen()),
 
 
     ///====================  Authentication Routes   ====================

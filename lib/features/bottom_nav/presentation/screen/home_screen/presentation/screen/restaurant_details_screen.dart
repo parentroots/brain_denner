@@ -60,7 +60,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                 SizedBox(height: 16.h),
                 SearchBoxWidget(
                   controller: controller.searchTEController,
-                  hintText: 'Search Items',
+                  hintText: 'Fries, Nuggets',
                 ),
                 SizedBox(height: 24.h),
                 SingleChildScrollView(
@@ -245,62 +245,96 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 10.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     AppText(
-                      text: 'Add to Favourite',
+                      text: 'Remember this for later',
                       color: Colors.black,
-                      fontSize: 20,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
                     ),
-
                     IconButton(
                       onPressed: () {
                         Get.back();
                       },
-                      icon: Image.asset(AppImages.cancel),
+                      icon: Icon(Icons.close, color: Colors.black54),
                     ),
                   ],
                 ),
 
-                AppText(text: 'Write a note(Optional)'),
+                SizedBox(height: 8.h),
+
+                AppText(
+                  text: 'Write a note (Optional)',
+                  color: Colors.black54,
+                  fontSize: 14,
+                ),
+
+                SizedBox(height: 12.h),
 
                 TextFormField(
-                  maxLines: 3,
+                  maxLines: 4,
                   decoration: InputDecoration(
+                    hintText: 'spikes later for me',
+                    hintStyle: TextStyle(
+                      color: Colors.black38,
+                      fontSize: 14.sp,
+                    ),
+                    filled: true,
+                    fillColor: Color(0xFFF5F5F5),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(width: 1, color: Colors.black),
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(color: Color(0xFFFF9500), width: 1),
                     ),
                   ),
                 ),
 
-                SizedBox(height: 24.h),
+                SizedBox(height: 20.h),
 
                 SizedBox(
-                  height: 44.h,
-                  width: 211.w,
+                  height: 48.h,
+                  width: double.infinity,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF075375),
+                      backgroundColor: Color(0xFFFF9500),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      elevation: 0,
                     ),
                     onPressed: () {
                       Get.back();
                       Get.snackbar(
-                        'Favourite',
-                        'product adding favourite',
+                        'Success',
+                        'Added to remember for later',
                         backgroundColor: Colors.white54,
                         barBlur: 0.5,
                       );
                     },
                     child: Text(
-                      'Confirm',
-                      style: TextStyle(color: Colors.white),
+                      'Leave a breadcrumb for future-you',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
+
+                SizedBox(height: 10.h),
               ],
             ),
           ),

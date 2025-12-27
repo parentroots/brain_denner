@@ -27,21 +27,24 @@ class _OnBoardingFirstScreenState extends State<OnBoardingFirstScreen> {
           child: Column(
             children: [
               OnBoardingWidget(
-                headerText: AppString.letsMakeThisEasier,
-                skipText: 'Skip',
-                skipTextSize: 20,
-                bodyText: AppString.yourAreHereToMakeOneGoodDecisionAndThatEnough,
-                bodyTextSize: 20.sp,
+                headerText1: AppString.diabetesisconfusing,
+                bodyText: AppString.fastfoodbuddyhelps,
+                endtext: AppString.nomorestaring,
                  onTap: () {
-
                   Get.offNamed(AppRoute.signInScreen);
                  },
+
                 child: Column(
-                  children: [AppButton(text: AppString.next, onPressed: () {
+                  children: [
+
+                    SizedBox(height: 40.h,),
+                    AppButton(text: AppString.Continue, onPressed: () {
                     onTapNextButton();
-                  })],
+                  }),],
                 ),
+
               ),
+
             ],
           ),
         ),

@@ -1,6 +1,7 @@
 import 'package:brain_denner/component/app_button/app_button.dart';
 import 'package:brain_denner/component/app_text/app_text.dart';
 import 'package:brain_denner/component/app_text_field/app_text_field.dart';
+import 'package:brain_denner/config/appRoutes/app_routes.dart';
 import 'package:brain_denner/features/auth/presentation/widget/auth_bg_widget.dart';
 import 'package:brain_denner/uitls/constants/appColors/app_colors.dart';
 import 'package:brain_denner/uitls/constants/appIcons/app_icons.dart';
@@ -103,13 +104,50 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ],
                     ),
 
-                    SizedBox(height: 40.h),
+                    SizedBox(height: 20.h),
+
+                    Center(child: Text("Most people start by checking food before or\nafter eating.",textAlign:TextAlign.center,style: TextStyle(color: AppColors.mosttextcolors,fontSize: 15),)),
+
+                    SizedBox(height: 20.h),
+
 
                     AppButton(
                       text: AppString.signUp,
                       onPressed: () {
                         debugPrint("Sign Up===>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                       },
+                    ),
+
+                    SizedBox(height: 25.h,),
+
+
+                    Center(
+                      child: RichText(
+                        text: TextSpan(
+                          text: "Already have an account?? ",
+                          style: TextStyle(
+                            color: AppColors.white,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: "  Sign In",
+                              style: TextStyle(
+                                color: AppColors.forgetcolor,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 17,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+
+                                Get.toNamed(AppRoute.signInScreen);
+
+                                },
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
 
                     SizedBox(height: 89.h),

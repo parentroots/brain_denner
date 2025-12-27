@@ -27,42 +27,42 @@ class RestaurantDetailsController extends GetxController {
     {
       'title': 'Fries',
       'icon': AppImages.fries,
-      'carbs': '150 ',
-      'protein': '120 ',
-      'fat': '0 ',
+      'carbs': '',
+      'protein': '',
+      'fat': '',
     },
 
     {
       'title': 'Burrito',
       'icon': AppImages.burrito,
-      'carbs': '15',
-      'protein': '200 ',
-      'fat': '14 ',
+      'carbs': '',
+      'protein': '',
+      'fat': ' ',
     },
 
     {
       'title': 'Chicken sandwich',
       'icon': AppImages.nuggets,
-      'carbs': '15 ',
-      'protein': '150 ',
-      'fat': '140 ',
+      'carbs': ' ',
+      'protein': ' ',
+      'fat': ' ',
     },
 
     {
       'title': 'Fries',
       'icon': AppImages.chicken,
-      'carbs': '150 ',
-      'protein': '150 ',
-      'fat': '150 ',
+      'carbs': ' ',
+      'protein': ' ',
+      'fat': ' ',
     },
   ];
   List<Map<String, dynamic>> launchFoodList = [
     {
       'title': 'Fries',
       'icon': AppImages.fries,
-      'carbs': '150 ',
-      'protein': '150 ',
-      'fat': '150 ',
+      'carbs': ' ',
+      'protein': ' ',
+      'fat': ' ',
     },
   ];
 
@@ -70,26 +70,26 @@ class RestaurantDetailsController extends GetxController {
     {
       'title': 'Fries',
       'icon': AppImages.fries,
-      'carbs': '150 ',
-      'protein': '150',
-      'fat': '150 ',
+      'carbs': ' ',
+      'protein': '',
+      'fat': ' ',
     },
 
     {
       'title': 'Burrito',
       'icon': AppImages.burrito,
-      'carbs': '150',
-      'protein': '150 ',
-      'fat': '150 fat',
+      'carbs': '',
+      'protein': '',
+      'fat': '',
     },
   ];
   List<Map<String, dynamic>> snackFoodList = [
     {
       'title': 'Fries',
       'icon': AppImages.fries,
-      'carbs': '150 ',
-      'protein': '150 ',
-      'fat': '150 ',
+      'carbs': '',
+      'protein': ' ',
+      'fat': '',
     },
   ];
 

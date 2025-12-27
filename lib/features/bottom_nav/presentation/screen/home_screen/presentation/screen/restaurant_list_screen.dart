@@ -55,7 +55,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: AppText(
-                    text: AppString.popularRestaurant,
+                    text: AppString.availableresturant,
                     fontSize: 24.sp,
                     color: AppColors.blue,
                   ),
@@ -96,16 +96,36 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                               SizedBox(width: 10),
 
                               AppText(text: data['name'], fontSize: 24.sp),
+
                             ],
                           ),
+
+
                         ),
                       );
                     },
+
                     separatorBuilder: (BuildContext context, int index) {
                       return SizedBox(height: 20.h);
                     },
+
+
+                  ),
+
+                ),
+
+                Align(
+                  child: AppText(
+                    text: AppString.moreresturants,
+                    fontSize: 20.sp,
+                    color: AppColors.blue,
                   ),
                 ),
+
+                SizedBox(height: 60.h,)
+
+
+
               ],
             ),
           ),
