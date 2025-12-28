@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
+import '../../../../../../../component/row_text/row_text.dart';
 import '../../../../../../../uitls/constants/appColors/app_colors.dart';
 import '../../widget/recent_meal_card.dart';
 
@@ -33,7 +34,6 @@ class _ProgressScreenState extends State<ProgressScreen> {
     Get.bottomSheet(
       isScrollControlled: true,
       Container(
-        height: Get.height * 0.9,
         width: double.maxFinite,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -87,38 +87,38 @@ class _ProgressScreenState extends State<ProgressScreen> {
               SizedBox(height: 32.h),
               PremiumOfferCard(
                 title:
-                '"Find fast-food carbs and nutrition \ninstantly.Simple, fast, and always\n up-to-date."',
+                    '"Find fast-food carbs and nutrition \ninstantly.Simple, fast, and always\n up-to-date."',
               ),
 
               SizedBox(height: 32.h),
 
               PremiumOfferCard(
                 title:
-                '"Find fast-food carbs and nutrition \ninstantly.Simple, fast, and always\n up-to-date."',
+                    '"Find fast-food carbs and nutrition \ninstantly.Simple, fast, and always\n up-to-date."',
               ),
-
 
               SizedBox(height: 32.h),
               PremiumOfferCard(
                 title:
-                '"Find fast-food carbs and nutrition \ninstantly.Simple, fast, and always\n up-to-date."',
+                    '"Find fast-food carbs and nutrition \ninstantly.Simple, fast, and always\n up-to-date."',
               ),
 
               SizedBox(height: 32.h),
 
-
               PremiumOfferCard(
                 title:
-                '"Find fast-food carbs and nutrition \ninstantly.Simple, fast, and always\n up-to-date."',
+                    '"Find fast-food carbs and nutrition \ninstantly.Simple, fast, and always\n up-to-date."',
               ),
 
-              SizedBox(height: 40.h,),
+              SizedBox(height: 40.h),
 
-
-              AppButton(text: 'Start 7 day free trail \$49.99', onPressed:(){
-                debugPrint("❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️");
-                Get.back();
-              })
+              AppButton(
+                text: 'Start 7 day free trail \$49.99',
+                onPressed: () {
+                  debugPrint("❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️");
+                  Get.back();
+                },
+              ),
             ],
           ),
         ),
@@ -146,89 +146,171 @@ class _ProgressScreenState extends State<ProgressScreen> {
             ),
           ),
 
-          body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 17.w),
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: AppText(
-                    text: 'Today’s Nutrition Summary',
-                    fontSize: 20.sp,
-                    color: AppColors.blue,
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 17.w),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: AppText(
+                      textAlign: TextAlign.center,
+                      text:
+                          'Understanding patterns over time — not daily perfection.  ',
+                      fontSize: 20.sp,
+                      color: AppColors.blue,
+                    ),
                   ),
-                ),
 
-                SizedBox(height: 20.h),
-                CircularPercentIndicator(
-                  radius: 100.r,
-                  lineWidth: 10,
-                  percent: 0.8,
-                  backgroundColor: Colors.transparent,
-                  progressColor: AppColors.orangeColor,
-                  startAngle: 220,
-                  center: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AppText(
-                        text: 'Today’s',
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      AppText(
-                        text: '40g',
-                        fontSize: 40.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      AppText(
-                        text: 'Used today',
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.blue,
-                      ),
-                    ],
+                  SizedBox(height: 20.h),
+
+                  Container(
+                    padding: EdgeInsets.only(
+                      left: 15,
+                      top: 10,
+                      bottom: 10,
+                      right: 10,
+                    ),
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(90.r),
+
+                      color: Color(0xff012844),
+                    ),
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AppText(
+                          textAlign: TextAlign.start,
+                          text: 'What am I learning about how \nfood affects me?',
+                        ),
+
+                        Icon(Icons.arrow_forward_ios, color: Color(0xFF8E8E8E)),
+                      ],
+                    ),
                   ),
-                  circularStrokeCap: CircularStrokeCap.round,
-                ),
 
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      NutritionCard(title: 'Carbs', weight: '40g'),
-                      SizedBox(width: 12.w),
-                      NutritionCard(title: 'Calories', weight: '2540'),
-                      SizedBox(width: 12.w),
+                  SizedBox(height: 24.h),
 
-                      NutritionCard(title: 'Carbs', weight: '5510mg'),
-                      SizedBox(width: 12.w),
-                    ],
+                  ColumnAppTextWithDot(
+                    valueWeight: FontWeight.w400,
+                    value1: "“Fried foods often spike later for me”",
+                    value2: "“Protein helps slow things down”",
+                    value3: "“Timing matters more than amount for fries”",
                   ),
-                ),
 
-                SizedBox(height: 41.h),
+                  SizedBox(height: 30.h),
 
-                AppButton(
-                  text: 'Add New Item',
-                  onPressed: () {
-                    Get.toNamed(AppRoute.restaurantListScreen);
-                  },
-                ),
-                SizedBox(height: 24.h),
-
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: AppText(
-                    text: 'Recent Meal',
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.blue,
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: AppText(
+                      text: 'Recent Viewed Meals ',
+                      color: AppColors.blue,
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                SizedBox(height: 24.h),
 
-                RecentMealCard(),
-              ],
+                  SizedBox(height: 16.h),
+
+                  Container(
+                    width: double.maxFinite,
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.r),
+                      color: Color(0xff012844),
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Image.asset(AppImages.fries),
+                                SizedBox(width: 10.w),
+                                AppText(text: 'Fries'),
+                              ],
+                            ),
+
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: Color(0xFF8E8E8E),
+                            ),
+                          ],
+                        ),
+
+                        SizedBox(height: 10.h),
+
+                        Container(
+                          height: 1,
+                          width: double.maxFinite,
+                          color: Color(0xff1A4363),
+                        ),
+
+                        SizedBox(height: 10.h),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Image.asset(AppImages.chicken),
+                                SizedBox(width: 10.w),
+                                AppText(text: 'Fries'),
+                              ],
+                            ),
+
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: Color(0xFF8E8E8E),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(height: 32.h),
+
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: AppText(
+                      text: 'Recent notes',
+                      color: AppColors.blue,
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+
+
+
+                  SizedBox(height: 8.h,),
+
+                  Align(
+                    alignment: Alignment.centerLeft,
+                      child: AppText(text: 'These are personal observations — not rules or advice.',fontSize: 14.sp,fontWeight: FontWeight.w500,)),
+
+
+                  SizedBox(height:8.h,),
+
+                  ColumnAppTextWithDot(
+                    valueWeight: FontWeight.w400,
+                    value1: "““Spikes later if I eat this alone”",
+                    value2: "“Works better with protein”",
+                  ),
+                  
+                  
+                  SizedBox(height: 10.h,),
+                  
+                  AppButton(text: 'Export another food', onPressed: (){
+
+                    debugPrint('💖💖🤷‍♂️✌️🤷‍♀️🤷‍♂️🤞😁🎶👌😒🤞🤞🤷‍♂️🤷‍♂️🤷‍♂️');
+                  })
+
+                ],
+              ),
             ),
           ),
         );

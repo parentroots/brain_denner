@@ -28,4 +28,5 @@ static const String history='assets/images/history.png';
 static const String sms='assets/images/sms.png';
 static const String  lock='assets/images/lock.png';
 static const String  heart='assets/images/heart.png';
+static const String  subscription='assets/images/subscription.png';
 }

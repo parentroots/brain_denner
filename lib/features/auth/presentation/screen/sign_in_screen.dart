@@ -23,8 +23,6 @@ class SignInScreen extends StatefulWidget {
   State<SignInScreen> createState() => _SignInScreenState();
 }
 
-final TextEditingController emailTEController = TextEditingController();
-final TextEditingController passwordTEController = TextEditingController();
 
 bool isChecked = false;
 
@@ -48,13 +46,15 @@ class _SignInScreenState extends State<SignInScreen> {
                    crossAxisAlignment: CrossAxisAlignment.start,
                    children: [
                      SizedBox(height: 24),
+
                      AppText(
                        text: AppString.emailAddress,
                        color: AppColors.white,
                      ),
+
                      SizedBox(height: 14),
                      AppTextField(
-                       controller: emailTEController,
+                       controller: controller.emailTEController,
                        hintText: 'Enter email address',
                      ),
                      SizedBox(height: 16),
@@ -67,7 +67,7 @@ class _SignInScreenState extends State<SignInScreen> {
                            obscureText: controller.isShowPassword,
                            onSuffixTap: controller.isPasswordToggle,
                            suffixIcon: controller.isShowPassword?Icons.visibility_off_outlined:Icons.visibility_outlined,
-                           controller: passwordTEController,
+                           controller: controller.passwordTEController,
                            hintText: 'Enter password',
                          ),
                        ],
@@ -79,7 +79,10 @@ class _SignInScreenState extends State<SignInScreen> {
 
                      SizedBox(height: 24),
 
-                     Center(child: Text("You don’t have to get it right — just check in.",style: TextStyle(color: AppColors.mosttextcolors),)),
+                     Center(child: Text("You don’t have to get it right — just check in.",style: TextStyle(
+                       fontSize: 14.sp,
+                         fontWeight: FontWeight.w400,
+                         color: AppColors.mosttextcolors),)),
 
                      SizedBox(height: 20),
 
@@ -87,8 +90,9 @@ class _SignInScreenState extends State<SignInScreen> {
                      AppButton(
                        text: AppString.login,
                        onPressed: () {
-                         debugPrint("Logged in===>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                         Get.toNamed(AppRoute.mainBottomNavScreen);
+
+                         // controller.signIn();
+
                        },
                      ),
                      SizedBox(height: 41),

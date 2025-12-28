@@ -76,6 +76,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   SizedBox(height: 12.h),
 
+
+                  ProfileOptionCard(
+                    icon: AppImages.subscription,
+                    title: 'Subscription',
+                    onTap: () {
+                      Get.toNamed(AppRoute.subscriptionScreen);
+                    },
+                  ),
+
+                  SizedBox(height: 12.h),
+
                   ProfileOptionCard(
                     icon: AppImages.history,
                     title: 'History',

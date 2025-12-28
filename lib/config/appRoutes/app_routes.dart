@@ -21,6 +21,7 @@ import '../../features/bottom_nav/presentation/screen/profile_screen/presentatio
 import '../../features/bottom_nav/presentation/screen/profile_screen/presentation/screen/change_password_screen.dart';
 import '../../features/bottom_nav/presentation/screen/profile_screen/presentation/screen/privacy_policy_screen.dart';
 import '../../features/bottom_nav/presentation/screen/profile_screen/presentation/screen/rating_screen.dart';
+import '../../features/bottom_nav/presentation/screen/profile_screen/presentation/screen/subscription_screen.dart';
 import '../../features/bottom_nav/presentation/screen/profile_screen/presentation/screen/terms_and_service_screen.dart';
 import '../../features/onBoarding/presentation/screen/on_boarding_second_screen.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
@@ -62,6 +63,7 @@ class AppRoute {
     static const String  supportAndContactScreen= "/SupportAndContactScreen";
     static const String  termsAndServicesScreen= "/TermsAndServiceScreen";
     static const String  privacyPolicyScreen= "/PrivacyPolicyScreen";
+    static const String  subscriptionScreen= "/SubscriptionScreen";
 
 
 
@@ -100,6 +102,7 @@ class AppRoute {
     GetPage(name: supportAndContactScreen, page: () => const SupportAndContactScreen()),
     GetPage(name: termsAndServicesScreen, page: () => const TermsAndServiceScreen()),
     GetPage(name: privacyPolicyScreen, page: () => const PrivacyPolicyScreen()),
+    GetPage(name: subscriptionScreen, page: () => const SubscriptionScreen()),
 
 
   ];

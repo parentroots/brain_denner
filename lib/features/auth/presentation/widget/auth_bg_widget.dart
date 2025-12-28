@@ -37,6 +37,7 @@ class AuthBgWidget extends StatelessWidget {
             SizedBox(height: 52.h),
 
             AppText(
+              fontWeight: FontWeight.w600,
               text: headerText,
               fontSize: headerTextSize.sp,
               gradient: LinearGradient(

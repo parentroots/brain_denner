@@ -73,7 +73,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                           debugPrint("name : ❤️❤️❤️❤️❤️❤️❤️❤️${data["name"]}");
                           Get.toNamed(
                             AppRoute.restaurantDetailsScreen,
-                            arguments: {
+                            arguments: <String, dynamic>{
                               "id": data[index],
                               "name": data["name"],
                             },

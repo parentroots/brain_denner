@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../uitls/constants/appColors/app_colors.dart';
 
 class ColumnAppTextWithDot extends StatelessWidget {
@@ -52,7 +53,7 @@ class ColumnAppTextWithDot extends StatelessWidget {
                 maxLines: maxLines,
                 overflow: overflow,
                 style: TextStyle(
-                  fontSize: 27,
+                  fontSize: 24.sp,
                   fontWeight: valueWeight,
                   color: valueColor,
                 ),

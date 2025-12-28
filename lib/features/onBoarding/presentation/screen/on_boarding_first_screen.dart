@@ -30,6 +30,9 @@ class _OnBoardingFirstScreenState extends State<OnBoardingFirstScreen> {
                 headerText1: AppString.diabetesisconfusing,
                 bodyText: AppString.fastfoodbuddyhelps,
                 endtext: AppString.nomorestaring,
+                 headerTextSize: 24.sp,
+                 bodyTextSize: 32.sp,
+
                  onTap: () {
                   Get.offNamed(AppRoute.signInScreen);
                  },

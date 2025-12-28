@@ -13,7 +13,7 @@ class OnBoardingWidget extends StatelessWidget {
     this.headerText1 = '',
     this.headerTextSize = 30,
     this.bodyText = '',
-    this.bodyTextSize = 35,
+    this.bodyTextSize = 32,
     this.hadertext2 = "",
     this.child,
     this.onTap,
@@ -85,7 +85,7 @@ class OnBoardingWidget extends StatelessWidget {
 
 
 
-        Text("${endtext}",textAlign:TextAlign.center,style: TextStyle(fontSize: 25,color: AppColors.endcolors,),),
+        Text("${endtext}",textAlign:TextAlign.center,style: TextStyle(fontSize: 24.sp,color: AppColors.endcolors,),),
 
         if (child != null) child!,
 

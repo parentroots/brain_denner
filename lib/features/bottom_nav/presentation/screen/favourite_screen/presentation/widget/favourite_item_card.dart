@@ -4,11 +4,8 @@ import '../../../../../../../component/app_text/app_text.dart';
 import '../../../../../../../uitls/constants/appColors/app_colors.dart';
 import '../../../../../../../uitls/constants/appImages/app_images.dart';
 
-
 class FavouriteItemCard extends StatelessWidget {
-  const FavouriteItemCard({
-    super.key,
-  });
+  const FavouriteItemCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,91 +32,29 @@ class FavouriteItemCard extends StatelessWidget {
                     child: Image.asset(AppImages.chicken),
                   ),
 
-                  SizedBox(width: 17.w,),
+                  SizedBox(width: 17.w),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
-                      AppText(text: "fries",fontSize: 24,fontWeight: FontWeight.w500,),
-                      SizedBox(height: 2.h,),
-                      Row(children: [
-
-
-                        RichText(
-                          text: TextSpan(
-                            text: 'Carbs',
-                            style: TextStyle(
-                              color: AppColors.orangeColor,
-                              fontSize: 10.sp,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: '25g',
-                                style: TextStyle(
-                                  color: Color(0xFF8E8E8E),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 10.sp,
-                                ),
-                              ),
-                            ],
+                      AppText(
+                        text: "Fries",
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      SizedBox(height: 2.h),
+                      Row(
+                        children: [
+                          AppText(
+                            text: "Spike late for me",
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0xFF8E8E8E),
                           ),
-                        ),SizedBox(width: 40.w,),
-
-
-                        RichText(
-                          text: TextSpan(
-                            text: 'Carbs',
-                            style: TextStyle(
-                              color: AppColors.orangeColor,
-                              fontSize: 10.sp,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: '25g',
-                                style: TextStyle(
-                                  color: Color(0xFF8E8E8E),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 10.sp,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),SizedBox(width: 40.w,),
-
-
-
-
-                        RichText(
-                          text: TextSpan(
-                            text: 'Carbs',
-                            style: TextStyle(
-                              color: AppColors.orangeColor,
-                              fontSize: 10.sp,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: '25g',
-                                style: TextStyle(
-                                  color: Color(0xFF8E8E8E),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 10.sp,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-
-
-                      ],)
-
+                        ],
+                      ),
                     ],
                   ),
-
-                  SizedBox(width: 80.w,),
-
-
-                  Image.asset(AppImages.love,color: Colors.red,)
 
 
 
