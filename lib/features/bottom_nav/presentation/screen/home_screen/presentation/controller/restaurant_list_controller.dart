@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 import 'package:brain_denner/config/appRoutes/app_routes.dart';
+import 'package:brain_denner/core/network/end_point/api_end_point.dart';
+import 'package:brain_denner/features/bottom_nav/presentation/screen/home_screen/presentation/data/restaurant_list_model.dart';
+import 'package:brain_denner/services/api_services/api_response_model.dart';
+import 'package:brain_denner/services/api_services/api_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -16,14 +22,46 @@ class RestaurantListController extends GetxController {
 
   final PageController pageController = PageController();
 
-  List<Map<String, dynamic>> restaurantList = [
-    {'image': AppImages.stallImage, 'name': AppString.mealIntake},
-    {'image': AppImages.stallImage, 'name': AppString.wendys},
 
-    {'image': AppImages.stallImage, 'name': AppString.tacobell},
+  List<Restaurant>restaurantList=[];
 
-    {'image': AppImages.stallImage, 'name': AppString.zaxby},
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    getAllRestaurantList();
+  }
 
-    {'image': AppImages.stallImage, 'name': AppString.popeye},
-  ];
+
+  Future<void> getAllRestaurantList() async {
+    try {
+      ApiResponseModel response =
+      await ApiService.get(ApiEndPoint.getAllRestaurantList);
+
+      if (response.isSuccess && response.statusCode == 200) {
+        final jsonResponse = response.data;
+
+        if (jsonResponse != null && jsonResponse['data'] != null) {
+
+          List<dynamic> jsonData = jsonResponse['data'];
+          restaurantList = jsonData.map((e) => Restaurant.fromJson(e)).toList();
+          update();
+
+
+          print(jsonResponse);
+
+        }
+      } else {
+        Get.snackbar("Error", response.message ?? "Failed to load restaurants");
+      }
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+  }
+  
+  
+  
+  
+  
+  
 }

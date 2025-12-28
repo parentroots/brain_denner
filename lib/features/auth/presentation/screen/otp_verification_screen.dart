@@ -121,7 +121,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
                         AppButton(text: 'Verify',fontSize: 24,fontWeight: FontWeight.w600, onPressed: (){
 
-                         onTapVerifyButton();
+                         controller.verifyOtp();
                         })
 
 

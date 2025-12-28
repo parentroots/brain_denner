@@ -45,6 +45,7 @@ class ApiEndPoint {
 
   //===============================Contact Info=================================
   static const String contactInfo= "$baseUrl/contact";
+  static const String getAllRestaurantList= "$baseUrl/restaurants";
 
 
 

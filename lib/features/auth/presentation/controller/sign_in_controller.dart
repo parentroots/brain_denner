@@ -1,9 +1,9 @@
+import 'package:brain_denner/config/appRoutes/app_routes.dart';
+import 'package:brain_denner/core/network/end_point/api_end_point.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as ApiServices;
 
-import '../../../../config/appRoutes/app_routes.dart';
-import '../../../../core/network/end_point/api_end_point.dart';
 import '../../../../services/api_services/api_response_model.dart';
 import '../../../../services/api_services/api_services.dart';
 import '../../data/auth_model.dart';
@@ -42,29 +42,31 @@ class SignInController extends GetxController{
     update();
 
     ApiResponseModel response = await ApiService.post(
-      "/login",
+      ApiEndPoint.login,
       body: {
-
-        // "email": email,
-        // "password": password,
+        "email": emailTEController.text,
+        "password": passwordTEController.text,
 
       },
+      headers: {
+        'Content-Type':'application/json'
+      }
     );
 
-    if (response.isSuccess) {
+    if (response.isSuccess && response.statusCode==200) {
 
       authModel = AuthModel.fromJson(response.data);
 
-      // 🔐 Attach token
       
       ApiService.defaultHeaders['Authorization'] =
       "Bearer ${authModel!.token}";
 
       Get.snackbar("Success", "Login successful");
-      Get.offAllNamed("/home");
+      Get.offAllNamed(AppRoute.mainBottomNavScreen);
     } else {
       errorMessage = response.message ?? "Invalid credentials";
-      Get.snackbar("Login Failed", errorMessage);
+      Get.snackbar("Login Failed😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒", errorMessage);
+      debugPrint("Login Failed😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒$errorMessage",);
     }
 
     isLoading = false;

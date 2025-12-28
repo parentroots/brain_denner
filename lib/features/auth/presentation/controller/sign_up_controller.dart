@@ -1,3 +1,4 @@
+import 'package:brain_denner/config/appRoutes/app_routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -41,33 +42,65 @@ class SignUpController extends GetxController {
 
   //=================================Sign user===============================
 
-  Future<void> signUp({
-    required String name,
-    required String email,
-    required String password,
-  }) async {
+  Future<void> signUp() async {
     isLoading = true;
     update();
 
     ApiResponseModel response = await ApiService.post(
-      ApiEndPoint.login,
-      body: {
-        "name": name,
-        "email": email,
-        "password": password,
-      },
+        ApiEndPoint.createUser,
+        body: {
+          "name": nameTEController.text,
+          "email": emailTEController.text,
+          "password": passwordTEController.text,
+        },
+        headers: {
+          'Content-Type': 'application/json'
+        }
+
     );
 
-    if (response.isSuccess) {
+    if (response.isSuccess && (response.statusCode == 200 || response.statusCode == 201)) {
       authModel = AuthModel.fromJson(response.data);
       Get.snackbar("Success", "Account created");
+
+
+      Get.toNamed(AppRoute.otpVerificationScreen, arguments: {
+        'email': emailTEController.text
+      });
+
+
     } else {
       errorMessage = response.message ?? "Signup failed";
       Get.snackbar("Error", errorMessage);
+
+      debugPrint('error is:::😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒$errorMessage');
     }
 
     isLoading = false;
     update();
   }
+
+
+
+
+  void clearTextField(){
+    nameTEController.clear();
+    passwordTEController.clear();
+    confirmPasswordTEController.clear();
+    emailTEController.clear();
+  }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    nameTEController.dispose();
+    passwordTEController.dispose();
+    confirmPasswordTEController.dispose();
+    emailTEController.dispose();
+  }
+
+
+
 
 }

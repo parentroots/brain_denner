@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'api_response_model.dart';
 
 class ApiService {
-  static const String baseUrl = "https://your-api-base-url.com";
+  static const String baseUrl = "http://10.10.7.7:5005/api/v1";
 
   static Map<String, String> defaultHeaders = {
     "Content-Type": "application/json",
@@ -19,7 +19,7 @@ class ApiService {
 
     try {
       final response = await http.get(
-        Uri.parse(baseUrl + endpoint),
+        Uri.parse( endpoint),
         headers: headers ?? defaultHeaders,
       );
       return _processResponse(response);
@@ -36,7 +36,7 @@ class ApiService {
   static Future<ApiResponseModel> post(String endpoint, {Map<String, String>? headers, Map<String, dynamic>? body,}) async {
     try {
       final response = await http.post(
-        Uri.parse(baseUrl + endpoint),
+        Uri.parse(endpoint),
         headers: headers ?? defaultHeaders,
         body: jsonEncode(body),
       );
@@ -53,7 +53,7 @@ class ApiService {
   static Future<ApiResponseModel> put(String endpoint, {Map<String, String>? headers, Map<String, dynamic>? body,}) async {
     try {
       final response = await http.put(
-        Uri.parse(baseUrl + endpoint),
+        Uri.parse(endpoint),
         headers: headers ?? defaultHeaders,
         body: jsonEncode(body),
       );
@@ -68,7 +68,7 @@ class ApiService {
   static Future<ApiResponseModel> patch(String endpoint, {Map<String, String>? headers, Map<String, dynamic>? body,}) async {
     try {
       final response = await http.patch(
-        Uri.parse(baseUrl + endpoint),
+        Uri.parse( endpoint),
         headers: headers ?? defaultHeaders,
         body: jsonEncode(body),
       );
@@ -84,7 +84,7 @@ class ApiService {
   static Future<ApiResponseModel> delete(String endpoint, {Map<String, String>? headers,}) async {
     try {
       final response = await http.delete(
-        Uri.parse(baseUrl + endpoint),
+        Uri.parse( endpoint),
         headers: headers ?? defaultHeaders,
       );
       return _processResponse(response);
@@ -99,7 +99,7 @@ class ApiService {
     try {
       final request = http.MultipartRequest(
         "POST",
-        Uri.parse(baseUrl + endpoint),
+        Uri.parse( endpoint),
       );
 
       request.headers.addAll(headers ?? {});

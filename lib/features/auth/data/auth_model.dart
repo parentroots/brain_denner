@@ -1,23 +1,19 @@
-// auth_model.dart
 class AuthModel {
-  final String token;
-  final int userId;
-  final String name;
-  final String email;
+  final String? token;
+  final String? message;
+  final bool? status;
 
   AuthModel({
-    required this.token,
-    required this.userId,
-    required this.name,
-    required this.email,
+    this.token,
+    this.message,
+    this.status,
   });
 
   factory AuthModel.fromJson(Map<String, dynamic> json) {
     return AuthModel(
-      token: json['token'],
-      userId: json['user']['id'],
-      name: json['user']['name'],
-      email: json['user']['email'],
+      token: json['token'], // null হলেও OK
+      message: json['message'],
+      status: json['status'],
     );
   }
 }

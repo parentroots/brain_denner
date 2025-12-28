@@ -117,7 +117,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                      AppButton(
                        text: AppString.signUp,
                        onPressed: () {
-                         //
+
+                         controller.signUp();
 
                        },
                      ),

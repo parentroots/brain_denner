@@ -25,6 +25,8 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
     return GetBuilder<RestaurantListController>(
       init: RestaurantListController(),
       builder: (controller) {
+
+        controller.getAllRestaurantList();
         return Scaffold(
           backgroundColor: AppColors.primaryColor,
           appBar: AppBar(
@@ -70,12 +72,12 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                       final data = controller.restaurantList[index];
                       return InkWell(
                         onTap: () {
-                          debugPrint("name : ❤️❤️❤️❤️❤️❤️❤️❤️${data["name"]}");
+
                           Get.toNamed(
                             AppRoute.restaurantDetailsScreen,
                             arguments: <String, dynamic>{
-                              "id": data[index],
-                              "name": data["name"],
+                              "id": data.id,
+                              "name": data.name,
                             },
                           );
                         },
@@ -91,11 +93,11 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                           ),
                           child: Row(
                             children: [
-                              Image.asset(data['image']),
+                              // Image.asset(),
 
                               SizedBox(width: 10),
 
-                              AppText(text: data['name'], fontSize: 24.sp),
+                              AppText(fontSize: 24.sp, text: data.name),
 
                             ],
                           ),
