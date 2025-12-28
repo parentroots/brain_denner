@@ -18,4 +18,5 @@ static const Color forgetcolor =Color(0xFFFF6D00);
 static const Color nextmealcolor =Color(0xFFE7E7E7);
 static const Color grashcolor =Color(0xFF5B5B5B);
 static const Color whiteGrey45 =Color(0xFF8E8E8E);
+static const Color blue500 =Color(0xFF00D4FF);
 }

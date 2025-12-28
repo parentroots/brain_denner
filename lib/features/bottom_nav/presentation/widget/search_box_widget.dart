@@ -17,11 +17,10 @@ class SearchBoxWidget extends StatelessWidget {
       width: 398.w,
       child: AppTextField(
         prefixIcon: Icons.search,
-
         hintColor: Color(0xff00D4FF),
         hintSize: 20.sp,
         controller: controller,
-        hintText: hintText??'Search',
+        hintText: hintText??'Restaurant',
       ),
     );
   }

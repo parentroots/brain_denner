@@ -32,7 +32,10 @@ class TermsAndServiceScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(height: 50.h,),
+
               AppText(
+                textAlign: TextAlign.start,
                 maxLines: null,
                 fontSize: 14,
                 fontWeight: FontWeight.w400,

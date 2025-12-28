@@ -6,13 +6,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ProfileOptionCard extends StatelessWidget {
   final String title;
   final String icon;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const ProfileOptionCard({
     super.key,
     required this.title,
     required this.icon,
-    required this.onTap,
+    this.onTap,
   });
 
   @override

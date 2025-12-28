@@ -323,12 +323,18 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                         barBlur: 0.5,
                       );
                     },
-                    child: Text(
-                      'Leave a breadcrumb for future-you',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
+                    child: GestureDetector(
+                      onTap: (){
+                        Get.toNamed(AppRoute.restaurantListScreen);
+                        
+                      },
+                      child: Text(
+                        'Leave a breadcrumb for future-you',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
