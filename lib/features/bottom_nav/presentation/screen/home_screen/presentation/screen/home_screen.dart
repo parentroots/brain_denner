@@ -1,5 +1,6 @@
 import 'package:brain_denner/component/app_button/app_button.dart';
 import 'package:brain_denner/component/app_text/app_text.dart';
+import 'package:brain_denner/config/appRoutes/app_routes.dart';
 import 'package:brain_denner/uitls/constants/appColors/app_colors.dart';
 import 'package:brain_denner/uitls/constants/appImages/app_images.dart';
 import 'package:brain_denner/uitls/constants/appString/app_string.dart';
@@ -119,29 +120,36 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       children: [
 
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.restaurant,
-                              color: Colors.orange,
-                              size: 22,
-                            ),
-                            const SizedBox(width: 12),
-                            const Expanded(
-                              child: Text(
-                                "Fries",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
+                        GestureDetector(
+                          onTap: (){
+                            
+                            Get.toNamed(AppRoute.nutritionDetailsScreen);
+                            
+                          },
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.restaurant,
+                                color: Colors.orange,
+                                size: 22,
+                              ),
+                              const SizedBox(width: 12),
+                              const Expanded(
+                                child: Text(
+                                  "Fries",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
-                            ),
-                            const Icon(
-                              Icons.chevron_right,
-                              color: Colors.white54,
-                            ),
-                          ],
+                              const Icon(
+                                Icons.chevron_right,
+                                color: Colors.white54,
+                              ),
+                            ],
+                          ),
                         ),
 
                         const SizedBox(height: 12),
@@ -225,7 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SizedBox(width: 12.h),
-          Container(
+          Container(//
             height: 164.h,
             width: 124.w,
             decoration: BoxDecoration(

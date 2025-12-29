@@ -32,6 +32,8 @@ class PrivacyPolicyScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+
+              SizedBox(height: 50.h,),
               AppText(
                 maxLines: null,
                 fontSize: 14,

@@ -12,128 +12,66 @@ class HistoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final List<Map<String, String>> menuList = [
+      {"icon": AppImages.fries, "title": "Fries"},
+      {"icon": AppImages.burrito, "title": "Burritto"},
+      {"icon": AppImages.fries, "title": "Chicken Sandwich"},
+      {"icon": AppImages.nuggets, "title": "Nuggets"},
+    ];
+
+
     return Expanded(
-      child: ListView.separated(
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          return InkWell(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              height: 78.h,
-              width: double.maxFinite,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(90.r),
-                gradient: LinearGradient(
-                  colors: [Color(0xFF00243F), Color(0xFF075476)],
-                ),
-              ),
-              child: Row(
-                children: [
-                  SizedBox(
-                    height: 24.h,
-                    width: 24.w,
-                    child: Image.asset(AppImages.chicken),
-                  ),
-
-                  SizedBox(width: 17.w,),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-
-                      AppText(text: "fries",fontSize: 24,fontWeight: FontWeight.w500,),
-                      SizedBox(height: 2.h,),
-                      Row(children: [
-
-
-                        RichText(
-                          text: TextSpan(
-                            text: 'Carbs',
-                            style: TextStyle(
-                              color: AppColors.orangeColor,
-                              fontSize: 10.sp,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: '25g',
-                                style: TextStyle(
-                                  color: Color(0xFF8E8E8E),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 10.sp,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),SizedBox(width: 40.w,),
-
-
-                        RichText(
-                          text: TextSpan(
-                            text: 'Carbs',
-                            style: TextStyle(
-                              color: AppColors.orangeColor,
-                              fontSize: 10.sp,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: '25g',
-                                style: TextStyle(
-                                  color: Color(0xFF8E8E8E),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 10.sp,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),SizedBox(width: 40.w,),
-
-
-
-
-                        RichText(
-                          text: TextSpan(
-                            text: 'Carbs',
-                            style: TextStyle(
-                              color: AppColors.orangeColor,
-                              fontSize: 10.sp,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: '25g',
-                                style: TextStyle(
-                                  color: Color(0xFF8E8E8E),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 10.sp,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-
-
-                      ],)
-
+      child: Padding(
+        padding: EdgeInsetsGeometry.only(left: 10,right: 10,top: 30),
+        child: ListView.separated(
+          itemCount: menuList.length,
+          separatorBuilder: (_, __) => SizedBox(height: 15.h),
+          itemBuilder: (context, index) {
+            final item = menuList[index];
+        
+            return InkWell(
+              onTap: () {},
+              child: Container(
+                height: 64.h,
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40.r),
+                  gradient: const LinearGradient(
+                    colors: [
+                      Color(0xFF0F4C75),
+                      Color(0xFF083358),
                     ],
                   ),
-
-                  SizedBox(width: 80.w,),
-
-
-                  CircleAvatar(
-                    backgroundColor: Color(0xFF002540),
-                      child: Image.asset(AppImages.heart,color: Colors.red,))
-
-
-
-                ],
+                ),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      item["icon"]!,
+                      height: 22.h,
+                      width: 22.w,
+                    ),
+                    SizedBox(width: 14.w),
+                    Expanded(
+                      child: AppText(
+                        text: item["title"]!,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                      size: 16.sp,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return SizedBox(height: 15.h);
-        },
+            );
+          },
+        ),
       ),
     );
+
   }
 }
