@@ -9,6 +9,7 @@ void main()async{
   await LocalStorage.init();
   DependencyInjection di = DependencyInjection();
   di.dependencies();
+
   runApp(App());
 }
 
