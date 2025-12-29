@@ -87,22 +87,28 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                       controller.update();
                     },
                     children: [
-
                       ListView.separated(
                         itemCount: controller.breakFastFoodList.length,
                         itemBuilder: (context, index) {
                           final data = controller.breakFastFoodList[index];
                           return FoodItemCard(
                             onTapItem: () {
-                              Get.toNamed(AppRoute.nutritionDetailsScreen);
+                              Get.toNamed(
+                                AppRoute.nutritionDetailsScreen,
+                                arguments: {'foodId': data.id},
+                              );
+
+
+                              print("FoodId: ${Get.arguments?['foodId']}");
+
                             },
-                            title: data['title'],
-                            carbs: data['carbs'],
-                            protein: data['protein'],
-                            fat: data['fat'],
-                            iconPath: data['icon'],
+                            protein: data.name.toString(),
+                            title: data.impactSpeed.toString(),
+                            carbs: data.digestionSpeed.toString(),
+                            fat: data.spike.toString(),
+                            iconPath: AppImages.chicken,
                             onTap: () {
-                              favouriteDialog(controller);
+                              favouriteDialog(controller,foodId: data.id!);
                             },
                           );
                         },
@@ -111,23 +117,24 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                         },
                       ),
 
-
-
                       ListView.separated(
-                        itemCount: controller.launchFoodList.length,
+                        itemCount: controller.lunchFoodList.length,
                         itemBuilder: (context, index) {
-                          final data = controller.launchFoodList[index];
+                          final data = controller.lunchFoodList[index];
                           return FoodItemCard(
                             onTapItem: () {
-                              Get.toNamed(AppRoute.nutritionDetailsScreen);
+                              Get.toNamed(
+                                AppRoute.nutritionDetailsScreen,
+                                arguments: {'foodId': data.id},
+                              );
                             },
-                            title: data['title'],
-                            carbs: data['carbs'],
-                            protein: data['protein'],
-                            fat: data['fat'],
-                            iconPath: data['icon'],
+                            protein: data.name.toString(),
+                            title: data.impactSpeed.toString(),
+                            carbs: data.digestionSpeed.toString(),
+                            fat: data.spike.toString(),
+                            iconPath: AppImages.chicken,
                             onTap: () {
-                              favouriteDialog(controller);
+                              favouriteDialog(controller,foodId: data.id!);
                             },
                           );
                         },
@@ -142,15 +149,18 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                           final data = controller.dinnerFoodList[index];
                           return FoodItemCard(
                             onTapItem: () {
-                              Get.toNamed(AppRoute.nutritionDetailsScreen);
+                              Get.toNamed(
+                                AppRoute.nutritionDetailsScreen,
+                                arguments: {'foodId': data.id},
+                              );
                             },
-                            title: data['title'],
-                            carbs: data['carbs'],
-                            protein: data['protein'],
-                            fat: data['fat'],
-                            iconPath: data['icon'],
+                            protein: data.name.toString(),
+                            title: data.impactSpeed.toString(),
+                            carbs: data.digestionSpeed.toString(),
+                            fat: data.spike.toString(),
+                            iconPath: AppImages.chicken,
                             onTap: () {
-                              favouriteDialog(controller);
+                              favouriteDialog(controller,foodId: data.id!);
                             },
                           );
                         },
@@ -164,16 +174,20 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                         itemBuilder: (context, index) {
                           final data = controller.snackFoodList[index];
                           return FoodItemCard(
-                            title: data['title'],
-                            carbs: data['carbs'],
-                            protein: data['protein'],
-                            fat: data['fat'],
-                            iconPath: data['icon'],
+                            protein: data.name.toString(),
+                            title: data.impactSpeed.toString(),
+                            carbs: data.digestionSpeed.toString(),
+                            fat: data.spike.toString(),
+                            iconPath: data.restaurant?.logo ?? '',
                             onTap: () {
-                              favouriteDialog(controller);
-                            }, onTapItem: () {
-                              Get.toNamed(AppRoute.nutritionDetailsScreen);
-                          },
+                              favouriteDialog(controller,foodId: data.id!);
+                            },
+                            onTapItem: () {
+                              Get.toNamed(
+                                AppRoute.nutritionDetailsScreen,
+                                arguments: {'foodId': data.id},
+                              );
+                            },
                           );
                         },
                         separatorBuilder: (context, index) {
@@ -231,7 +245,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
     );
   }
 
-  void favouriteDialog(RestaurantDetailsController controller) {
+  void favouriteDialog(RestaurantDetailsController controller,{required String foodId,}) {
     Get.dialog(
       Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -278,6 +292,7 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
 
                 TextFormField(
                   maxLines: 4,
+                  controller: controller.dialogNoteTEController,
                   decoration: InputDecoration(
                     hintText: 'spikes later for me',
                     hintStyle: TextStyle(
@@ -296,7 +311,10 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(color: Color(0xFFFF9500), width: 1),
+                      borderSide: BorderSide(
+                        color: Color(0xFFFF9500),
+                        width: 1,
+                      ),
                     ),
                   ),
                 ),
@@ -324,9 +342,15 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                       );
                     },
                     child: GestureDetector(
-                      onTap: (){
+                      onTap: () {
+
+                        controller.addFavourite(
+                          foodId: foodId,
+                          note: controller.dialogNoteTEController.text,
+                        );
+                        controller.dialogNoteTEController.clear();
+
                         Get.toNamed(AppRoute.restaurantListScreen);
-                        
                       },
                       child: Text(
                         'Leave a breadcrumb for future-you',

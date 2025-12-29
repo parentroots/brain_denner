@@ -12,6 +12,7 @@ import 'package:brain_denner/features/bottom_nav/presentation/screen/progress_sc
 
 import 'package:get/get.dart';
 
+import '../../features/bottom_nav/presentation/screen/favourite_screen/presentation/controller/favourite_controller.dart';
 import '../../features/bottom_nav/presentation/screen/home_screen/presentation/controller/home_screen_controller.dart';
 import '../../features/bottom_nav/presentation/screen/home_screen/presentation/controller/restaurant_details_controller.dart';
 import '../../features/bottom_nav/presentation/screen/home_screen/presentation/controller/restaurant_list_controller.dart';
@@ -36,6 +37,7 @@ class DependencyInjection extends Bindings{
      Get.lazyPut(() => ProfileScreenController(), fenix: true);
      Get.lazyPut(() => ChangePasswordScreenController(), fenix: true);
      Get.lazyPut(() => SupportAndContactScreenController(), fenix: true);
+     Get.lazyPut(() => FavouriteController(), fenix: true);
 
   }
 }

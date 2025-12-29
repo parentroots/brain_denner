@@ -115,13 +115,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
 
                      AppButton(
-                       text: AppString.signUp,
-                       onPressed: () {
+                       isLoading: controller.isLoading,
+                         text: AppString.signUp,
+                         onPressed: () {
 
-                         controller.signUp();
+                           controller.signUp();
 
-                       },
-                     ),
+                         },
+                       ),
+
 
                      SizedBox(height: 25.h,),
 

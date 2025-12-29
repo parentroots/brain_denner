@@ -1,6 +1,8 @@
+import 'package:brain_denner/features/bottom_nav/presentation/screen/favourite_screen/presentation/controller/favourite_controller.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/favourite_screen/presentation/widget/favourite_item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../../../../../uitls/constants/appColors/app_colors.dart';
 
@@ -14,28 +16,31 @@ class FavouriteScreen extends StatefulWidget {
 class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.primaryColor,
-      appBar: AppBar(
-        
+
+    return GetBuilder<FavouriteController>(builder: (controller){
+      return Scaffold(
         backgroundColor: AppColors.primaryColor,
-        centerTitle: true,
-        title: Text('Favourites',style: TextStyle(fontSize: 24.sp,
-        color: Color(0xFFFEFEFE),
-        fontWeight: FontWeight.w500),),
-      ),
-      body: Column(
-        children: [
+        appBar: AppBar(
+
+          backgroundColor: AppColors.primaryColor,
+          centerTitle: true,
+          title: Text('Favourites',style: TextStyle(fontSize: 24.sp,
+              color: Color(0xFFFEFEFE),
+              fontWeight: FontWeight.w500),),
+        ),
+        body: Column(
+          children: [
 
 
-          SizedBox(height: 24.h,),
+            SizedBox(height: 24.h,),
 
-          FavouriteItemCard()
+            FavouriteItemCard()
 
 
-          
-        ],
-      ),
-    );
+
+          ],
+        ),
+      );
+    });
   }
 }

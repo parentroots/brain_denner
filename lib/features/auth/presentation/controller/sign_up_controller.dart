@@ -59,6 +59,8 @@ class SignUpController extends GetxController {
 
     );
 
+    print(response);
+
     if (response.isSuccess && (response.statusCode == 200 || response.statusCode == 201)) {
       authModel = AuthModel.fromJson(response.data);
       Get.snackbar("Success", "Account created");
@@ -66,7 +68,6 @@ class SignUpController extends GetxController {
 
       Get.toNamed(AppRoute.otpVerificationScreen, arguments: {
         'email': emailTEController.text,
-        'type':'signUp'
       });
 
 

@@ -1,14 +1,24 @@
+import 'package:brain_denner/features/bottom_nav/presentation/screen/home_screen/presentation/controller/nutrition_details_controller.dart';
 import 'package:brain_denner/uitls/constants/appImages/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 
 class NutritionInfoCard extends StatelessWidget {
   const NutritionInfoCard({super.key});
 
+
+
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final controller = Get.find<NutritionDetailsController>();
 
+    final food = controller.nutritionDetailsData!;
+    final restaurant = food.restaurant;
+
+    return Container(
       decoration: BoxDecoration(
         color: const Color(0xFF0E5A6F), // bluish background
         borderRadius: BorderRadius.only(topLeft: Radius.circular(24.r),topRight: Radius.circular(24.r)),
@@ -77,8 +87,8 @@ class NutritionInfoCard extends StatelessWidget {
 
                   children: [
 
-                    _nutritionItem("Carbs", "45g"),
-                    _nutritionItem("Carbs", "45g"),
+                    _nutritionItem("Carbs",food.typicalServing!.carbs.toString()),
+                    _nutritionItem("Carbs", food.typicalServing!.protein.toString()),
 
                   ],
                 ),
@@ -97,8 +107,8 @@ class NutritionInfoCard extends StatelessWidget {
 
                   children: [
 
-                    _nutritionItem("Carbs", "45g"),
-                    _nutritionItem("Carbs", "45g"),
+                    _nutritionItem("Carbs", food.typicalServing!.fat.toString()),
+                    _nutritionItem("Carbs", food.typicalServing!.fiber.toString()),
 
 
 

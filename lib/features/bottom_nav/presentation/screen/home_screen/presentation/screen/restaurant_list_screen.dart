@@ -26,7 +26,6 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
       init: RestaurantListController(),
       builder: (controller) {
 
-        controller.getAllRestaurantList();
         return Scaffold(
           backgroundColor: AppColors.primaryColor,
           appBar: AppBar(

@@ -19,7 +19,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3)).then((val) {
-      if (LocalStorage.isLogIn) {
+      print("isLogin : ${LocalStorage.isLogIn}😁😁😁😁");
+      print("accesstoken : ${LocalStorage.token}😁😁😁😁");
+      if (LocalStorage.token!="") {
         Get.offAllNamed(AppRoute.mainBottomNavScreen);
       } else {
         Get.toNamed(AppRoute.onBoardingFirstScreen);

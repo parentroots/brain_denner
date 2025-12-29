@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 
 import '../../../../../../../uitls/constants/appImages/app_images.dart';
 import '../../../../../../../uitls/constants/appString/app_string.dart';
+import '../../../favourite_screen/data/favourite_data_model.dart';
 
 
 
@@ -24,6 +25,8 @@ class RestaurantListController extends GetxController {
 
 
   List<Restaurant>restaurantList=[];
+
+
 
   @override
   void onInit() {
@@ -58,7 +61,9 @@ class RestaurantListController extends GetxController {
       Get.snackbar("Error", e.toString());
     }
   }
-  
+
+
+
   
   
   

@@ -64,9 +64,36 @@ class LocalStorage {
 
 
   // Save Data To SharedPreferences
+  /*static Future<void> setString(String key, String value) async {
+    final localStorage = await _getStorage();
+    await localStorage.setString(key, value);
+  }*/
+
   static Future<void> setString(String key, String value) async {
     final localStorage = await _getStorage();
     await localStorage.setString(key, value);
+
+    // Update static variables based on the key
+    switch (key) {
+      case LocalStorageKeys.token:
+        token = value;
+        break;
+      case LocalStorageKeys.refreshToken:
+        refreshToken = value;
+        break;
+      case LocalStorageKeys.userId:
+        userId = value;
+        break;
+      case LocalStorageKeys.myImage:
+        myImage = value;
+        break;
+      case LocalStorageKeys.myName:
+        myName = value;
+        break;
+      case LocalStorageKeys.myEmail:
+        myEmail = value;
+        break;
+    }
   }
 
 

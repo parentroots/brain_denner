@@ -109,6 +109,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
               SizedBox(height: 20.h,),
 
+
+
+
               Column(
                 children: [
                   Container(
@@ -122,9 +125,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
                         GestureDetector(
                           onTap: (){
-                            
+
                             Get.toNamed(AppRoute.nutritionDetailsScreen);
-                            
+
                           },
                           child: Row(
                             children: [
@@ -155,7 +158,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(height: 12),
                         const Divider(color: Colors.white24, height: 1),
                         const SizedBox(height: 12),
-
 
                         Row(
                           children: [
@@ -192,6 +194,8 @@ class _HomeScreenState extends State<HomeScreen> {
       },
     );
   }
+
+
 
   SingleChildScrollView buildDailyCard() {
     return SingleChildScrollView(

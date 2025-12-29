@@ -1,18 +1,25 @@
+import 'package:brain_denner/features/bottom_nav/presentation/screen/favourite_screen/data/favourite_data_model.dart';
+import 'package:brain_denner/features/bottom_nav/presentation/screen/favourite_screen/presentation/controller/favourite_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
 import '../../../../../../../component/app_text/app_text.dart';
-import '../../../../../../../uitls/constants/appColors/app_colors.dart';
 import '../../../../../../../uitls/constants/appImages/app_images.dart';
 
 class FavouriteItemCard extends StatelessWidget {
   const FavouriteItemCard({super.key});
 
+
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<FavouriteController>();
     return Expanded(
       child: ListView.separated(
-        itemCount: 5,
+        itemCount: controller.favouriteList.length,
         itemBuilder: (context, index) {
+
+          final data=controller.favouriteList[index];
           return InkWell(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -38,7 +45,7 @@ class FavouriteItemCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AppText(
-                        text: "Fries",
+                        text: data.food!.name.toString(),
                         fontSize: 24,
                         fontWeight: FontWeight.w500,
                       ),
@@ -46,7 +53,7 @@ class FavouriteItemCard extends StatelessWidget {
                       Row(
                         children: [
                           AppText(
-                            text: "Spike late for me",
+                            text: data.note.toString(),
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w400,
                             color: Color(0xFF8E8E8E),
