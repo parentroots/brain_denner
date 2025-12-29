@@ -2,6 +2,7 @@ import 'package:brain_denner/component/app_button/app_button.dart';
 import 'package:brain_denner/component/app_text/app_text.dart';
 import 'package:brain_denner/config/appRoutes/app_routes.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/controller/profile_screen_controller.dart';
+import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/presentation/screen/edit_profile_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/widget/profice_card.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/widget/profile_option_card.dart';
 import 'package:brain_denner/storage/storage_services.dart';
@@ -68,7 +69,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     fontWeight: FontWeight.w600,
                   ),
 
-                  SizedBox(height: 40.h),
+
+                  SizedBox(height: 15.h),
+
+                  GestureDetector(
+                    onTap: () {
+                      
+                      Get.to(EditProfileScreen());
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF0A2A43),
+                        borderRadius: BorderRadius.circular(30),
+                        border: Border.all(
+                          color: const Color(0xFF1EA7FF),
+                          width: 1,
+                        ),
+                      ),
+                      child: const Text(
+                        'Edit Profile',
+                        style: TextStyle(
+                          color: Color(0xFF1EA7FF),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+
+
+                  SizedBox(height: 20.h),
+
 
                   InkWell(
                     onTap: (){

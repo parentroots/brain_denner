@@ -32,6 +32,9 @@ class SignInController extends GetxController {
   }
 
   Future<void> signIn() async {
+
+    Get.toNamed(AppRoute.mainBottomNavScreen);
+
     isLoading.value = true;
     update();
 

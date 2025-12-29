@@ -6,6 +6,7 @@ import 'package:brain_denner/features/bottom_nav/main_bottom_nav_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/favourite_screen/presentation/screen/favourite_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/home_screen/presentation/screen/nutrition_details_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/controller/privacy_policy_controller.dart';
+import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/presentation/screen/edit_profile_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/presentation/screen/history_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/presentation/screen/profile_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/presentation/screen/support_and_contact_screen.dart';
@@ -65,6 +66,7 @@ class AppRoute {
     static const String  termsAndServicesScreen= "/TermsAndServiceScreen";
     static const String  privacyPolicyScreen= "/PrivacyPolicyScreen";
     static const String  subscriptionScreen= "/SubscriptionScreen";
+    static const String  editProfileMyScreen= "/editProfileMyScreen";
 
 
 
@@ -105,6 +107,7 @@ class AppRoute {
     GetPage(name: termsAndServicesScreen, page: () => const TermsAndServiceScreen()),
     GetPage(name: privacyPolicyScreen, page: () => PrivacyPolicyScreen()),
     GetPage(name: subscriptionScreen, page: () => const SubscriptionScreen()),
+    GetPage(name: editProfileMyScreen, page: () => const EditProfileScreen()),
 
 
   ];

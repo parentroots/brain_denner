@@ -98,7 +98,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   text: 'Change Password',
                   onPressed: () {
 
-
+                    controller.changePasswordRepo();
                   },
                 ),
 
