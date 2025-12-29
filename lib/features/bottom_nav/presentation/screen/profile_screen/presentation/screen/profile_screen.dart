@@ -66,70 +66,100 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   SizedBox(height: 40.h),
 
-                  ProfileOptionCard(
-                    icon: AppImages.person,
-                    title: 'Account setting',
-                    onTap: () {
+                  InkWell(
+                    onTap: (){
                       Get.toNamed(AppRoute.accountSettings);
+
                     },
+                    child: ProfileOptionCard(
+                      icon: AppImages.person,
+                      title: 'Account setting',
+
+                    ),
                   ),
 
                   SizedBox(height: 12.h),
 
 
-                  ProfileOptionCard(
-                    icon: AppImages.subscription,
-                    title: 'Subscription',
-                    onTap: () {
+                  InkWell(
+                    onTap: (){
+
                       Get.toNamed(AppRoute.subscriptionScreen);
+
                     },
+                    child: ProfileOptionCard(
+                      icon: AppImages.subscription,
+                      title: 'Subscription',
+
+                    ),
                   ),
 
                   SizedBox(height: 12.h),
 
-                  ProfileOptionCard(
-                    icon: AppImages.history,
-                    title: 'History',
-                    onTap: () {
+                  InkWell(
+                    onTap: (){
                       Get.toNamed(AppRoute.historyScreen);
+
                     },
+                    child: ProfileOptionCard(
+                      icon: AppImages.history,
+                      title: 'History',
+
+                    ),
                   ),
                   SizedBox(height: 12.h),
 
-                  ProfileOptionCard(
-                    icon: AppImages.rate,
-                    title: 'Rate Our App',
-                    onTap: () {
+                  InkWell(
+                    onTap: (){
                       Get.toNamed(AppRoute.ratingScreen);
+
+
                     },
+                    child: ProfileOptionCard(
+                      icon: AppImages.rate,
+                      title: 'Rate Our App',
+
+                    ),
                   ),
                   SizedBox(height: 12.h),
 
-                  ProfileOptionCard(
-                    icon: AppImages.support,
-                    title: 'Support & contact',
-                    onTap: () {
+                  InkWell(
+                    onTap: (){
                       Get.toNamed(AppRoute.supportAndContactScreen);
+
                     },
+                    child: ProfileOptionCard(
+                      icon: AppImages.support,
+                      title: 'Support & contact',
+
+                    ),
                   ),
                   SizedBox(height: 12.h),
 
-                  ProfileOptionCard(
-                    icon: AppImages.terms,
-                    title: 'Terms and Services',
-                    onTap: () {
+                  InkWell(
+                    onTap: (){
                       Get.toNamed(AppRoute.termsAndServicesScreen);
 
                     },
+                    child: ProfileOptionCard(
+                      icon: AppImages.terms,
+                      title: 'Terms and Services',
+
+                    ),
                   ),
                   SizedBox(height: 12.h),
 
-                  ProfileOptionCard(
-                    icon: AppImages.privacy,
-                    title: 'Privacy policy',
-                    onTap: () {
+                  InkWell(
+                    onTap: (){
+
                       Get.toNamed(AppRoute.privacyPolicyScreen);
+
                     },
+                    child: ProfileOptionCard(
+                      icon: AppImages.privacy,
+                      title: 'Privacy policy',
+
+                    ),
                   ),
                 ],
               ),

@@ -1,5 +1,6 @@
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/widget/history_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
@@ -32,6 +33,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
       body: Column(
         children: [
+
 
           HistoryCard()
 

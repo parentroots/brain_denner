@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../../../../uitls/constants/appColors/app_colors.dart';
+import '../controller/restaurant_details_controller.dart';
 import '../widget/nutrition_card.dart';
 
 class NutritionDetailsScreen extends StatelessWidget {
@@ -27,8 +28,13 @@ class NutritionDetailsScreen extends StatelessWidget {
             title: Text('Fries', style: TextStyle(color: Colors.white)),
             centerTitle: true,
             actions: [
-              Image.asset(AppImages.love),
-              SizedBox(width: 1.w),
+              InkWell(
+                  onTap: (){
+
+                    favouriteDialog(controller);
+                  },
+                  child: Image.asset(AppImages.love)),
+              SizedBox(width: 10.w),
             ],
           ),
           body: Padding(
@@ -153,17 +159,143 @@ class NutritionDetailsScreen extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                     text: 'Save this meal',
                     onPressed: () {
-                      Get.toNamed(AppRoute.mainBottomNavScreen);
+                      Get.toNamed(AppRoute.progressScreen);
                     },
                   ),
 
                   SizedBox(height: 20.h),
+
+
+
+
+
+
+
                 ],
               ),
             ),
           ),
         );
       },
+    );
+  }
+
+  void favouriteDialog(NutritionDetailsController controller) {
+    Get.dialog(
+      Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 10.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AppText(
+                      text: 'Remember this for later',
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: Icon(Icons.close, color: Colors.black54),
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: 8.h),
+
+                AppText(
+                  text: 'Write a note (Optional)',
+                  color: Colors.black54,
+                  fontSize: 14,
+                ),
+
+                SizedBox(height: 12.h),
+
+                TextFormField(
+                  maxLines: 4,
+                  decoration: InputDecoration(
+                    hintText: 'spikes later for me',
+                    hintStyle: TextStyle(
+                      color: Colors.black38,
+                      fontSize: 14.sp,
+                    ),
+                    filled: true,
+                    fillColor: Color(0xFFF5F5F5),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(color: Color(0xFFFF9500), width: 1),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 20.h),
+
+                SizedBox(
+                  height: 48.h,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFFFF9500),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      elevation: 0,
+                    ),
+                    onPressed: () {
+                      Get.back();
+                      Get.snackbar(
+                        'Success',
+                        'Added to remember for later',
+                        backgroundColor: Colors.white54,
+                        barBlur: 0.5,
+                      );
+                    },
+                    child: GestureDetector(
+                      onTap: (){
+                        Get.toNamed(AppRoute.restaurantListScreen);
+
+                      },
+                      child: Text(
+                        'Leave a breadcrumb for future-you',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 10.h),
+              ],
+            ),
+          ),
+        ),
+      ),
+      barrierDismissible: true,
     );
   }
 

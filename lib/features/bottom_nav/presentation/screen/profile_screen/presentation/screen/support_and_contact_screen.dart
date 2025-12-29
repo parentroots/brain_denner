@@ -45,7 +45,7 @@ class SupportAndContactScreen extends StatelessWidget {
                   AppText(
                     text:
                         'If you’re experiencing any Issues, Please let us know. We’ll try to solve them as soon as possible',
-                    fontSize: 16,
+                    fontSize: 15,
                     fontWeight: FontWeight.w400,
                   ),
               
@@ -90,8 +90,25 @@ class SupportAndContactScreen extends StatelessWidget {
               
                   AppButton(text: 'Submit', onPressed: (){
                     print('❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️');
-                  })
-              
+                  }),
+
+                  SizedBox(height: 40.h,),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+
+
+                      AppText(text: 'You can contact us on this number-',maxLines: 1,fontSize: 15,),
+                      AppText(text: '123456789',maxLines: 1,fontSize: 15,color: AppColors.blue500),
+
+                      
+                    ],
+                    
+                  ),
+                  SizedBox(height: 25.h,),
+
+
                 ],
               ),
             ),
