@@ -42,11 +42,15 @@ class ApiEndPoint {
 
 //===============================Support==================================
   static const String createSupport= "$baseUrl/supports/create";
+  static const String privacyPolicyEndPo= "$baseUrl/disclaimer/privacy-policy";
+  static const String termsAndServiceEndPo= "$baseUrl/disclaimer/terms-and-conditions";
+  static const String rateAppEndPo= "$baseUrl/ratings/create";
+  static const String supportCreate= "$baseUrl/supports/create";
+  static const String authChangePassword= "$baseUrl/auth/change-password";
 
   //===============================Contact Info=================================
   static const String contactInfo= "$baseUrl/contact";
   static const String getAllRestaurantList= "$baseUrl/restaurants";
-
 
 
 }

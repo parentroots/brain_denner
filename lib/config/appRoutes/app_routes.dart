@@ -5,6 +5,7 @@ import 'package:brain_denner/features/auth/presentation/screen/sign_up_screen.da
 import 'package:brain_denner/features/bottom_nav/main_bottom_nav_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/favourite_screen/presentation/screen/favourite_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/home_screen/presentation/screen/nutrition_details_screen.dart';
+import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/controller/privacy_policy_controller.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/presentation/screen/history_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/presentation/screen/profile_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/presentation/screen/support_and_contact_screen.dart';
@@ -68,6 +69,7 @@ class AppRoute {
 
 
   static List<GetPage> routes = [
+
     ///==================== OnBoarding  Routes ====================
     GetPage(name: splashScreen, page: () => const SplashScreen()),
     GetPage(name: onBoardingFirstScreen, page: () => const OnBoardingFirstScreen()),
@@ -101,7 +103,7 @@ class AppRoute {
     GetPage(name: ratingScreen, page: () => const RatingScreen()),
     GetPage(name: supportAndContactScreen, page: () => const SupportAndContactScreen()),
     GetPage(name: termsAndServicesScreen, page: () => const TermsAndServiceScreen()),
-    GetPage(name: privacyPolicyScreen, page: () => const PrivacyPolicyScreen()),
+    GetPage(name: privacyPolicyScreen, page: () => PrivacyPolicyScreen()),
     GetPage(name: subscriptionScreen, page: () => const SubscriptionScreen()),
 
 

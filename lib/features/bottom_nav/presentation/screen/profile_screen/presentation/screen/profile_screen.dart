@@ -1,6 +1,7 @@
 import 'package:brain_denner/component/app_text/app_text.dart';
 import 'package:brain_denner/config/appRoutes/app_routes.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/controller/profile_screen_controller.dart';
+import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/controller/terms_and_service_controller.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/widget/profice_card.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/widget/profile_option_card.dart';
 import 'package:brain_denner/uitls/constants/appImages/app_images.dart';
@@ -10,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../../../../uitls/constants/appColors/app_colors.dart';
+import '../../controller/privacy_policy_controller.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -136,31 +138,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   SizedBox(height: 12.h),
 
-                  InkWell(
-                    onTap: (){
-                      Get.toNamed(AppRoute.termsAndServicesScreen);
+                  // InkWell(
+                  //   onTap: (){
+                  //     Get.toNamed(AppRoute.termsAndServicesScreen);
+                  //
+                  //   },
+                  //   child: ProfileOptionCard(
+                  //     icon: AppImages.terms,
+                  //     title: 'Terms and Services',
+                  //
+                  //   ),
+                  // ),
 
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(AppRoute.termsAndServicesScreen);
                     },
                     child: ProfileOptionCard(
                       icon: AppImages.terms,
                       title: 'Terms and Services',
-
                     ),
                   ),
+
+
+
                   SizedBox(height: 12.h),
 
+
                   InkWell(
-                    onTap: (){
-
+                    onTap: () {
+                      if (!Get.isRegistered<PrivacyPolicyController>()) {
+                        Get.put(PrivacyPolicyController());
+                      }
                       Get.toNamed(AppRoute.privacyPolicyScreen);
-
                     },
                     child: ProfileOptionCard(
                       icon: AppImages.privacy,
                       title: 'Privacy policy',
-
                     ),
-                  ),
+                  )
+
                 ],
               ),
             ),
