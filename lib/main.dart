@@ -12,6 +12,7 @@ void main()async{
 
   di.dependencies();
 
+
   runApp(App());
 }
 
