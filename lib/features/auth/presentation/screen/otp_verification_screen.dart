@@ -119,10 +119,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
                       SizedBox(height: 60.h),
 
-                        AppButton(text: 'Verify',fontSize: 24,fontWeight: FontWeight.w600, onPressed: (){
+                        Visibility(
+                          visible: controller.isLoading,
+                          replacement: Center(child: CircularProgressIndicator(),),
+                          child: AppButton(text: 'Verify',fontSize: 24,fontWeight: FontWeight.w600, onPressed: (){
 
-                         controller.verifyOtp();
-                        })
+                           controller.verifyOtp();
+                          }),
+                        )
 
 
                       ],

@@ -1,5 +1,6 @@
 import 'package:brain_denner/uitls/constants/appColors/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AppButton extends StatelessWidget {
   final String text;
@@ -12,6 +13,7 @@ class AppButton extends StatelessWidget {
   final Color? textColor;
   final IconData? icon;
   final double fontSize;
+  final bool isLoading;
   final FontWeight fontWeight;
 
   const AppButton({
@@ -21,6 +23,7 @@ class AppButton extends StatelessWidget {
     this.height = 60,
     this.borderRadius = 90,
     this.gradient,
+    this.isLoading=false,
     this.color,
     this.textColor,
     this.icon,
@@ -39,7 +42,7 @@ class AppButton extends StatelessWidget {
           Icon(icon, color: textColor ?? Colors.white),
           const SizedBox(width: 8),
         ],
-        Text(
+        isLoading==true?CircularProgressIndicator():Text(
           text,
           style: TextStyle(
             color: textColor ?? Colors.white,

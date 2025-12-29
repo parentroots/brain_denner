@@ -1,17 +1,16 @@
 import 'package:brain_denner/config/appRoutes/app_routes.dart';
 import 'package:brain_denner/core/network/end_point/api_end_point.dart';
+import 'package:brain_denner/storage/storage_keys.dart';
 import 'package:brain_denner/storage/storage_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as ApiServices;
 
 import '../../../../services/api_services/api_response_model.dart';
 import '../../../../services/api_services/api_services.dart';
-import '../../../../storage/storage_keys.dart';
 import '../../data/auth_model.dart';
 
 class SignInController extends GetxController {
-  bool isLoading = false;
+  RxBool isLoading = false.obs;
   AuthModel? authModel;
   String errorMessage = "";
 
@@ -33,13 +32,10 @@ class SignInController extends GetxController {
   }
 
   Future<void> signIn() async {
-
-    Get.offAllNamed(AppRoute.mainBottomNavScreen);
-
-    isLoading = true;
+    isLoading.value = true;
     update();
 
-    try {
+    try{
       ApiResponseModel response = await ApiService.post(
         ApiEndPoint.login,
         body: {
@@ -51,38 +47,48 @@ class SignInController extends GetxController {
 
       if (response.isSuccess && response.statusCode == 200) {
         authModel = AuthModel.fromJson(response.data);
-        final accessToken = authModel?.accessToken;
 
-        if (accessToken != null && accessToken.isNotEmpty) {
-          await LocalStorage.setString(LocalStorageKeys.token, accessToken);
-          await LocalStorage.setString(LocalStorageKeys.refreshToken, accessToken);
-          await LocalStorage.setBool(LocalStorageKeys.isLogIn, true);
+        final accessToken=response.data["data"]["accessToken"]??"";
+        LocalStorage.token = accessToken;
+        LocalStorage.isLogIn = true;
+        await LocalStorage.setString(LocalStorageKeys.token, LocalStorage.token);
+        await LocalStorage.setBool(LocalStorageKeys.isLogIn, LocalStorage.isLogIn);
 
-          await LocalStorage.setString(LocalStorageKeys.userId, authModel?.userId ?? "");
-          await LocalStorage.setString(LocalStorageKeys.myName, authModel?.name ?? "");
-          await LocalStorage.setString(LocalStorageKeys.myEmail, authModel?.email ?? "");
+        isLoading.value=false;
+        update();
+        
+        print("AccessToken😁😁😁😁 ${LocalStorage.token}");
+        print("isLogin😁😁😁😁 ${LocalStorage.isLogIn}");
 
-          ApiService.defaultHeaders['Authorization'] = "Bearer $accessToken";
-          LocalStorage.refreshToken = accessToken;
-          LocalStorage.isLogIn = true;
 
-          Get.snackbar("Success", "Login successful");
-          Get.offAllNamed(AppRoute.mainBottomNavScreen);
-        } else {
-          Get.snackbar("Error", "Token not found from server");
-        }
+        Get.toNamed(AppRoute.mainBottomNavScreen);
+
       } else {
         errorMessage = response.message ?? "Invalid credentials";
-        Get.snackbar("Login Failed", errorMessage);
-        debugPrint("Login Failed: $errorMessage");
+        Get.snackbar(
+          "Login Failed😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒",
+          errorMessage,
+        );
+        debugPrint(
+          "Login Failed😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒$errorMessage",
+        );
+        isLoading.value==false;
+        update();
       }
-    } catch (e) {
-      Get.snackbar("Error", "Something went wrong: $e");
-      debugPrint("SignIn Error: $e");
-    } finally {
-      isLoading = false;
+    }
+    catch(e){
+      Get.snackbar(
+        "Login Failed😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒",
+        e.toString(),
+      );
+      isLoading.value=false;
       update();
     }
-  }
+    finally{
+      isLoading.value=false;
+      update();
+    }
 
+
+  }
 }

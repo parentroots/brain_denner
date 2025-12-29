@@ -13,11 +13,30 @@ import '../widget/nutrition_card.dart';
 class NutritionDetailsScreen extends StatelessWidget {
   const NutritionDetailsScreen({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<NutritionDetailsController>(
+
       builder: (controller) {
+
+        if(controller.isLoading){
+          return Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+
+        if(controller.nutritionDetailsData == null){
+          return Scaffold(
+            body: Center(child: Text(controller.errorMessage.isEmpty ? "No data found" : controller.errorMessage)),
+          );
+        }
+
+        final food = controller.nutritionDetailsData!;
+        final restaurant = food.restaurant;
+
         return Scaffold(
+
           backgroundColor: AppColors.primaryColor,
           appBar: AppBar(
             backgroundColor: AppColors.primaryColor,
@@ -25,7 +44,7 @@ class NutritionDetailsScreen extends StatelessWidget {
               onTap: Get.back,
               child: Image.asset(AppImages.backImage),
             ),
-            title: Text('Fries', style: TextStyle(color: Colors.white)),
+            title: Text(food.name??"", style: TextStyle(color: Colors.white)),
             centerTitle: true,
             actions: [
               InkWell(
@@ -59,7 +78,7 @@ class NutritionDetailsScreen extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: AppText(
                       text:
-                          'Fries tend to raise blood sugar quickly, especially when eaten alone',
+                          food.fact.toString(),
                       color: AppColors.white,
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w400,
@@ -86,7 +105,7 @@ class NutritionDetailsScreen extends StatelessWidget {
 
                   AppText(
                     text:
-                        'WBecause digestion is fast, timing often matters more than total carbs',
+                        food.reason.toString(),
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w400,
                     color: AppColors.white,
@@ -123,7 +142,7 @@ class NutritionDetailsScreen extends StatelessWidget {
 
                   AppText(
                     text:
-                        'Often affects blood sugar within 40–90 minutes Min-Max',
+                        food.absorption.toString(),
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -143,7 +162,7 @@ class NutritionDetailsScreen extends StatelessWidget {
 
                   AppText(
                     text:
-                        'Digestion profiles are estimates based on typical \n food composition. Individual responses may vary. \n This information is for awareness only and is not \n insulin or dosing advice.',
+                        food.description.toString(),
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w400,
                   ),

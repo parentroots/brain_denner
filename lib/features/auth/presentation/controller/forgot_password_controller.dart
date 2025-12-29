@@ -55,7 +55,6 @@ class ForgotPasswordController extends GetxController{
 
     if(response.statusCode==200){
       Get.toNamed(AppRoute.otpVerificationScreen,arguments: {
-        'type':'forgotPassword',
         "email":forgotEmailTEController.text.trim()
       });
 

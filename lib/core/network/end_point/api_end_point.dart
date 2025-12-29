@@ -52,5 +52,14 @@ class ApiEndPoint {
   static const String contactInfo= "$baseUrl/contact";
   static const String getAllRestaurantList= "$baseUrl/restaurants";
 
+  //===============================Food=================================
+  static const String getAllFood= "$baseUrl/foods";
+  static const String getSingleFood= "$baseUrl/foods/";
+
+  //===============================Favourite=================================
+  static const String addToFavourite= "$baseUrl/favourites/create";
+
+
+
 
 }
