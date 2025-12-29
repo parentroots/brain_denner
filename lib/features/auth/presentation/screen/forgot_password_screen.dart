@@ -65,7 +65,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         
                         AppButton(text: 'Get OTP',fontSize: 24,fontWeight: FontWeight.w600, onPressed: (){
 
-                          onTapGetOtpButton();
+
+                          controller.sendOtp();
                           
                         })
             

@@ -8,6 +8,7 @@ import '../../data/auth_model.dart';
 
 class OtpVerifyController extends GetxController {
   late String email;
+  late String type;
 
   bool isLoading = false;
   AuthModel? authModel;
@@ -20,68 +21,149 @@ class OtpVerifyController extends GetxController {
     super.onInit();
 
     email = Get.arguments?['email'] ?? '';
+    type=Get.arguments?['type']??'';
+
   }
 
-  /// OTP verify method
-  Future<void> verifyOtp() async {
-    if (otpVerifyTEController.text.isEmpty) {
-      Get.snackbar("Error", "Please enter OTP");
-      return;
-    }
-
-    isLoading = true;
-    update();
-
-    try {
-      ApiResponseModel response = await ApiService.post(
-        ApiEndPoint.verifyEmail,
-        body: {
-          "oneTimeCode": int.parse(otpVerifyTEController.text),
-          "email": email.trim(),
-        },
-        headers: {'Content-Type': 'application/json'},
-      );
-
-      print("OTP Response: ${response.data}");
-      print("OTP Response: ${response.statusCode}");
-
-      if (response.statusCode == 200 || response.statusCode == 201) {
-
-        authModel = AuthModel.fromJson(
-          response.data,
-        );
 
 
+  Future<void> verifyOtp()async{
 
-        Get.snackbar(
-          "Success",
-          response.data['message'] ?? "Verify Success",
-          snackPosition: SnackPosition.BOTTOM,
-        );
+    if(type=='signUp'){
 
-        Get.offAllNamed(AppRoute.mainBottomNavScreen);
+        if (otpVerifyTEController.text.isEmpty) {
+          Get.snackbar("Error", "Please enter OTP");
+          return;
+        }
 
-        clearTextField();
-      } else {
-        errorMessage =
-            response.data?['message'] ?? response.message ?? "Verify failed";
+        isLoading = true;
+        update();
 
-        Get.snackbar(
-          "OTP Verify Failed",
-          errorMessage,
-          snackPosition: SnackPosition.BOTTOM,
-        );
+        try {
+          ApiResponseModel response = await ApiService.post(
+            ApiEndPoint.verifyEmail,
+            body: {
+              "oneTimeCode": int.parse(otpVerifyTEController.text),
+              "email": email.trim(),
+            },
+            headers: {'Content-Type': 'application/json'},
+          );
 
-        debugPrint('OTP verify error: $errorMessage');
+          print("OTP Response: ${response.data}");
+          print("OTP Response: ${response.statusCode}");
+
+          if (response.statusCode == 200 || response.statusCode == 201) {
+
+            authModel = AuthModel.fromJson(
+              response.data,
+            );
+
+
+
+            Get.snackbar(
+              "Success",
+              response.data['message'] ?? "Verify Success",
+              snackPosition: SnackPosition.BOTTOM,
+            );
+
+            Get.offAllNamed(AppRoute.signInScreen);
+
+            clearTextField();
+          } else {
+            errorMessage =
+                response.data?['message'] ?? response.message ?? "Verify failed";
+
+            Get.snackbar(
+              "OTP Verify Failed",
+              errorMessage,
+              snackPosition: SnackPosition.BOTTOM,
+            );
+
+            debugPrint('OTP verify error: $errorMessage');
+          }
+        } catch (e) {
+          Get.snackbar("Error", e.toString(), snackPosition: SnackPosition.BOTTOM);
+          debugPrint('OTP verify exception: $e');
+        } finally {
+          isLoading = false;
+          update();
+        }
+
+
+
+    }else{
+
+
+      if (otpVerifyTEController.text.isEmpty) {
+        Get.snackbar("Error", "Please enter OTP");
+        return;
       }
-    } catch (e) {
-      Get.snackbar("Error", e.toString(), snackPosition: SnackPosition.BOTTOM);
-      debugPrint('OTP verify exception: $e');
-    } finally {
-      isLoading = false;
+
+      isLoading = true;
       update();
+
+      try {
+        ApiResponseModel response = await ApiService.post(
+          ApiEndPoint.verifyEmail,
+          body: {
+            "oneTimeCode": int.parse(otpVerifyTEController.text),
+            "email": email.trim(),
+          },
+          headers: {'Content-Type': 'application/json'},
+        );
+
+        print("OTP Response: ${response.data}");
+        print("OTP Response: ${response.statusCode}");
+
+        if (response.statusCode == 200 || response.statusCode == 201) {
+
+          authModel = AuthModel.fromJson(
+            response.data,
+          );
+
+
+
+          Get.snackbar(
+            "Success",
+            response.data['message'] ?? "Verify Success",
+            snackPosition: SnackPosition.BOTTOM,
+          );
+
+          Get.offAllNamed(AppRoute.setNewPasswordScreen);
+
+          clearTextField();
+        } else {
+          errorMessage =
+              response.data?['message'] ?? response.message ?? "Verify failed";
+
+          Get.snackbar(
+            "OTP Verify Failed",
+            errorMessage,
+            snackPosition: SnackPosition.BOTTOM,
+          );
+
+          debugPrint('OTP verify error: $errorMessage');
+        }
+      } catch (e) {
+        Get.snackbar("Error", e.toString(), snackPosition: SnackPosition.BOTTOM);
+        debugPrint('OTP verify exception: $e');
+      } finally {
+        isLoading = false;
+        update();
+      }
+
+
+
+
     }
+
+
   }
+
+
+
+
+
 
   /// Clear OTP text field
   void clearTextField() {

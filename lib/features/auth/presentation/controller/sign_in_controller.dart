@@ -1,5 +1,6 @@
 import 'package:brain_denner/config/appRoutes/app_routes.dart';
 import 'package:brain_denner/core/network/end_point/api_end_point.dart';
+import 'package:brain_denner/storage/storage_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as ApiServices;
@@ -8,9 +9,7 @@ import '../../../../services/api_services/api_response_model.dart';
 import '../../../../services/api_services/api_services.dart';
 import '../../data/auth_model.dart';
 
-class SignInController extends GetxController{
-
-
+class SignInController extends GetxController {
   bool isLoading = false;
   AuthModel? authModel;
   String errorMessage = "";
@@ -18,24 +17,19 @@ class SignInController extends GetxController{
   final TextEditingController emailTEController = TextEditingController();
   final TextEditingController passwordTEController = TextEditingController();
 
+  bool isShowPassword = true;
 
-  bool isShowPassword=true;
-
-
-  void isPasswordToggle(){
-    isShowPassword=!isShowPassword;
+  void isPasswordToggle() {
+    isShowPassword = !isShowPassword;
     update();
   }
 
   @override
   void dispose() {
-
     super.dispose();
     emailTEController.dispose();
     passwordTEController.dispose();
-
   }
-
 
   Future<void> signIn() async {
     isLoading = true;
@@ -46,27 +40,41 @@ class SignInController extends GetxController{
       body: {
         "email": emailTEController.text,
         "password": passwordTEController.text,
-
       },
-      headers: {
-        'Content-Type':'application/json'
-      }
+      headers: {'Content-Type': 'application/json'},
     );
 
-    if (response.isSuccess && response.statusCode==200) {
-
+    if (response.isSuccess && response.statusCode == 200) {
       authModel = AuthModel.fromJson(response.data);
 
-      
-      ApiService.defaultHeaders['Authorization'] =
-      "Bearer ${authModel!.token}";
+      final accessToken = authModel?.accessToken;
 
+      if (accessToken == null || accessToken.isEmpty) {
+        Get.snackbar("Error", "Token not found from server");
+        isLoading = false;
+        update();
+        return;
+      }
+
+      ApiService.defaultHeaders['Authorization'] = "Bearer ${authModel!.accessToken}";
       Get.snackbar("Success", "Login successful");
+
+
+      LocalStorage.refreshToken = accessToken;
+      LocalStorage.isLogIn=true;
       Get.offAllNamed(AppRoute.mainBottomNavScreen);
+
+
+
     } else {
       errorMessage = response.message ?? "Invalid credentials";
-      Get.snackbar("Login Failed😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒", errorMessage);
-      debugPrint("Login Failed😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒$errorMessage",);
+      Get.snackbar(
+        "Login Failed😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒",
+        errorMessage,
+      );
+      debugPrint(
+        "Login Failed😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒$errorMessage",
+      );
     }
 
     isLoading = false;

@@ -1,19 +1,11 @@
 class AuthModel {
-  final String? token;
-  final String? message;
-  final bool? status;
+  String? accessToken;
+  String? role;
 
-  AuthModel({
-    this.token,
-    this.message,
-    this.status,
-  });
+  AuthModel({this.accessToken, this.role});
 
-  factory AuthModel.fromJson(Map<String, dynamic> json) {
-    return AuthModel(
-      token: json['token'], // null হলেও OK
-      message: json['message'],
-      status: json['status'],
-    );
+  AuthModel.fromJson(Map<String, dynamic> json) {
+    accessToken = json['data']?['accessToken'];
+    role = json['data']?['role'];
   }
 }

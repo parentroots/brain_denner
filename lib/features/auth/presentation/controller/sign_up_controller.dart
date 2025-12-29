@@ -65,7 +65,8 @@ class SignUpController extends GetxController {
 
 
       Get.toNamed(AppRoute.otpVerificationScreen, arguments: {
-        'email': emailTEController.text
+        'email': emailTEController.text,
+        'type':'signUp'
       });
 
 
