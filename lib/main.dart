@@ -10,7 +10,6 @@ void main()async{
   DependencyInjection di = DependencyInjection();
   di.dependencies();
 
-
   runApp(App());
 }
 
