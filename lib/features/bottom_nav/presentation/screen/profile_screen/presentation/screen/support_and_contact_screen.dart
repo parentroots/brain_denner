@@ -41,16 +41,16 @@ class SupportAndContactScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 40.h),
-              
+
                   AppText(
                     text:
                         'If you’re experiencing any Issues, Please let us know. We’ll try to solve them as soon as possible',
                     fontSize: 15,
                     fontWeight: FontWeight.w400,
                   ),
-              
+
                   SizedBox(height: 57.h),
-              
+
                   Align(
                     alignment: Alignment.centerLeft,
                     child: AppText(
@@ -60,13 +60,13 @@ class SupportAndContactScreen extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-              
+
                   SizedBox(height: 14,),
                   AppTextField(
                     controller: controller.titleTEController,
                     hintText: 'Title',
                   ),
-              
+
                   SizedBox(height: 47.h),
                   Align(
                     alignment: Alignment.centerLeft,
@@ -77,20 +77,23 @@ class SupportAndContactScreen extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-              
+
                   SizedBox(height: 14,),
                   AppTextField(
                     maxLine: 6,
-                    controller: controller.titleTEController,
+                    controller: controller.issuesTEController,
                     hintText: 'Title',
                   ),
-              
+
                   SizedBox(height: 40.h,),
-              
-              
-                  AppButton(text: 'Submit', onPressed: (){
-                    print('❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️');
-                  }),
+
+
+                  AppButton(
+                    text: controller.isLoading ? 'Submitting...' : 'Submit',
+                    onPressed: () {
+                      controller.postSupportContact();
+                    },
+                  ),
 
                   SizedBox(height: 40.h,),
 
@@ -102,9 +105,9 @@ class SupportAndContactScreen extends StatelessWidget {
                       AppText(text: 'You can contact us on this number-',maxLines: 1,fontSize: 15,),
                       AppText(text: '123456789',maxLines: 1,fontSize: 15,color: AppColors.blue500),
 
-                      
+
                     ],
-                    
+
                   ),
                   SizedBox(height: 25.h,),
 

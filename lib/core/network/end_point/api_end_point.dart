@@ -42,6 +42,11 @@ class ApiEndPoint {
 
 //===============================Support==================================
   static const String createSupport= "$baseUrl/supports/create";
+  static const String privacyPolicyEndPo= "$baseUrl/disclaimer/privacy-policy";
+  static const String termsAndServiceEndPo= "$baseUrl/disclaimer/terms-and-conditions";
+  static const String rateAppEndPo= "$baseUrl/ratings/create";
+  static const String supportCreate= "$baseUrl/supports/create";
+  static const String authChangePassword= "$baseUrl/auth/change-password";
 
   //===============================Contact Info=================================
   static const String contactInfo= "$baseUrl/contact";
@@ -53,7 +58,9 @@ class ApiEndPoint {
 
   //===============================Favourite=================================
   static const String addToFavourite= "$baseUrl/favourites/create";
-
+  static const String autLogin= "$baseUrl/auth/login";
+  static const String getMyHistory= "$baseUrl/histories/me";
+  static const String userProfile= "$baseUrl/users/profile";
 
 
 

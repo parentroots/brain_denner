@@ -27,19 +27,8 @@ class AccountSettings extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 13.w),
         child: Column(
           children: [
-            SizedBox(height: 32.h),
-            InfoWidget(
-              image: AppImages.person,
-              title: 'MD IBRAHIM NAZMUL',
-              onTap: () {},
-            ),
-            SizedBox(height: 16.h),
-            InfoWidget(
-              image: AppImages.sms,
-              title: 'evu@gmail.com',
-              onTap: () {},
-            ),
-            SizedBox(height: 16.h),
+            SizedBox(height: 40.h),
+
             InfoWidget(
               image: AppImages.lock,
               title: 'change password',

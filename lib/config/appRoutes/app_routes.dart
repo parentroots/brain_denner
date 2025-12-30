@@ -1,10 +1,13 @@
 import 'package:brain_denner/features/auth/presentation/screen/forgot_password_screen.dart';
 import 'package:brain_denner/features/auth/presentation/screen/otp_verification_screen.dart';
+import 'package:brain_denner/features/auth/presentation/screen/otp_verify_forgotpassword.dart';
 import 'package:brain_denner/features/auth/presentation/screen/sign_in_screen.dart';
 import 'package:brain_denner/features/auth/presentation/screen/sign_up_screen.dart';
 import 'package:brain_denner/features/bottom_nav/main_bottom_nav_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/favourite_screen/presentation/screen/favourite_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/home_screen/presentation/screen/nutrition_details_screen.dart';
+import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/controller/privacy_policy_controller.dart';
+import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/presentation/screen/edit_profile_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/presentation/screen/history_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/presentation/screen/profile_screen.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/presentation/screen/support_and_contact_screen.dart';
@@ -64,10 +67,13 @@ class AppRoute {
     static const String  termsAndServicesScreen= "/TermsAndServiceScreen";
     static const String  privacyPolicyScreen= "/PrivacyPolicyScreen";
     static const String  subscriptionScreen= "/SubscriptionScreen";
+    static const String  editProfileMyScreen= "/editProfileMyScreen";
+    static const String  otpVerifyForgotpassword= "/otpVerifyForgotpassword";
 
 
 
   static List<GetPage> routes = [
+
     ///==================== OnBoarding  Routes ====================
     GetPage(name: splashScreen, page: () => const SplashScreen()),
     GetPage(name: onBoardingFirstScreen, page: () => const OnBoardingFirstScreen()),
@@ -101,8 +107,10 @@ class AppRoute {
     GetPage(name: ratingScreen, page: () => const RatingScreen()),
     GetPage(name: supportAndContactScreen, page: () => const SupportAndContactScreen()),
     GetPage(name: termsAndServicesScreen, page: () => const TermsAndServiceScreen()),
-    GetPage(name: privacyPolicyScreen, page: () => const PrivacyPolicyScreen()),
+    GetPage(name: privacyPolicyScreen, page: () => PrivacyPolicyScreen()),
     GetPage(name: subscriptionScreen, page: () => const SubscriptionScreen()),
+    GetPage(name: editProfileMyScreen, page: () => const EditProfileScreen()),
+    GetPage(name: otpVerifyForgotpassword, page: () => const OtpVerifyForgotpassword()),
 
 
   ];

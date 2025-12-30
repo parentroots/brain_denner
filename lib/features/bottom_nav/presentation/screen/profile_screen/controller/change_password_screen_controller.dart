@@ -1,43 +1,99 @@
+import 'package:brain_denner/core/network/end_point/api_end_point.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../../../services/api_services/api_services.dart';
+import '../../../../../../storage/storage_services.dart';
+class ChangePasswordScreenController extends GetxController {
+  // ================= Controllers =================
+  final TextEditingController currentPasswordTEController = TextEditingController();
+  final TextEditingController newPasswordTEController = TextEditingController();
+  final TextEditingController confirmNewPasswordTEController = TextEditingController();
 
-class ChangePasswordScreenController extends GetxController{
+  // ================= State =================
+  bool currentPasswordIsShow = true;
+  bool newPasswordIsShow = true;
+  bool confirmNewPasswordIsShow = true;
+  bool isLoading = false;
 
-
-  final TextEditingController currentPasswordTEController=TextEditingController();
-  final TextEditingController newPasswordTEController=TextEditingController();
-  final TextEditingController confirmNewPasswordTEController=TextEditingController();
-
-  bool currentPasswordIsShow=false;
-  bool newPasswordIsShow=false;
-  bool confirmNewPasswordIsShow=false;
-
-
-
-
-  void currentPasswordToggle(){
-    currentPasswordIsShow=!currentPasswordIsShow;
+  // ================= Toggle Password Visibility =================
+  void currentPasswordToggle() {
+    currentPasswordIsShow = !currentPasswordIsShow;
     update();
   }
 
-  void newPasswordToggle(){
-    newPasswordIsShow=!newPasswordIsShow;
+  void newPasswordToggle() {
+    newPasswordIsShow = !newPasswordIsShow;
     update();
   }
 
-  void confirmNewPasswordToggle(){
-    confirmNewPasswordIsShow=!confirmNewPasswordIsShow;
+  void confirmNewPasswordToggle() {
+    confirmNewPasswordIsShow = !confirmNewPasswordIsShow;
     update();
   }
 
+  // ================= Change Password =================
+
+
+  Future<void> changePasswordRepo() async {
+    try {
+
+      isLoading = true;
+      update();
+
+      print("Token: ${LocalStorage.token}");
+
+
+      final response = await ApiService.post(
+        ApiEndPoint.authChangePassword,
+        body: {
+          "currentPassword": currentPasswordTEController.text,
+          "newPassword": newPasswordTEController.text,
+          "confirmPassword": confirmNewPasswordTEController.text,
+        },
+        headers: {
+          "Authorization": "Bearer ${LocalStorage.token}",
+          "Content-Type": "application/json",
+        },
+      );
+
+      print("=== API Response ===");
+      print("Status Code: ${response.statusCode}");
+      print("Data: ${response.data}");
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+
+        Get.snackbar(
+          "Success",
+          response.data["message"] ?? "Support created successfully",
+          snackPosition: SnackPosition.BOTTOM,
+        );
+
+        currentPasswordTEController.clear();
+        newPasswordTEController.clear();
+        confirmNewPasswordTEController.clear();
+
+      } else {
+        Get.snackbar(
+          "Failed",
+          "Status Code: ${response.statusCode}",
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
+    } catch (e) {
+      Get.snackbar("Error", "Something went wrong");
+      print("Error: $e");
+    } finally {
+      isLoading = false;
+      update();
+    }
+  }
+
+  // ================= Dispose Controllers =================
   @override
   void dispose() {
-    // TODO: implement dispose
-    super.dispose();
     currentPasswordTEController.dispose();
     newPasswordTEController.dispose();
-    currentPasswordTEController.dispose();
+    confirmNewPasswordTEController.dispose();
+    super.dispose();
   }
-
-
 }
