@@ -12,14 +12,14 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../../uitls/constants/appColors/app_colors.dart';
 import '../controller/otp_verify_controller.dart';
 
-class OtpVerificationScreen extends StatefulWidget {
-  const OtpVerificationScreen({super.key});
+class OtpVerifyForgotpassword extends StatefulWidget {
+  const OtpVerifyForgotpassword({super.key});
 
   @override
-  State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
+  State<OtpVerifyForgotpassword> createState() => _OtpVerificationScreenState();
 }
 
-class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
+class _OtpVerificationScreenState extends State<OtpVerifyForgotpassword> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<OtpVerifyController>(
@@ -60,69 +60,69 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
                         SizedBox(height: 14.h,),
 
-                      PinCodeTextField(
-                        length: 6,
-                        appContext: context,
-                        controller: controller.otpVerifyTEController,
+                        PinCodeTextField(
+                          length: 6,
+                          appContext: context,
+                          controller: controller.otpVerifyTEController,
 
-                        obscureText: false,
-                        hintCharacter: '●',
-                        hintStyle: TextStyle(
-                          color: Color(0xffFFFFFF),
-                          fontSize: 24.sp,
+                          obscureText: false,
+                          hintCharacter: '●',
+                          hintStyle: TextStyle(
+                            color: Color(0xffFFFFFF),
+                            fontSize: 24.sp,
+                          ),
+
+
+                          keyboardType: TextInputType.number,
+
+                          animationType: AnimationType.fade,
+                          animationDuration: const Duration(milliseconds: 300),
+
+                          enableActiveFill: true,
+                          backgroundColor: Colors.transparent,
+
+                          pinTheme: PinTheme(
+                            shape: PinCodeFieldShape.box,
+                            borderRadius: BorderRadius.circular(12),
+
+                            fieldHeight: 60,
+                            fieldWidth: 56.w,
+
+
+                            // 🔹 Border Color
+                            inactiveColor: const Color(0xff313E48),
+                            selectedColor:const Color(0xffB0F2FF),
+                            activeColor: const Color(0xffB0F2FF),
+
+
+                            inactiveFillColor: AppColors.primaryColor,
+                            selectedFillColor:  AppColors.primaryColor,
+                            activeFillColor:  AppColors.primaryColor,
+
+                            errorBorderColor: Colors.red,
+                            disabledColor: const Color(0xff313E48),
+                          ),
+
+                          textStyle: const TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+
+                          onCompleted: (value) {
+                            print("OTP Completed: $value");
+                          },
+
+                          onChanged: (value) {},
                         ),
 
 
-                        keyboardType: TextInputType.number,
-
-                        animationType: AnimationType.fade,
-                        animationDuration: const Duration(milliseconds: 300),
-
-                        enableActiveFill: true,
-                        backgroundColor: Colors.transparent,
-
-                        pinTheme: PinTheme(
-                          shape: PinCodeFieldShape.box,
-                          borderRadius: BorderRadius.circular(12),
-
-                          fieldHeight: 60,
-                          fieldWidth: 56.w,
-
-
-                          // 🔹 Border Color
-                          inactiveColor: const Color(0xff313E48),
-                          selectedColor:const Color(0xffB0F2FF),
-                          activeColor: const Color(0xffB0F2FF),
-
-
-                          inactiveFillColor: AppColors.primaryColor,
-                          selectedFillColor:  AppColors.primaryColor,
-                          activeFillColor:  AppColors.primaryColor,
-
-                          errorBorderColor: Colors.red,
-                          disabledColor: const Color(0xff313E48),
-                        ),
-
-                        textStyle: const TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-
-                        onCompleted: (value) {
-                          print("OTP Completed: $value");
-                        },
-
-                        onChanged: (value) {},
-                      ),
-
-
-                      SizedBox(height: 60.h),
+                        SizedBox(height: 60.h),
 
                         Visibility(
                           replacement: Center(child: CircularProgressIndicator(),),
                           child: AppButton(text: 'Verify',fontSize: 24,fontWeight: FontWeight.w600, onPressed: (){
-                           controller.verifyOtp();
+                            controller.verifyOtpforgotpassword();
                           }),
                         )
 

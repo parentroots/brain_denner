@@ -93,7 +93,7 @@ class _SignInScreenState extends State<SignInScreen> {
                          text: AppString.login,
                          onPressed: () {
 
-                            controller.signIn();
+                            controller.signInUser();
 
                          },
                        ),

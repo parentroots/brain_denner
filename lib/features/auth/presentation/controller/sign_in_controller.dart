@@ -1,3 +1,4 @@
+
 import 'package:brain_denner/config/appRoutes/app_routes.dart';
 import 'package:brain_denner/core/network/end_point/api_end_point.dart';
 import 'package:brain_denner/storage/storage_keys.dart';
@@ -31,67 +32,52 @@ class SignInController extends GetxController {
     passwordTEController.dispose();
   }
 
-  Future<void> signIn() async {
 
-    Get.toNamed(AppRoute.mainBottomNavScreen);
+  Future<void> signInUser() async {
 
-    isLoading.value = true;
     update();
 
-    try{
-      ApiResponseModel response = await ApiService.post(
-        ApiEndPoint.login,
-        body: {
-          "email": emailTEController.text,
-          "password": passwordTEController.text,
-        },
-        headers: {'Content-Type': 'application/json'},
-      );
+    Map<String, String> body = {
+      "email": emailTEController.text,
+      "password": passwordTEController.text,
+    };
 
-      if (response.isSuccess && response.statusCode == 200) {
-        authModel = AuthModel.fromJson(response.data);
+    var response = await ApiService.post(
+      ApiEndPoint.autLogin,
+      body: body,
+    ).timeout(const Duration(seconds: 30));
 
-        final accessToken=response.data["data"]["accessToken"]??"";
-        LocalStorage.token = accessToken;
-        LocalStorage.isLogIn = true;
-        await LocalStorage.setString(LocalStorageKeys.token, LocalStorage.token);
-        await LocalStorage.setBool(LocalStorageKeys.isLogIn, LocalStorage.isLogIn);
+    if (response.statusCode == 200) {
+      var data = response.data;
 
-        isLoading.value=false;
-        update();
-        
-        print("AccessToken😁😁😁😁 ${LocalStorage.token}");
-        print("isLogin😁😁😁😁 ${LocalStorage.isLogIn}");
+      Get.snackbar("meessage", "working");
+      Get.toNamed(AppRoute.mainBottomNavScreen);
 
 
-        Get.toNamed(AppRoute.mainBottomNavScreen);
+      LocalStorage.token = data['data']["accessToken"];
+      LocalStorage.userId = data['data']["attributes"]["_id"];
+      LocalStorage.myImage = data['data']["attributes"]["image"];
+      LocalStorage.myName = data['data']["attributes"]["fullName"];
 
-      } else {
-        errorMessage = response.message ?? "Invalid credentials";
-        Get.snackbar(
-          "Login Failed😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒",
-          errorMessage,
-        );
-        debugPrint(
-          "Login Failed😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒$errorMessage",
-        );
-        isLoading.value==false;
-        update();
-      }
-    }
-    catch(e){
-      Get.snackbar(
-        "Login Failed😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒😒",
-        e.toString(),
-      );
-      isLoading.value=false;
-      update();
-    }
-    finally{
-      isLoading.value=false;
-      update();
+      LocalStorage.myEmail = data['data']["attributes"]["email"];
+      LocalStorage.isLogIn = true;
+
+      LocalStorage.setBool(LocalStorageKeys.isLogIn, LocalStorage.isLogIn);
+      LocalStorage.setString(LocalStorageKeys.token, LocalStorage.token);
+      LocalStorage.setString(LocalStorageKeys.userId, LocalStorage.userId);
+      LocalStorage.setString(LocalStorageKeys.myImage, LocalStorage.myImage);
+      LocalStorage.setString(LocalStorageKeys.myName, LocalStorage.myName);
+      LocalStorage.setString(LocalStorageKeys.myEmail, LocalStorage.myEmail);
+
+
+      emailTEController.clear();
+      passwordTEController.clear();
+    } else {
+      Get.snackbar(response.statusCode.toString(),"rong");
     }
 
-
+    update();
   }
+
+
 }

@@ -6,6 +6,8 @@ import 'package:brain_denner/features/auth/presentation/controller/forgot_passwo
 import 'package:brain_denner/features/bottom_nav/presentation/controller/main_bottom_nav_controller.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/home_screen/presentation/controller/nutrition_details_controller.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/controller/change_password_screen_controller.dart';
+import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/controller/edit_pofile_controller.dart';
+import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/controller/history_controller.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/controller/privacy_policy_controller.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/controller/profile_screen_controller.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/controller/support_and_contact_screen_controller.dart';
@@ -46,6 +48,8 @@ class DependencyInjection extends Bindings{
      Get.lazyPut(() => ChangePasswordScreenController(), fenix: true);
      Get.lazyPut(() => SupportAndContactScreenController(), fenix: true);
      Get.lazyPut(() => FavouriteController(), fenix: true);
+     Get.lazyPut(() => HistoryController(), fenix: true);
+     Get.lazyPut(() => EditPofileController(), fenix: true);
 
   }
 }

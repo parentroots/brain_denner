@@ -1,5 +1,6 @@
 import 'package:brain_denner/features/auth/presentation/screen/forgot_password_screen.dart';
 import 'package:brain_denner/features/auth/presentation/screen/otp_verification_screen.dart';
+import 'package:brain_denner/features/auth/presentation/screen/otp_verify_forgotpassword.dart';
 import 'package:brain_denner/features/auth/presentation/screen/sign_in_screen.dart';
 import 'package:brain_denner/features/auth/presentation/screen/sign_up_screen.dart';
 import 'package:brain_denner/features/bottom_nav/main_bottom_nav_screen.dart';
@@ -67,6 +68,7 @@ class AppRoute {
     static const String  privacyPolicyScreen= "/PrivacyPolicyScreen";
     static const String  subscriptionScreen= "/SubscriptionScreen";
     static const String  editProfileMyScreen= "/editProfileMyScreen";
+    static const String  otpVerifyForgotpassword= "/otpVerifyForgotpassword";
 
 
 
@@ -108,6 +110,7 @@ class AppRoute {
     GetPage(name: privacyPolicyScreen, page: () => PrivacyPolicyScreen()),
     GetPage(name: subscriptionScreen, page: () => const SubscriptionScreen()),
     GetPage(name: editProfileMyScreen, page: () => const EditProfileScreen()),
+    GetPage(name: otpVerifyForgotpassword, page: () => const OtpVerifyForgotpassword()),
 
 
   ];

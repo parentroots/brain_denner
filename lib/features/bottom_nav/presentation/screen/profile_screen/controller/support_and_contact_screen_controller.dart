@@ -10,6 +10,7 @@ class SupportAndContactScreenController extends GetxController {
   final TextEditingController titleTEController = TextEditingController();
   final TextEditingController issuesTEController = TextEditingController();
 
+
   // ================= State =================
   bool isLoading = false;
   String supportResponseMessage = "";
@@ -17,11 +18,6 @@ class SupportAndContactScreenController extends GetxController {
   // ================= POST API =================
   Future<void> postSupportContact() async {
     try {
-      if (titleTEController.text.trim().isEmpty ||
-          issuesTEController.text.trim().isEmpty) {
-        Get.snackbar("Error", "Title & message required");
-        return;
-      }
 
       isLoading = true;
       update();
@@ -33,18 +29,27 @@ class SupportAndContactScreenController extends GetxController {
 
       final response = await ApiService.post(
         ApiEndPoint.supportCreate,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${LocalStorage.token}",
+        },
         body: {
           "title": titleTEController.text.trim(),
           "message": issuesTEController.text.trim(),
         },
-
       );
 
-      print("=== API Response ===");
+      print("=== API RESPONSE RECEIVED ===");
       print("Status Code: ${response.statusCode}");
+      print("Message: ${response.message}");
       print("Data: ${response.data}");
 
+
+
+
       if (response.statusCode == 200 || response.statusCode == 201) {
+
+        print("Working doen😊😊😊😊😊😊");
 
           Get.snackbar(
             "Success",

@@ -25,7 +25,7 @@ class SetNewPasswordController extends GetxController{
 
 
   void onTapUpdateButton(){
-    Get.toNamed(AppRoute.mainBottomNavScreen);
+    Get.toNamed(AppRoute.signInScreen);
   }
 
 

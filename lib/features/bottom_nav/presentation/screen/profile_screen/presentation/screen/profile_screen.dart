@@ -49,13 +49,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ProfileCard(
-                        imageFile: controller.file,
-                        size: 80,
-                        onCameraTap: () {
-                          controller.pickImage();
-                        },
-                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Stack(
+                          children: [
+
+                            Container(
+                              alignment: Alignment.center,
+                              child: Container(
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.grey[300],
+                                ),
+                                child: Icon(
+                                  Icons.person,
+                                  size: 60,
+                                  color: Colors.grey[600],
+                                ),
+                              ),
+                            )
+
+
+                          ],
+                        ),
+                      )
+
                     ],
                   ),
 

@@ -1,15 +1,16 @@
 // api_service.dart
 import 'dart:convert';
 import 'dart:io';
+import 'package:brain_denner/storage/storage_services.dart';
 import 'package:http/http.dart' as http;
 import 'api_response_model.dart';
 
 class ApiService {
-  static const String baseUrl = "http://10.10.7.7:5005/api/v1";
+ // static const String baseUrl = "http://10.10.7.7:5005/api/v1";
 
   static Map<String, String> defaultHeaders = {
     "Content-Type": "application/json",
-    "Accept": "application/json",
+    "Authorization":"Bearer ${LocalStorage.token}"
   };
 
 

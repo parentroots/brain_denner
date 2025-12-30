@@ -58,6 +58,9 @@ class ApiEndPoint {
 
   //===============================Favourite=================================
   static const String addToFavourite= "$baseUrl/favourites/create";
+  static const String autLogin= "$baseUrl/auth/login";
+  static const String getMyHistory= "$baseUrl/histories/me";
+  static const String userProfile= "$baseUrl/users/profile";
 
 
 
