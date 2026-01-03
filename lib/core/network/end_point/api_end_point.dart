@@ -1,6 +1,7 @@
 class ApiEndPoint {
 
   static const String baseUrl = "http://10.10.7.7:5005/api/v1";
+  static const String imageUrl = "http://10.10.7.7:5005/";
 
 
 
@@ -15,6 +16,7 @@ class ApiEndPoint {
 //===============================User==================================
   static const String createUser = "$baseUrl/users/create-user";
   static const String updateProfile = "$baseUrl/users/profile";
+  static const String getProfile = "$baseUrl/users/profile";
 
 
 //===============================Favourite==================================

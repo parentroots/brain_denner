@@ -125,6 +125,7 @@ class RestaurantDetailsController extends GetxController {
       }
     } catch (e) {
       Get.snackbar("Error", e.toString());
+      debugPrint('error is================ :${e.toString()}');
     } finally {
       update();
     }

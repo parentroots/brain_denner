@@ -49,7 +49,7 @@ class DependencyInjection extends Bindings{
      Get.lazyPut(() => SupportAndContactScreenController(), fenix: true);
      Get.lazyPut(() => FavouriteController(), fenix: true);
      Get.lazyPut(() => HistoryController(), fenix: true);
-     Get.lazyPut(() => EditPofileController(), fenix: true);
+     Get.lazyPut(() => EditProfileController(), fenix: true);
 
   }
 }

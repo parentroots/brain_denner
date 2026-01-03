@@ -42,7 +42,9 @@ class AppButton extends StatelessWidget {
           Icon(icon, color: textColor ?? Colors.white),
           const SizedBox(width: 8),
         ],
-        isLoading==true?CircularProgressIndicator():Text(
+        isLoading==true?CircularProgressIndicator(
+          color: Colors.white,
+        ):Text(
           text,
           style: TextStyle(
             color: textColor ?? Colors.white,

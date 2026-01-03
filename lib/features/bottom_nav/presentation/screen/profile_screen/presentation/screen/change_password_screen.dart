@@ -50,6 +50,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 14.h),
                 AppTextField(
+
                   controller: controller.currentPasswordTEController,
                   hintText: 'Enter current Password',
                   obscureText: controller.currentPasswordIsShow,
@@ -101,10 +102,12 @@ class ChangePasswordScreen extends StatelessWidget {
 
                 /// Button
                 AppButton(
+                  isLoading: controller.isLoading,
                   text: 'Change Password',
                   onPressed: () {
 
-                    controller.changePasswordRepo();
+                    controller.changePassword();
+
                   },
                 ),
 

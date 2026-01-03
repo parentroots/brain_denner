@@ -13,8 +13,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shimmer/shimmer.dart';
 
+import '../../../../../../../core/network/end_point/api_end_point.dart';
 import '../../../../../../../uitls/constants/appColors/app_colors.dart';
+import '../../../../widget/skletonizer.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -30,237 +33,268 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return GetBuilder<ProfileScreenController>(
       builder: (controller) {
-        return Scaffold(
-          backgroundColor: AppColors.primaryColor,
-          appBar: AppBar(
-            centerTitle: true,
-            title: AppText(
-              text: 'Profile',
-              color: Color(0xFFFEFEFE),
-              fontSize: 24.sp,
-            ),
+        
+
+        return RefreshIndicator(
+          onRefresh: ()=>controller.getProfileData()
+         ,
+          child: Scaffold(
             backgroundColor: AppColors.primaryColor,
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 13.w),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        alignment: Alignment.center,
-                        child: Stack(
-                          children: [
+            appBar: AppBar(
+              centerTitle: true,
+              title: AppText(
+                text: 'Profile',
+                color: Color(0xFFFEFEFE),
+                fontSize: 24.sp,
+              ),
+              backgroundColor: AppColors.primaryColor,
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 13.w),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
 
-                            Container(
-                              alignment: Alignment.center,
-                              child: Container(
-                                width: 100,
-                                height: 100,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.grey[300],
+
+                        Obx(() {
+                          final profile = controller.profileData.value;
+
+                          return Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              // shimmer / loading placeholder
+                              if (profile == null)
+                                Container(
+                                  height: 100,
+                                  width: 100,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.grey.shade300,
+                                  ),
+                                )
+                              else
+                                CircleAvatar(
+                                  radius: 50,
+                                  backgroundColor: Colors.grey.shade300,
+                                  backgroundImage: profile.image.isNotEmpty
+                                      ? NetworkImage(ApiEndPoint.imageUrl + profile.image)
+                                      : null,
+                                  child: profile.image.isEmpty
+                                      ? const Icon(
+                                    Icons.person,
+                                    size: 45,
+                                    color: Colors.grey,
+                                  )
+                                      : null,
                                 ),
-                                child: Icon(
-                                  Icons.person,
-                                  size: 60,
-                                  color: Colors.grey[600],
-                                ),
-                              ),
-                            )
+                            ],
+                          );
+                        })
 
 
-                          ],
+
+                      ],
+                    ),
+
+                    SizedBox(height: 12.h),
+                    Obx(() {
+                      final profile = controller.profileData.value;
+
+                      return profile == null
+                          ? Shimmer.fromColors(
+                        baseColor: Colors.grey.shade400,
+                        highlightColor: Colors.grey.shade200,
+                        child: Container(
+                          height: 20.h,   // adjust according to font size
+                          width: 120.w,
+                          color: Colors.grey,
                         ),
                       )
-
-                    ],
-                  ),
-
-                  SizedBox(height: 12.h),
-
-                  AppText(
-                    text: 'MD IBRAHIM NAZMUL',
-                    color: Colors.white,
-                    textAlign: TextAlign.center,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
+                          : AppText(
+                        text: profile.name,
+                        color: Colors.white,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600,
+                      );
+                    }),
 
 
-                  SizedBox(height: 15.h),
 
-                  GestureDetector(
-                    onTap: () {
-                      
-                      Get.to(EditProfileScreen());
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF0A2A43),
-                        borderRadius: BorderRadius.circular(30),
-                        border: Border.all(
-                          color: const Color(0xFF1EA7FF),
-                          width: 1,
+                    SizedBox(height: 15.h),
+
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(EditProfileScreen());
+
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF0A2A43),
+                          borderRadius: BorderRadius.circular(30),
+                          border: Border.all(
+                            color: const Color(0xFF1EA7FF),
+                            width: 1,
+                          ),
                         ),
-                      ),
-                      child: const Text(
-                        'Edit Profile',
-                        style: TextStyle(
-                          color: Color(0xFF1EA7FF),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                        child: const Text(
+                          'Edit Profile',
+                          style: TextStyle(
+                            color: Color(0xFF1EA7FF),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
-                  ),
 
 
-                  SizedBox(height: 20.h),
+                    SizedBox(height: 20.h),
 
 
-                  InkWell(
-                    onTap: (){
-                      Get.toNamed(AppRoute.accountSettings);
+                    InkWell(
+                      onTap: (){
+                        Get.toNamed(AppRoute.accountSettings);
 
-                    },
-                    child: ProfileOptionCard(
-                      icon: AppImages.person,
-                      title: 'Account setting',
+                      },
+                      child: ProfileOptionCard(
+                        icon: AppImages.person,
+                        title: 'Account setting',
 
-                    ),
-                  ),
-
-                  SizedBox(height: 12.h),
-
-
-                  InkWell(
-                    onTap: (){
-
-                      Get.toNamed(AppRoute.subscriptionScreen);
-
-                    },
-                    child: ProfileOptionCard(
-                      icon: AppImages.subscription,
-                      title: 'Subscription',
-
-                    ),
-                  ),
-
-                  SizedBox(height: 12.h),
-
-                  InkWell(
-                    onTap: (){
-                      Get.toNamed(AppRoute.historyScreen);
-
-                    },
-                    child: ProfileOptionCard(
-                      icon: AppImages.history,
-                      title: 'History',
-
-                    ),
-                  ),
-                  SizedBox(height: 12.h),
-
-                  InkWell(
-                    onTap: (){
-                      Get.toNamed(AppRoute.ratingScreen);
-
-
-                    },
-                    child: ProfileOptionCard(
-                      icon: AppImages.rate,
-                      title: 'Rate Our App',
-
-                    ),
-                  ),
-                  SizedBox(height: 12.h),
-
-                  InkWell(
-                    onTap: (){
-                      Get.toNamed(AppRoute.supportAndContactScreen);
-
-                    },
-                    child: ProfileOptionCard(
-                      icon: AppImages.support,
-                      title: 'Support & contact',
-
-                    ),
-                  ),
-                  SizedBox(height: 12.h),
-
-                  InkWell(
-                    onTap: (){
-                      Get.toNamed(AppRoute.termsAndServicesScreen);
-
-                    },
-                    child: ProfileOptionCard(
-                      icon: AppImages.terms,
-                      title: 'Terms and Services',
-
-                    ),
-                  ),
-                  SizedBox(height: 12.h),
-
-                  InkWell(
-                    onTap: (){
-
-                      Get.toNamed(AppRoute.privacyPolicyScreen);
-
-                    },
-                    child: ProfileOptionCard(
-                      icon: AppImages.privacy,
-                      title: 'Privacy policy',
-
-                    ),
-
-
-                  ),
-
-
-                  SizedBox(height: 20.h,),
-
-                  InkWell(
-                    onTap: (){
-
-                  controller.showCustomLogoutDialog();
-
-                    },
-                    child: Container(
-                      height: 65.h,
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(90.r),
-                        color:Color(0xFF00243F)
                       ),
-                      child: Center(child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-
-                          SvgPicture.asset(
-                            height: 25.h,
-                              width: 20.w,
-                              AppIcons.logOut),
-
-                          SizedBox(width: 8.w,),
-
-                          AppText(
-                            fontSize: 22.sp,
-                              fontWeight: FontWeight.w500,
-                              text: 'Log out'),
-                        ],
-                      ),),
                     ),
 
-                  ),
+                    SizedBox(height: 12.h),
 
 
-                  SizedBox(height: 20.h,),
+                    InkWell(
+                      onTap: (){
 
-                ],
+                        Get.toNamed(AppRoute.subscriptionScreen);
+
+                      },
+                      child: ProfileOptionCard(
+                        icon: AppImages.subscription,
+                        title: 'Subscription',
+
+                      ),
+                    ),
+
+                    SizedBox(height: 12.h),
+
+                    InkWell(
+                      onTap: (){
+                        Get.toNamed(AppRoute.historyScreen);
+
+                      },
+                      child: ProfileOptionCard(
+                        icon: AppImages.history,
+                        title: 'History',
+
+                      ),
+                    ),
+                    SizedBox(height: 12.h),
+
+                    InkWell(
+                      onTap: (){
+                        Get.toNamed(AppRoute.ratingScreen);
+
+
+                      },
+                      child: ProfileOptionCard(
+                        icon: AppImages.rate,
+                        title: 'Rate Our App',
+
+                      ),
+                    ),
+                    SizedBox(height: 12.h),
+
+                    InkWell(
+                      onTap: (){
+                        Get.toNamed(AppRoute.supportAndContactScreen);
+
+                      },
+                      child: ProfileOptionCard(
+                        icon: AppImages.support,
+                        title: 'Support & contact',
+
+                      ),
+                    ),
+                    SizedBox(height: 12.h),
+
+                    InkWell(
+                      onTap: (){
+                        Get.toNamed(AppRoute.termsAndServicesScreen);
+
+                      },
+                      child: ProfileOptionCard(
+                        icon: AppImages.terms,
+                        title: 'Terms and Services',
+
+                      ),
+                    ),
+                    SizedBox(height: 12.h),
+
+                    InkWell(
+                      onTap: (){
+
+                        Get.toNamed(AppRoute.privacyPolicyScreen);
+
+                      },
+                      child: ProfileOptionCard(
+                        icon: AppImages.privacy,
+                        title: 'Privacy policy',
+
+                      ),
+
+
+                    ),
+
+
+                    SizedBox(height: 20.h,),
+
+                    InkWell(
+                      onTap: (){
+
+                    controller.showCustomLogoutDialog();
+
+                      },
+                      child: Container(
+                        height: 65.h,
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(90.r),
+                          color:Color(0xFF00243F)
+                        ),
+                        child: Center(child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+
+                            SvgPicture.asset(
+                              height: 25.h,
+                                width: 20.w,
+                                AppIcons.logOut),
+
+                            SizedBox(width: 8.w,),
+
+                            AppText(
+                              fontSize: 22.sp,
+                                fontWeight: FontWeight.w500,
+                                text: 'Log out'),
+                          ],
+                        ),),
+                      ),
+
+                    ),
+
+
+                    SizedBox(height: 20.h,),
+
+                  ],
+                ),
               ),
             ),
           ),

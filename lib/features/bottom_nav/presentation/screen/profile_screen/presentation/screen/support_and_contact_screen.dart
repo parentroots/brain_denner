@@ -82,7 +82,7 @@ class SupportAndContactScreen extends StatelessWidget {
                   AppTextField(
                     maxLine: 6,
                     controller: controller.issuesTEController,
-                    hintText: 'Title',
+                    hintText: 'Issue',
                   ),
 
                   SizedBox(height: 40.h,),
@@ -97,18 +97,85 @@ class SupportAndContactScreen extends StatelessWidget {
 
                   SizedBox(height: 40.h,),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Column(
                     children: [
 
+                      // WhatsApp
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AppText(text: 'Whatsapp : ', maxLines: 1, fontSize: 15),
+                          InkWell(
+                            onTap: () {
+                              if (controller.contactInfo?.whatsApp?.isNotEmpty ?? false) {
+                                controller.sendWhatsAppMessage(
+                                  controller.contactInfo!.whatsApp!,
+                                  'Hello Dear, I need support. Please help me',
+                                );
+                              } else {
+                                Get.snackbar("Error", "WhatsApp number not available");
+                              }
+                            },
+                            child: AppText(
+                              text: controller.contactInfo?.whatsApp ?? '',
+                              maxLines: 1,
+                              fontSize: 15,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5.h),
 
-                      AppText(text: 'You can contact us on this number-',maxLines: 1,fontSize: 15,),
-                      AppText(text: '123456789',maxLines: 1,fontSize: 15,color: AppColors.blue500),
+                      // Email
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AppText(text: 'E-mail : ', maxLines: 1, fontSize: 15),
+                          InkWell(
+                            onTap: () {
+                              if (controller.contactInfo?.email?.isNotEmpty ?? false) {
+                                controller.sendEmail(controller.contactInfo!.email!);
+                              } else {
+                                Get.snackbar("Error", "Email not available");
+                              }
+                            },
+                            child: AppText(
+                              text: controller.contactInfo?.email ?? '',
+                              maxLines: 1,
+                              fontSize: 15,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5.h),
 
-
+                      // Phone
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AppText(text: 'Phone: ', maxLines: 1, fontSize: 15),
+                          InkWell(
+                            onTap: () {
+                              if (controller.contactInfo?.phone?.isNotEmpty ?? false) {
+                                controller.makePhoneCall(controller.contactInfo!.phone!);
+                              } else {
+                                Get.snackbar("Error", "Phone number not available");
+                              }
+                            },
+                            child: AppText(
+                              text: controller.contactInfo?.phone ?? '',
+                              maxLines: 1,
+                              fontSize: 15,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
-
                   ),
+
                   SizedBox(height: 25.h,),
 
 

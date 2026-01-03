@@ -17,10 +17,10 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ✅ শুধু Get.put করো, variable এ রাখার দরকার নাই
-    Get.put(EditPofileController());
+    Get.put(EditProfileController());
 
     return Scaffold(
+
       backgroundColor: AppColors.primaryColor,
       appBar: AppBar(
         leading: InkWell(
@@ -40,7 +40,7 @@ class EditProfileScreen extends StatelessWidget {
 
             // ✅ Image picker
             Center(
-              child: GetBuilder<EditPofileController>(
+              child: GetBuilder<EditProfileController>(
                 builder: (controller) {
                   return GestureDetector(
                     onTap: controller.pickImage,
@@ -64,24 +64,28 @@ class EditProfileScreen extends StatelessWidget {
 
             SizedBox(height: 5.h),
 
-            GetBuilder<EditPofileController>(
+            GetBuilder<EditProfileController>(
               builder: (controller) {
-                return TextField(
-                  controller: controller.nameController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    hintText: "Enter your name",
-                    hintStyle: const TextStyle(color: Colors.grey),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.blue),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.green, width: 2),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                );
+                 return //TextField(
+                //   controller: controller.nameController,
+                //   style: const TextStyle(color: Colors.white),
+                //   decoration: InputDecoration(
+                //     hintText: "Enter your name",
+                //     hintStyle: const TextStyle(color: Colors.grey),
+                //     enabledBorder: OutlineInputBorder(
+                //       borderSide: const BorderSide(color: Colors.blue),
+                //       borderRadius: BorderRadius.circular(10),
+                //     ),
+                //     focusedBorder: OutlineInputBorder(
+                //       borderSide: const BorderSide(color: Colors.green, width: 2),
+                //       borderRadius: BorderRadius.circular(10),
+                //     ),
+                //   ),
+                // );
+
+                AppTextField(
+                  hintSize: 18.sp,
+                  controller: controller.nameController, hintText: 'Enter your name',);
               },
             ),
           ],
@@ -90,10 +94,11 @@ class EditProfileScreen extends StatelessWidget {
 
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(bottom: 70.h),
-        child: GetBuilder<EditPofileController>(
+        child: GetBuilder<EditProfileController>(
           builder: (controller) {
             return AppButton(
-              text: controller.isLoading ? "Updating..." : "Save Change",
+              isLoading: controller.isLoading,
+              text: 'Save Changes',
               onPressed: () {
                 if (!controller.isLoading) {
                   controller.editProfileMultipartUpdate();

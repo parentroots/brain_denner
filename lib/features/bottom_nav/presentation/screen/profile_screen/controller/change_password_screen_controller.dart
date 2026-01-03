@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../services/api_services/api_services.dart';
 import '../../../../../../storage/storage_services.dart';
+
 class ChangePasswordScreenController extends GetxController {
   // ================= Controllers =================
-  final TextEditingController currentPasswordTEController = TextEditingController();
+  final TextEditingController currentPasswordTEController =
+      TextEditingController();
   final TextEditingController newPasswordTEController = TextEditingController();
-  final TextEditingController confirmNewPasswordTEController = TextEditingController();
+  final TextEditingController confirmNewPasswordTEController =
+      TextEditingController();
 
   // ================= State =================
   bool currentPasswordIsShow = true;
@@ -32,14 +35,18 @@ class ChangePasswordScreenController extends GetxController {
     update();
   }
 
-  Future<void> changePasswordRepo() async {
+  Future<void> changePassword() async {
     try {
+      if (currentPasswordTEController.text.isEmpty ||
+          newPasswordTEController.text.isEmpty ||
+          confirmNewPasswordTEController.text.isEmpty) {
+        Get.snackbar('error', 'All Field is required');
+      }
 
       isLoading = true;
       update();
 
       print("Token: ${LocalStorage.token}");
-
 
       final response = await ApiService.post(
         ApiEndPoint.authChangePassword,
@@ -54,11 +61,15 @@ class ChangePasswordScreenController extends GetxController {
         },
       );
 
+
+
       print("=== API Response ===");
       print("Status Code: ${response.statusCode}");
       print("Data: ${response.data}");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
+        isLoading = false;
+        update();
 
         Get.snackbar(
           "Success",
@@ -68,11 +79,10 @@ class ChangePasswordScreenController extends GetxController {
 
         Get.toNamed(AppRoute.mainBottomNavScreen);
 
-        currentPasswordTEController.clear();
-        newPasswordTEController.clear();
-        confirmNewPasswordTEController.clear();
-
+        clearTextField();
       } else {
+        isLoading = false;
+        update();
         Get.snackbar(
           "Failed",
           "Status Code: ${response.statusCode}",
@@ -81,7 +91,7 @@ class ChangePasswordScreenController extends GetxController {
       }
     } catch (e) {
       Get.snackbar("Error", "Something went wrong");
-      print("Error: $e");
+      print("Error==============================: $e");
     } finally {
       isLoading = false;
       update();
@@ -95,5 +105,13 @@ class ChangePasswordScreenController extends GetxController {
     newPasswordTEController.dispose();
     confirmNewPasswordTEController.dispose();
     super.dispose();
+  }
+
+  //===============textField Clear============================
+
+  void clearTextField() {
+    currentPasswordTEController.clear();
+    newPasswordTEController.clear();
+    confirmNewPasswordTEController.clear();
   }
 }
