@@ -35,6 +35,10 @@ class SignInController extends GetxController {
 
   Future<void> signInUser() async {
 
+    Get.toNamed(AppRoute.mainBottomNavScreen);
+
+
+    // Get.toNamed(AppRoute.mainBottomNavScreen);
     update();
 
     Map<String, String> body = {

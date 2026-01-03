@@ -17,9 +17,9 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ✅ শুধু Get.put করো, variable এ রাখার দরকার নাই
+    Get.put(EditPofileController());
 
-
-    final EditPofileController controller = Get.put(EditPofileController());
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       appBar: AppBar(
@@ -29,68 +29,78 @@ class EditProfileScreen extends StatelessWidget {
         ),
         backgroundColor: AppColors.primaryColor,
         centerTitle: true,
-        title: AppText(text: 'Eit Profile', fontSize: 24),
+        title: AppText(text: 'Edit Profile', fontSize: 24),
       ),
-
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 13.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
-
             SizedBox(height: 25.h),
 
+            // ✅ Image picker
             Center(
-              child: ProfileCard(
-                imageFile: controller.file,
-                size: 120,
-                onCameraTap: () {
-                  controller.pickImage();
+              child: GetBuilder<EditPofileController>(
+                builder: (controller) {
+                  return GestureDetector(
+                    onTap: controller.pickImage,
+                    child: ProfileCard(
+                      imageFile: controller.file,
+                      size: 120,
+                      onCameraTap: controller.pickImage,
+                    ),
+                  );
                 },
               ),
             ),
-            SizedBox(height: 15.h),
-
 
             SizedBox(height: 40.h),
+
             AppText(
               text: 'Name',
               fontSize: 14,
               fontWeight: FontWeight.w400,
             ),
+
             SizedBox(height: 5.h),
 
-            TextField(
-              controller: controller.nameController,
-              style: const TextStyle(color: Colors.white), // Text color white
-              decoration: InputDecoration(
-                hintText: "Enter your name",
-                hintStyle: const TextStyle(color: Colors.grey),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.blue),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.green, width: 2),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
-
-
-            Spacer(),
-
-            AppButton(
-              text: 'Save Change',
-              onPressed: () {
-
+            GetBuilder<EditPofileController>(
+              builder: (controller) {
+                return TextField(
+                  controller: controller.nameController,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    hintText: "Enter your name",
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.blue),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.green, width: 2),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                );
               },
             ),
-            SizedBox(height: 30.h),
-
-
           ],
+        ),
+      ),
+
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(bottom: 70.h),
+        child: GetBuilder<EditPofileController>(
+          builder: (controller) {
+            return AppButton(
+              text: controller.isLoading ? "Updating..." : "Save Change",
+              onPressed: () {
+                if (!controller.isLoading) {
+                  controller.editProfileMultipartUpdate();
+                }
+              },
+            );
+          },
         ),
       ),
     );
