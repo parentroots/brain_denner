@@ -14,7 +14,8 @@ class OtpVerifyController extends GetxController {
   AuthModel? authModel;
   String errorMessage = "";
 
-  final TextEditingController otpVerifyTEController = TextEditingController();
+  final TextEditingController otpVerifyTEControllers = TextEditingController();
+
 
   @override
   void onInit() {
@@ -26,10 +27,10 @@ class OtpVerifyController extends GetxController {
 
   }
 
-
+///===============this on for when new user create
 
   Future<void> verifyOtp() async {
-    if (otpVerifyTEController.text.isEmpty) {
+    if (otpVerifyTEControllers.text.isEmpty) {
       Get.snackbar("Error", "Please enter OTP");
       return;
     }
@@ -41,7 +42,7 @@ class OtpVerifyController extends GetxController {
       ApiResponseModel response = await ApiService.post(
         ApiEndPoint.verifyEmail,
         body: {
-          "oneTimeCode": int.parse(otpVerifyTEController.text),
+          "oneTimeCode": int.parse(otpVerifyTEControllers.text),
           "email": email.trim(),
         },
 
@@ -49,7 +50,7 @@ class OtpVerifyController extends GetxController {
 
       print("OTP Response: ${response.data}");
       print("OTP eail: ${email}");
-      print("OTP : ${otpVerifyTEController}");
+      print("OTP : ${otpVerifyTEControllers}");
       print("OTP Status Code: ${response.statusCode}");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -62,6 +63,7 @@ class OtpVerifyController extends GetxController {
         );
 
         Future.delayed(Duration(milliseconds: 300), () {
+
           Get.offAllNamed(AppRoute.signInScreen);
         });
 
@@ -89,9 +91,10 @@ class OtpVerifyController extends GetxController {
 
 
 
+  ///===============this on for when  forgotPassword
 
-  Future<void> verifyOtpforgotpassword() async {
-    if (otpVerifyTEController.text.isEmpty) {
+  Future<void> verifyOtpForgotPassword() async {
+    if (otpVerifyTEControllers.text.isEmpty) {
       Get.snackbar("Error", "Please enter OTP");
       return;
     }
@@ -103,7 +106,7 @@ class OtpVerifyController extends GetxController {
       ApiResponseModel response = await ApiService.post(
         ApiEndPoint.verifyEmail,
         body: {
-          "oneTimeCode": int.parse(otpVerifyTEController.text),
+          "oneTimeCode": int.parse(otpVerifyTEControllers.text),
           "email": email.trim(),
         },
 
@@ -111,10 +114,12 @@ class OtpVerifyController extends GetxController {
 
       print("OTP Response: ${response.data}");
       print("OTP eail: ${email}");
-      print("OTP : ${otpVerifyTEController}");
+      print("OTP : ${otpVerifyTEControllers}");
       print("OTP Status Code: ${response.statusCode}");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
+
+        debugPrint('Refresh Token is===========================:${response.data}');
 
 
         Get.snackbar(
@@ -123,8 +128,12 @@ class OtpVerifyController extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
         );
 
+        String refreshToken=response.data['data'];
+
         Future.delayed(Duration(milliseconds: 300), () {
-          Get.offAllNamed(AppRoute.setNewPasswordScreen);
+          Get.offAllNamed(AppRoute.setNewPasswordScreen,arguments: {
+            'refreshToken':refreshToken
+          });
         });
 
         clearTextField();
@@ -155,12 +164,7 @@ class OtpVerifyController extends GetxController {
 
   /// Clear OTP text field
   void clearTextField() {
-    otpVerifyTEController.clear();
+    otpVerifyTEControllers.clear();
   }
 
-  @override
-  void onClose() {
-    otpVerifyTEController.dispose();
-    super.onClose();
-  }
 }

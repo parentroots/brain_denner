@@ -1,4 +1,3 @@
-
 import 'package:brain_denner/config/appRoutes/app_routes.dart';
 import 'package:brain_denner/core/network/end_point/api_end_point.dart';
 import 'package:brain_denner/storage/storage_keys.dart';
@@ -32,56 +31,54 @@ class SignInController extends GetxController {
     passwordTEController.dispose();
   }
 
-
   Future<void> signInUser() async {
+    try {
+      Map<String, String> body = {
+        "email": emailTEController.text,
+        "password": passwordTEController.text,
+      };
 
-    Get.toNamed(AppRoute.mainBottomNavScreen);
+      ApiResponseModel response = await ApiService.post(
+        ApiEndPoint.login,
+        body: body,
+      );
 
+      if (response.statusCode == 200 || response.isSuccess) {
+        var data = response.data;
 
-    // Get.toNamed(AppRoute.mainBottomNavScreen);
-    update();
+        LocalStorage.token = data['data']["accessToken"];
 
-    Map<String, String> body = {
-      "email": emailTEController.text,
-      "password": passwordTEController.text,
-    };
+        LocalStorage.isLogIn = true;
 
-    var response = await ApiService.post(
-      ApiEndPoint.autLogin,
-      body: body,
-    ).timeout(const Duration(seconds: 30));
+        LocalStorage.setBool(LocalStorageKeys.isLogIn, LocalStorage.isLogIn);
+        LocalStorage.setString(LocalStorageKeys.token, LocalStorage.token);
 
-    if (response.statusCode == 200) {
-      var data = response.data;
+        debugPrint(
+          "Access token is 😎😎😎😎😎😎😎😎😎😎😎😎: ${LocalStorage.token}",
+        );
 
-      Get.snackbar("meessage", "working");
-      Get.toNamed(AppRoute.mainBottomNavScreen);
+        Get.snackbar("Login!", "Login Successful");
+        Get.toNamed(AppRoute.mainBottomNavScreen);
 
+        emailTEController.clear();
+        passwordTEController.clear();
+      } else {
+        Get.snackbar(response.statusCode.toString(), "Login Failed");
+      }
 
-      LocalStorage.token = data['data']["accessToken"];
-      LocalStorage.userId = data['data']["attributes"]["_id"];
-      LocalStorage.myImage = data['data']["attributes"]["image"];
-      LocalStorage.myName = data['data']["attributes"]["fullName"];
-
-      LocalStorage.myEmail = data['data']["attributes"]["email"];
-      LocalStorage.isLogIn = true;
-
-      LocalStorage.setBool(LocalStorageKeys.isLogIn, LocalStorage.isLogIn);
-      LocalStorage.setString(LocalStorageKeys.token, LocalStorage.token);
-      LocalStorage.setString(LocalStorageKeys.userId, LocalStorage.userId);
-      LocalStorage.setString(LocalStorageKeys.myImage, LocalStorage.myImage);
-      LocalStorage.setString(LocalStorageKeys.myName, LocalStorage.myName);
-      LocalStorage.setString(LocalStorageKeys.myEmail, LocalStorage.myEmail);
-
-
-      emailTEController.clear();
-      passwordTEController.clear();
-    } else {
-      Get.snackbar(response.statusCode.toString(),"rong");
+      update();
+    } catch (e) {
+      debugPrint(e.toString());
     }
-
-    update();
   }
 
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    emailTEController.dispose();
+    passwordTEController.dispose();
+  }
 
+  //============================================controller end
 }

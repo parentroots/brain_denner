@@ -63,7 +63,7 @@ class _OtpVerificationScreenState extends State<OtpVerifyForgotpassword> {
                         PinCodeTextField(
                           length: 6,
                           appContext: context,
-                          controller: controller.otpVerifyTEController,
+                          controller: controller.otpVerifyTEControllers,
 
                           obscureText: false,
                           hintCharacter: '●',
@@ -122,7 +122,7 @@ class _OtpVerificationScreenState extends State<OtpVerifyForgotpassword> {
                         Visibility(
                           replacement: Center(child: CircularProgressIndicator(),),
                           child: AppButton(text: 'Verify',fontSize: 24,fontWeight: FontWeight.w600, onPressed: (){
-                            controller.verifyOtpforgotpassword();
+                            controller.verifyOtpForgotPassword();
                           }),
                         )
 

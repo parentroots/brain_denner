@@ -19,7 +19,8 @@ class SignUpController extends GetxController {
   final TextEditingController emailTEController = TextEditingController();
   final TextEditingController passwordTEController = TextEditingController();
   final TextEditingController nameTEController = TextEditingController();
-  final TextEditingController confirmPasswordTEController = TextEditingController();
+  final TextEditingController confirmPasswordTEController =
+      TextEditingController();
 
   void firstPasswordToggle() {
     isFirstPasswordIsShow.value = !isFirstPasswordIsShow.value;
@@ -80,6 +81,14 @@ class SignUpController extends GetxController {
       );
       return false;
     }
+    // @override
+    // void dispose() {
+    //   super.dispose();
+    //   nameTEController.dispose();
+    //   emailTEController.dispose();
+    //   passwordTEController.dispose();
+    //   confirmPasswordTEController.dispose();
+    // }
 
     if (confirmPasswordTEController.text.isEmpty) {
       Get.snackbar(
@@ -121,14 +130,12 @@ class SignUpController extends GetxController {
           "email": emailTEController.text.trim(),
           "password": passwordTEController.text,
         },
-
       );
 
       print(response);
 
-      if (response.isSuccess && (response.statusCode == 200 || response.statusCode == 201)) {
-
-
+      if (response.isSuccess &&
+          (response.statusCode == 200 || response.statusCode == 201)) {
         Get.snackbar(
           "Success",
           "Account created successfully",
@@ -136,12 +143,12 @@ class SignUpController extends GetxController {
           colorText: Colors.white,
         );
 
-        Get.toNamed(AppRoute.otpVerificationScreen, arguments: {
-          'email': emailTEController.text.trim(),
-        });
+        Get.toNamed(
+          AppRoute.otpVerificationScreen,
+          arguments: {'email': emailTEController.text.trim()},
+        );
 
         clearTextField();
-
       } else {
         errorMessage = response.message ?? "Signup failed";
         Get.snackbar(
@@ -154,7 +161,6 @@ class SignUpController extends GetxController {
         debugPrint('Error: $errorMessage');
       }
     } catch (e) {
-
       Get.snackbar(
         "Error",
         "Something went wrong. Please try again.",

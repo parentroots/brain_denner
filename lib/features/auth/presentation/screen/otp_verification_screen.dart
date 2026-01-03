@@ -63,7 +63,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       PinCodeTextField(
                         length: 6,
                         appContext: context,
-                        controller: controller.otpVerifyTEController,
+                        controller: controller.otpVerifyTEControllers,
 
                         obscureText: false,
                         hintCharacter: '●',

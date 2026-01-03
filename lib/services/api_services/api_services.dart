@@ -82,6 +82,7 @@ class ApiService {
 
   // ================= DELETE =================
 
+
   static Future<ApiResponseModel> delete(String endpoint, {Map<String, String>? headers,}) async {
     try {
       final response = await http.delete(

@@ -72,7 +72,9 @@ class SetNewPasswordScreen extends StatelessWidget {
                         /// Update Button
                         AppButton(
                           text: AppString.update,
-                          onPressed: controller.onTapUpdateButton,
+                          onPressed: (){
+                            controller.resetPassword();
+                          },
                         ),
                         
                         SizedBox(height: 60.h),

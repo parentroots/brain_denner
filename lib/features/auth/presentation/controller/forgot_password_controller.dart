@@ -38,6 +38,7 @@ class ForgotPasswordController extends GetxController {
   }
 
   // ✅ Send OTP
+
   Future<void> sendOtp() async {
     if (!_validateEmail()) {
       return;
@@ -48,12 +49,8 @@ class ForgotPasswordController extends GetxController {
     try {
       ApiResponseModel response = await ApiService.post(
         ApiEndPoint.forgotPassword,
-        body: {
-          'email': forgotEmailTEController.text.trim(),
-        },
+        body: {'email': forgotEmailTEController.text.trim()},
       );
-
-
 
       if (response.isSuccess &&
           (response.statusCode == 200 || response.statusCode == 201)) {
@@ -65,18 +62,22 @@ class ForgotPasswordController extends GetxController {
           snackPosition: SnackPosition.BOTTOM,
         );
 
+        Get.toNamed(
+          AppRoute.otpVerifyForgotpassword,
+          arguments: {
+            'email': forgotEmailTEController.text.trim(),
+            "type": "forgot_password",
+          },
+        );
 
-        Get.toNamed(AppRoute.otpVerifyForgotpassword, arguments: {
-          'email': forgotEmailTEController.text.trim(),
-          "type": "forgot_password",
-
-
-        });
-
-        print("📤 Email sent to OTP screen: ${forgotEmailTEController.toString()}");
+        print(
+          "📤 Email sent to OTP screen: ${forgotEmailTEController.toString()}",
+        );
       } else {
         String errorMessage =
-            response.data?['message'] ?? response.message ?? "Failed to send OTP";
+            response.data?['message'] ??
+            response.message ??
+            "Failed to send OTP";
 
         Get.snackbar(
           'Error',

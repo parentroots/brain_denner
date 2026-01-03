@@ -225,8 +225,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   InkWell(
                     onTap: (){
-                      
-                      LocalStorage.removeAllPrefData();
+
+                  controller.showCustomLogoutDialog();
+
                     },
                     child: Container(
                       height: 65.h,
