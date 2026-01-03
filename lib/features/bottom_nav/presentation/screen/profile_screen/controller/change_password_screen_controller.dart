@@ -1,3 +1,4 @@
+import 'package:brain_denner/config/appRoutes/app_routes.dart';
 import 'package:brain_denner/core/network/end_point/api_end_point.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,9 +31,6 @@ class ChangePasswordScreenController extends GetxController {
     confirmNewPasswordIsShow = !confirmNewPasswordIsShow;
     update();
   }
-
-  // ================= Change Password =================
-
 
   Future<void> changePasswordRepo() async {
     try {
@@ -67,6 +65,8 @@ class ChangePasswordScreenController extends GetxController {
           response.data["message"] ?? "Support created successfully",
           snackPosition: SnackPosition.BOTTOM,
         );
+
+        Get.toNamed(AppRoute.mainBottomNavScreen);
 
         currentPasswordTEController.clear();
         newPasswordTEController.clear();

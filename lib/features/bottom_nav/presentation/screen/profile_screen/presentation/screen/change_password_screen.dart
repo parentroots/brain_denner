@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../../../../../../component/app_text/app_text.dart';
 import '../../../../../../../component/app_text_field/app_text_field.dart';
 import '../../../../../../../uitls/constants/appColors/app_colors.dart';
+import '../../../../../../../uitls/constants/appImages/app_images.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({super.key});
@@ -19,6 +20,11 @@ class ChangePasswordScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: AppColors.primaryColor,
           appBar: AppBar(
+
+            leading: InkWell(
+              onTap: Get.back,
+              child: Image.asset(AppImages.backImage),
+            ),
             centerTitle: true,
             backgroundColor: AppColors.primaryColor,
             title: AppText(

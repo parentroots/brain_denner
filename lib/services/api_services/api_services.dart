@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:brain_denner/storage/storage_services.dart';
+import 'package:get/get_connect/http/src/multipart/form_data.dart';
 import 'package:http/http.dart' as http;
 import 'api_response_model.dart';
 
@@ -25,14 +26,13 @@ class ApiService {
       );
       return _processResponse(response);
     } catch (e) {
+
       return ApiResponseModel.error(500, e.toString());
+
     }
 
   }
 
-
-
-  
   // ================= POST =================
   static Future<ApiResponseModel> post(String endpoint, {Map<String, String>? headers, Map<String, dynamic>? body,}) async {
     try {
@@ -94,25 +94,47 @@ class ApiService {
     }
   }
 
-  // ================= MULTIPART =================
 
-  static Future<ApiResponseModel> multipart(String endpoint, {required File file, required String fileKey, Map<String, String>? fields, Map<String, String>? headers,}) async {
+
+  static Future<ApiResponseModel> multipartPatch(
+      String url, {
+        Map<String, String>? header,
+        Map<String, String>? body,
+        String method = "PATCH",
+        String imageName = 'image',
+        String? imagePath,
+        bool skipAuth = false,
+      }) async {
     try {
       final request = http.MultipartRequest(
-        "POST",
-        Uri.parse( endpoint),
+        method,
+        Uri.parse(url),
       );
 
-      request.headers.addAll(headers ?? {});
-      if (fields != null) request.fields.addAll(fields);
+      final Map<String, String> finalHeaders = header ?? {};
+      if (!skipAuth && LocalStorage.token != null) {
+        finalHeaders["Authorization"] = "Bearer ${LocalStorage.token}";
+      }
+      request.headers.addAll(finalHeaders);
 
-      request.files.add(
-        await http.MultipartFile.fromPath(fileKey, file.path),
-      );
+      // ===== Image =====
+      if (imagePath != null && imagePath.isNotEmpty) {
+        request.files.add(
+          await http.MultipartFile.fromPath(
+            imageName,
+            imagePath,
+          ),
+        );
+      }
 
+      // ===== Text fields =====
+      if (body != null) {
+        request.fields.addAll(body);
+      }
+
+      // ===== Send Request =====
       final streamedResponse = await request.send();
-      final response =
-      await http.Response.fromStream(streamedResponse);
+      final response = await http.Response.fromStream(streamedResponse);
 
       return _processResponse(response);
     } catch (e) {
@@ -120,9 +142,40 @@ class ApiService {
     }
   }
 
+  static Future<ApiResponseModel> multipart(
+      String endpoint, {
+        required File file,
+        required String fileKey,
+        Map<String, String>? fields,
+        Map<String, String>? headers,
+        String method = "PATCH",
+      }) async {
+    try {
+      final request = http.MultipartRequest(
+        method,
+        Uri.parse(endpoint),
+      );
 
+      if (headers != null) {
+        request.headers.addAll(headers);
+      }
 
-  // ================= RESPONSE HANDLER =================
+      if (fields != null) {
+        request.fields.addAll(fields);
+      }
+
+      request.files.add(
+        await http.MultipartFile.fromPath(fileKey, file.path),
+      );
+
+      final streamedResponse = await request.send();
+      final response = await http.Response.fromStream(streamedResponse);
+
+      return _processResponse(response);
+    } catch (e) {
+      return ApiResponseModel.error(500, e.toString());
+    }
+  }
   static ApiResponseModel _processResponse(http.Response response) {
     try {
       final data = jsonDecode(response.body);
