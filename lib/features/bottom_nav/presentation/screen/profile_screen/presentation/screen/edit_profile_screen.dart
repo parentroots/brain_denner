@@ -101,7 +101,7 @@ class EditProfileScreen extends StatelessWidget {
               text: 'Save Changes',
               onPressed: () {
                 if (!controller.isLoading) {
-                  controller.editProfileMultipartUpdate();
+                  controller.editProfileUpdate();
                 }
               },
             );

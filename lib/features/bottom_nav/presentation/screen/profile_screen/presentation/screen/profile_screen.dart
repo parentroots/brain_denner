@@ -1,305 +1,249 @@
-import 'package:brain_denner/component/app_button/app_button.dart';
 import 'package:brain_denner/component/app_text/app_text.dart';
 import 'package:brain_denner/config/appRoutes/app_routes.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/controller/profile_screen_controller.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/presentation/screen/edit_profile_screen.dart';
-import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/widget/profice_card.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/widget/profile_option_card.dart';
-import 'package:brain_denner/storage/storage_services.dart';
 import 'package:brain_denner/uitls/constants/appIcons/app_icons.dart';
 import 'package:brain_denner/uitls/constants/appImages/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../../../../core/network/end_point/api_end_point.dart';
 import '../../../../../../../uitls/constants/appColors/app_colors.dart';
-import '../../../../widget/skletonizer.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-  final ImagePicker picker = ImagePicker();
-
-  @override
   Widget build(BuildContext context) {
-    return GetBuilder<ProfileScreenController>(
-      builder: (controller) {
-        
+    final controller = Get.find<ProfileScreenController>();
 
-        return RefreshIndicator(
-          onRefresh: ()=>controller.getProfileData()
-         ,
-          child: Scaffold(
-            backgroundColor: AppColors.primaryColor,
-            appBar: AppBar(
-              centerTitle: true,
-              title: AppText(
-                text: 'Profile',
-                color: Color(0xFFFEFEFE),
-                fontSize: 24.sp,
-              ),
-              backgroundColor: AppColors.primaryColor,
+    return Obx(() {
+      final profile = controller.profileData.value;
+
+      return RefreshIndicator(
+        onRefresh: controller.getProfileData,
+        child: Scaffold(
+          backgroundColor: AppColors.primaryColor,
+          appBar: AppBar(
+            centerTitle: true,
+            title: AppText(
+              text: 'Profile',
+              color: const Color(0xFFFEFEFE),
+              fontSize: 24.sp,
             ),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 13.w),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+            backgroundColor: AppColors.primaryColor,
+          ),
+          body: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 13.w),
+              child: Column(
+                children: [
+                  SizedBox(height: 12.h),
 
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          if (profile == null)
+                            Container(
+                              height: 100,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.grey.shade300,
+                              ),
+                            )
+                          else
+                            CircleAvatar(
+                              radius: 50,
+                              backgroundColor: Colors.grey.shade300,
+                              backgroundImage: profile.image.isNotEmpty
+                                  ? NetworkImage(
+                                ApiEndPoint.imageUrl + profile.image,
+                              )
+                                  : null,
+                              child: profile.image.isEmpty
+                                  ? const Icon(
+                                Icons.person,
+                                size: 45,
+                                color: Colors.grey,
+                              )
+                                  : null,
+                            ),
+                        ],
+                      ),
+                    ],
+                  ),
 
-                        Obx(() {
-                          final profile = controller.profileData.value;
+                  SizedBox(height: 12.h),
 
-                          return Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              // shimmer / loading placeholder
-                              if (profile == null)
-                                Container(
-                                  height: 100,
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.grey.shade300,
-                                  ),
-                                )
-                              else
-                                CircleAvatar(
-                                  radius: 50,
-                                  backgroundColor: Colors.grey.shade300,
-                                  backgroundImage: profile.image.isNotEmpty
-                                      ? NetworkImage(ApiEndPoint.imageUrl + profile.image)
-                                      : null,
-                                  child: profile.image.isEmpty
-                                      ? const Icon(
-                                    Icons.person,
-                                    size: 45,
-                                    color: Colors.grey,
-                                  )
-                                      : null,
-                                ),
-                            ],
-                          );
-                        })
-
-
-
-                      ],
-                    ),
-
-                    SizedBox(height: 12.h),
-                    Obx(() {
-                      final profile = controller.profileData.value;
-
-                      return profile == null
-                          ? Shimmer.fromColors(
-                        baseColor: Colors.grey.shade400,
-                        highlightColor: Colors.grey.shade200,
-                        child: Container(
-                          height: 20.h,   // adjust according to font size
-                          width: 120.w,
-                          color: Colors.grey,
-                        ),
-                      )
-                          : AppText(
-                        text: profile.name,
-                        color: Colors.white,
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w600,
-                      );
-                    }),
-
-
-
-                    SizedBox(height: 15.h),
-
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(EditProfileScreen());
-
-                      },
+                  if (profile == null)
+                    Shimmer.fromColors(
+                      baseColor: Colors.grey.shade400,
+                      highlightColor: Colors.grey.shade200,
                       child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF0A2A43),
-                          borderRadius: BorderRadius.circular(30),
-                          border: Border.all(
-                            color: const Color(0xFF1EA7FF),
-                            width: 1,
-                          ),
+                        height: 20.h,
+                        width: 120.w,
+                        color: Colors.grey,
+                      ),
+                    )
+                  else
+                    AppText(
+                      text: profile.name,
+                      color: Colors.white,
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+
+                  SizedBox(height: 15.h),
+
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => const EditProfileScreen());
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 18,
+                        vertical: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF0A2A43),
+                        borderRadius: BorderRadius.circular(30),
+                        border: Border.all(
+                          color: const Color(0xFF1EA7FF),
+                          width: 1,
                         ),
-                        child: const Text(
-                          'Edit Profile',
-                          style: TextStyle(
-                            color: Color(0xFF1EA7FF),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
+                      ),
+                      child: const Text(
+                        'Edit Profile',
+                        style: TextStyle(
+                          color: Color(0xFF1EA7FF),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
+                  ),
 
+                  SizedBox(height: 20.h),
 
-                    SizedBox(height: 20.h),
-
-
-                    InkWell(
-                      onTap: (){
-                        Get.toNamed(AppRoute.accountSettings);
-
-                      },
-                      child: ProfileOptionCard(
-                        icon: AppImages.person,
-                        title: 'Account setting',
-
-                      ),
+                  InkWell(
+                    onTap: () => Get.toNamed(AppRoute.accountSettings),
+                    child: ProfileOptionCard(
+                      icon: AppImages.person,
+                      title: 'Account setting',
                     ),
+                  ),
 
-                    SizedBox(height: 12.h),
+                  SizedBox(height: 12.h),
 
-
-                    InkWell(
-                      onTap: (){
-
-                        Get.toNamed(AppRoute.subscriptionScreen);
-
-                      },
-                      child: ProfileOptionCard(
-                        icon: AppImages.subscription,
-                        title: 'Subscription',
-
-                      ),
+                  InkWell(
+                    onTap: () => Get.toNamed(AppRoute.subscriptionScreen),
+                    child: ProfileOptionCard(
+                      icon: AppImages.subscription,
+                      title: 'Subscription',
                     ),
+                  ),
 
-                    SizedBox(height: 12.h),
+                  SizedBox(height: 12.h),
 
-                    InkWell(
-                      onTap: (){
-                        Get.toNamed(AppRoute.historyScreen);
-
-                      },
-                      child: ProfileOptionCard(
-                        icon: AppImages.history,
-                        title: 'History',
-
-                      ),
+                  InkWell(
+                    onTap: () => Get.toNamed(AppRoute.historyScreen),
+                    child: ProfileOptionCard(
+                      icon: AppImages.history,
+                      title: 'History',
                     ),
-                    SizedBox(height: 12.h),
+                  ),
 
-                    InkWell(
-                      onTap: (){
-                        Get.toNamed(AppRoute.ratingScreen);
+                  SizedBox(height: 12.h),
 
-
-                      },
-                      child: ProfileOptionCard(
-                        icon: AppImages.rate,
-                        title: 'Rate Our App',
-
-                      ),
+                  InkWell(
+                    onTap: () => Get.toNamed(AppRoute.ratingScreen),
+                    child: ProfileOptionCard(
+                      icon: AppImages.rate,
+                      title: 'Rate Our App',
                     ),
-                    SizedBox(height: 12.h),
+                  ),
 
-                    InkWell(
-                      onTap: (){
-                        Get.toNamed(AppRoute.supportAndContactScreen);
+                  SizedBox(height: 12.h),
 
-                      },
-                      child: ProfileOptionCard(
-                        icon: AppImages.support,
-                        title: 'Support & contact',
-
-                      ),
+                  InkWell(
+                    onTap: () =>
+                        Get.toNamed(AppRoute.supportAndContactScreen),
+                    child: ProfileOptionCard(
+                      icon: AppImages.support,
+                      title: 'Support & contact',
                     ),
-                    SizedBox(height: 12.h),
+                  ),
 
-                    InkWell(
-                      onTap: (){
-                        Get.toNamed(AppRoute.termsAndServicesScreen);
+                  SizedBox(height: 12.h),
 
-                      },
-                      child: ProfileOptionCard(
-                        icon: AppImages.terms,
-                        title: 'Terms and Services',
-
-                      ),
+                  InkWell(
+                    onTap: () =>
+                        Get.toNamed(AppRoute.termsAndServicesScreen),
+                    child: ProfileOptionCard(
+                      icon: AppImages.terms,
+                      title: 'Terms and Services',
                     ),
-                    SizedBox(height: 12.h),
+                  ),
 
-                    InkWell(
-                      onTap: (){
+                  SizedBox(height: 12.h),
 
-                        Get.toNamed(AppRoute.privacyPolicyScreen);
-
-                      },
-                      child: ProfileOptionCard(
-                        icon: AppImages.privacy,
-                        title: 'Privacy policy',
-
-                      ),
-
-
+                  InkWell(
+                    onTap: () =>
+                        Get.toNamed(AppRoute.privacyPolicyScreen),
+                    child: ProfileOptionCard(
+                      icon: AppImages.privacy,
+                      title: 'Privacy policy',
                     ),
+                  ),
 
+                  SizedBox(height: 20.h),
 
-                    SizedBox(height: 20.h,),
-
-                    InkWell(
-                      onTap: (){
-
-                    controller.showCustomLogoutDialog();
-
-                      },
-                      child: Container(
-                        height: 65.h,
-                        width: double.maxFinite,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(90.r),
-                          color:Color(0xFF00243F)
-                        ),
-                        child: Center(child: Row(
+                  InkWell(
+                    onTap: controller.showCustomLogoutDialog,
+                    child: Container(
+                      height: 65.h,
+                      width: double.maxFinite,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(90.r),
+                        color: const Color(0xFF00243F),
+                      ),
+                      child: Center(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-
                             SvgPicture.asset(
+                              AppIcons.logOut,
                               height: 25.h,
-                                width: 20.w,
-                                AppIcons.logOut),
-
-                            SizedBox(width: 8.w,),
-
+                              width: 20.w,
+                            ),
+                            SizedBox(width: 8.w),
                             AppText(
+                              text: 'Log out',
                               fontSize: 22.sp,
-                                fontWeight: FontWeight.w500,
-                                text: 'Log out'),
+                              fontWeight: FontWeight.w500,
+                            ),
                           ],
-                        ),),
+                        ),
                       ),
-
                     ),
+                  ),
 
-
-                    SizedBox(height: 20.h,),
-
-                  ],
-                ),
+                  SizedBox(height: 20.h),
+                ],
               ),
             ),
           ),
-        );
-      },
-    );
+        ),
+      );
+    });
   }
 }

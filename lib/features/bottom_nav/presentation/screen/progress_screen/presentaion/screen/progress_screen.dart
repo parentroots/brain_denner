@@ -572,127 +572,191 @@ void showFoodNotesDialog(BuildContext context) {
 
 
 
-void showFoodAddNotesDialog(BuildContext context){
+void showFoodAddNotesDialog(BuildContext context) {
   final controller = Get.find<ProgressScreenController>();
-
   Get.dialog(
     Dialog(
       backgroundColor: Colors.transparent,
-      child: Container(
-        padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: Color(0xFFE8E8E8),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
+      insetPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+      child: SingleChildScrollView( // 🔥 prevents overflow
+        child: Container(
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * 0.85, // 🔥 height limit
+          ),
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: const Color(0xFFE8E8E8),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
 
-            // Header
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(child: Text(
-                  'What have I noticed about\nhow food affects me?',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                )),
-                GestureDetector(
-                  onTap: ()=> Get.back(),
-                  child: Icon(Icons.close, size: 24),
-                ),
-              ],
-            ),
+              // ---------------- Header ----------------
 
-            SizedBox(height: 16),
-
-            // Input field
-            TextField(
-              controller: controller.addNoteTEController,
-              maxLines: 4,
-              decoration: InputDecoration(
-                hintText: "Write your note here",
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-              ),
-            ),
-
-            SizedBox(height: 16),
-
-            // Notes List
-
-            Obx(() => Container(
-              height: 200,
-              child: ListView.separated(
-                itemCount: controller.notes.length,
-                separatorBuilder: (_,__)=> SizedBox(height: 12),
-                itemBuilder: (context,index){
-                  final note = controller.notes[index];
-                  return Container(
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                    decoration: BoxDecoration(
-                      color: Color(0xFFD9D9D9),
-                      borderRadius: BorderRadius.circular(25),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      'What have I noticed about\nhow food affects me?',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(child: Text(note.text, style: TextStyle(fontSize: 14))),
-                        GestureDetector(
-                          onTap: ()=> controller.removeNoteLocal(index),
-                          child: Container(
-                            width:24,height:24,
-                            decoration: BoxDecoration(color: Color(0xFF999999), shape: BoxShape.circle),
-                            child: Icon(Icons.remove, color: Colors.white, size:16),
+                  ),
+                  GestureDetector(
+                    onTap: () => Get.back(),
+                    child: const Icon(Icons.close, size: 24),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 16),
+
+              // ---------------- Input ----------------
+
+              TextField(
+                controller: controller.addNoteTEController,
+                maxLines: 4,
+                decoration: InputDecoration(
+                  hintText: "Write your note here",
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 16),
+
+              // ---------------- Notes List ----------------
+
+              Obx(() => controller.notes.isEmpty
+                  ? const Text(
+                "No notes added yet",
+                style: TextStyle(color: Colors.grey),
+              )
+                  : Container(
+                height: 200.h, // safe fixed height
+                child: ListView.separated(
+                  itemCount: controller.notes.length,
+                  separatorBuilder: (_, __) =>
+                  const SizedBox(height: 12),
+                  itemBuilder: (context, index) {
+                    final note = controller.notes[index];
+                    return Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 14),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFD9D9D9),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Row(
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              note.text,
+                              style: const TextStyle(fontSize: 14),
+                            ),
                           ),
-                        )
-                      ],
+                          GestureDetector(
+                            onTap: () =>
+                                controller.removeNoteLocal(index),
+                            child: Container(
+                              width: 24,
+                              height: 24,
+                              decoration: const BoxDecoration(
+                                color: Color(0xFF999999),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.remove,
+                                color: Colors.white,
+                                size: 16,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              )),
+
+              const SizedBox(height: 20),
+
+              // ---------------- Buttons ----------------
+
+              Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        controller.addNoteLocal(
+                          controller.addNoteTEController.text,
+                        );
+                      },
+                      child: Container(
+                        height: 50,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [
+                              Color(0xFFFFB347),
+                              Color(0xFFFF9800),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: const Text(
+                          "Add Note",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
                     ),
-                  );
-                },
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => controller.sendNotesToServer(),
+                      child: Container(
+                        height: 50,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          border:
+                          Border.all(color: Colors.black, width: 2),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: const Text(
+                          "Save to Server",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            )),
-
-            SizedBox(height:20),
-
-            // Buttons
-            Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: ()=> controller.addNoteLocal(controller.addNoteTEController.text),
-                    child: Container(
-                      height: 50, alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: [Color(0xFFFFB347), Color(0xFFFF9800)]),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Text("Add Note", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
-                    ),
-                  ),
-                ),
-                SizedBox(width:12),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: ()=> controller.sendNotesToServer(),
-                    child: Container(
-                      height:50, alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width:2),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Text("Save to Server", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600)),
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
+            ],
+          ),
         ),
       ),
     ),
     barrierDismissible: true,
+    useSafeArea: true, // 🔥 keyboard safe
   );
 }
-
 
 
 

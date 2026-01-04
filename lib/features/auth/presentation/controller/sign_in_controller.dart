@@ -4,35 +4,51 @@ import 'package:brain_denner/storage/storage_keys.dart';
 import 'package:brain_denner/storage/storage_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../services/api_services/api_response_model.dart';
 import '../../../../services/api_services/api_services.dart';
 import '../../data/auth_model.dart';
 
 class SignInController extends GetxController {
+
+  ///------------------ STATE ------------------
   RxBool isLoading = false.obs;
   AuthModel? authModel;
   String errorMessage = "";
+
+
+  ///------------------ CONTROLLERS ------------------
 
   final TextEditingController emailTEController = TextEditingController();
   final TextEditingController passwordTEController = TextEditingController();
 
   bool isShowPassword = true;
 
+  ///------------------ UI LOGIC ------------------
+
   void isPasswordToggle() {
     isShowPassword = !isShowPassword;
     update();
   }
 
+  ///------------------ LOGIN METHOD ------------------
+
 
   Future<void> signInUser() async {
-    if(emailTEController.text.isEmpty||passwordTEController.text.isEmpty){
-      Get.snackbar('Warning', 'All Field Required');
+
+
+    if (emailTEController.text.trim().isEmpty ||
+        passwordTEController.text.trim().isEmpty) {
+      Get.snackbar("Warning", "All fields are required");
+      return;
     }
+
+    isLoading.value = true;
+    update();
+
     try {
-      Map<String, String> body = {
-        "email": emailTEController.text,
-        "password": passwordTEController.text,
+      final Map<String, String> body = {
+        "email": emailTEController.text.trim(),
+        "password": passwordTEController.text.trim(),
       };
 
       ApiResponseModel response = await ApiService.post(
@@ -41,41 +57,56 @@ class SignInController extends GetxController {
       );
 
       if (response.statusCode == 200 || response.isSuccess) {
-        var data = response.data;
 
-        LocalStorage.token = data['data']["accessToken"];
+        final data = response.data;
 
+        // Save token
+        LocalStorage.token = data['data']['accessToken'];
         LocalStorage.isLogIn = true;
 
-        LocalStorage.setBool(LocalStorageKeys.isLogIn, LocalStorage.isLogIn);
-        LocalStorage.setString(LocalStorageKeys.token, LocalStorage.token);
-
-        debugPrint(
-          "Access token is 😎😎😎😎😎😎😎😎😎😎😎😎: ${LocalStorage.token}",
+        await LocalStorage.setBool(
+          LocalStorageKeys.isLogIn,
+          true,
+        );
+        await LocalStorage.setString(
+          LocalStorageKeys.token,
+          LocalStorage.token,
         );
 
-        Get.snackbar("Login!", "Login Successful");
-        Get.toNamed(AppRoute.mainBottomNavScreen);
+        debugPrint("Access Token: ${LocalStorage.token}");
+
+        Get.snackbar("Success", "Login Successful");
 
         emailTEController.clear();
         passwordTEController.clear();
+
+        // Clear stack and go home
+        Get.offAllNamed(AppRoute.mainBottomNavScreen);
+
       } else {
-        Get.snackbar(response.statusCode.toString(), "Login Failed");
+        Get.snackbar(
+          "Login Failed",
+          response.data?['message'] ?? "Invalid credentials",
+        );
       }
 
-      update();
     } catch (e) {
-      debugPrint(e.toString());
+      debugPrint("Login Error: $e");
+      Get.snackbar("Error", "Something went wrong");
+    } finally {
+      isLoading.value = false;
+      update();
     }
   }
 
+  ///------------------ CLEANUP ------------------
+
   @override
   void onClose() {
-    // TODO: implement onClose
-    super.onClose();
     emailTEController.dispose();
     passwordTEController.dispose();
+    super.onClose();
   }
 
-  //============================================controller end
+
 }
