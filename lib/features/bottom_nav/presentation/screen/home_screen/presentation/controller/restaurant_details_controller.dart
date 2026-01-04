@@ -158,10 +158,15 @@ class RestaurantDetailsController extends GetxController {
     try {
       ApiResponseModel response = await ApiService.post(
         ApiEndPoint.createFavourite,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${LocalStorage.token}",
+        },
         body: {
           "food": foodId,
           "note": note ?? "",
         },
+
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {

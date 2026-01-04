@@ -24,7 +24,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
       Get.put(HistoryController());
     }
     // Load history data
-    Get.find<HistoryController>().getallhistory();
+    Get.find<HistoryController>().allHistoryList();
   }
 
   @override

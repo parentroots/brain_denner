@@ -7,7 +7,7 @@ class HistoryController extends GetxController {
   List<HistoryItem> historyList = [];
   bool isLoading = false;
 
-  Future<void> getallhistory() async {
+  Future<void> allHistoryList() async {
     try {
       isLoading = true;
       update();

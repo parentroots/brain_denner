@@ -87,9 +87,9 @@ class _SignInScreenState extends State<SignInScreen> {
                      SizedBox(height: 20),
 
 
-                    Visibility(
-                       replacement: Center(child: CircularProgressIndicator(),),
-                       child: AppButton(
+
+                     AppButton(
+                       isLoading: controller.isLoading.value,
                          text: AppString.login,
                          onPressed: () {
 
@@ -97,7 +97,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                          },
                        ),
-                     ),
+
 
                      SizedBox(height: 41),
 

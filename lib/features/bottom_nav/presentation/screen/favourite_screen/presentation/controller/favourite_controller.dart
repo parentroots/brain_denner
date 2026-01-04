@@ -6,6 +6,8 @@ import 'package:brain_denner/services/api_services/api_response_model.dart';
 import 'package:brain_denner/services/api_services/api_services.dart';
 import 'package:get/get.dart';
 
+import '../../../../../../../storage/storage_services.dart';
+
 class FavouriteController extends GetxController {
 
 
@@ -17,10 +19,13 @@ class FavouriteController extends GetxController {
   Future<void> getFavouriteList() async {
 
     ApiResponseModel response =
-    await ApiService.get(ApiEndPoint.getFavourite);
+    await ApiService.get(ApiEndPoint.getFavourite,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer ${LocalStorage.token}",
+      },);
 
     if (response.statusCode == 200) {
-
 
       Map<String, dynamic> jsonResponse = response.data;
 

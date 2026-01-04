@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
@@ -11,11 +12,25 @@ import '../data/note_model.dart';
 class ProgressScreenController extends GetxController{
   RxList<FoodNote> notes = <FoodNote>[].obs;
 
+  final TextEditingController addNoteTEController=TextEditingController();
+
   @override
   void onInit() {
     super.onInit();
     fetchNotes();
   }
+
+
+  void addNoteLocal(String text) {
+    if(text.trim().isEmpty) return;
+    notes.add(FoodNote(id: 0, text: text.trim()));
+    addNoteTEController.clear();
+  }
+
+  void removeNoteLocal(int index) {
+    notes.removeAt(index);
+  }
+
   void fetchNotes() async {
     try {
       ApiResponseModel response = await ApiService.get(
@@ -55,5 +70,43 @@ class ProgressScreenController extends GetxController{
       print("Error fetching notes: $e");
     }
   }
+
+
+
+
+  void sendNotesToServer() async {
+    if (notes.isEmpty) return;
+
+    List<String> observations = notes.map((note) => note.text).toList();
+
+    try {
+      ApiResponseModel response = await ApiService.post(
+        ApiEndPoint.createNote, // তোমার সার্ভার এন্ডপয়েন্ট
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${LocalStorage.token}", // যদি auth লাগে
+        },
+        body: {
+          "observations": observations,
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print("Notes sent successfully: $observations");
+        Get.back(); // Dialog বন্ধ করে
+        Get.snackbar("Success", "Notes saved successfully!");
+      } else {
+        print("Failed to send notes. Status: ${response.statusCode}");
+        Get.snackbar("Error", "Failed to save notes to server");
+      }
+    } catch (e) {
+      print("Error sending notes: $e");
+      Get.snackbar("Error", "Something went wrong while sending notes");
+    }
+  }
+
+
+
+
 
 }

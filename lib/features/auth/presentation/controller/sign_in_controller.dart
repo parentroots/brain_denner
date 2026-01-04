@@ -24,14 +24,11 @@ class SignInController extends GetxController {
     update();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    emailTEController.dispose();
-    passwordTEController.dispose();
-  }
 
   Future<void> signInUser() async {
+    if(emailTEController.text.isEmpty||passwordTEController.text.isEmpty){
+      Get.snackbar('Warning', 'All Field Required');
+    }
     try {
       Map<String, String> body = {
         "email": emailTEController.text,
