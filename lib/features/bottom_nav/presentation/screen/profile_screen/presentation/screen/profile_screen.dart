@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../../../../core/network/end_point/api_end_point.dart';
+import '../../../../../../../storage/storage_services.dart';
 import '../../../../../../../uitls/constants/appColors/app_colors.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -208,7 +209,7 @@ class ProfileScreen extends StatelessWidget {
                   SizedBox(height: 20.h),
 
                   InkWell(
-                    onTap: controller.showCustomLogoutDialog,
+                    onTap: showCustomLogoutDialog,
                     child: Container(
                       height: 65.h,
                       width: double.maxFinite,
@@ -245,5 +246,81 @@ class ProfileScreen extends StatelessWidget {
         ),
       );
     });
+  }
+
+
+
+
+
+
+
+
+
+  void showCustomLogoutDialog() {
+    Get.dialog(
+      Center(
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            width: Get.width * 0.8,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.logout, size: 48, color: Colors.red),
+                const SizedBox(height: 12),
+                const Text(
+                  "Logout",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  "Are you sure you want to Log-Out ?",
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: const AppText(
+                          text: 'Cancel',
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryColor,
+                        ),
+                        onPressed: () async {
+                          await LocalStorage.removeAllPrefData();
+                          Get.offAllNamed(AppRoute.signInScreen);
+                        },
+                        child: const AppText(
+                          text: 'Log Out',
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      barrierDismissible: false,
+    );
   }
 }
