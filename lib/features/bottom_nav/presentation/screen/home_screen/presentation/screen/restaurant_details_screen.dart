@@ -88,11 +88,12 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                     },
                     children: [
                       ListView.separated(
-                        itemCount: controller.breakFastFoodList.length,
+                        itemCount: controller.filteredBreakFast.length,
                         itemBuilder: (context, index) {
-                          final data = controller.breakFastFoodList[index];
+                          final data = controller.filteredBreakFast[index];
                           return FoodItemCard(
                             onTapItem: () {
+                              controller.createHistory(foodId: data.id??"");
                               Get.toNamed(
                                 AppRoute.nutritionDetailsScreen,
                                 arguments: {'foodId': data.id},
@@ -102,8 +103,10 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                               print("FoodId: ${Get.arguments?['foodId']}");
 
                             },
-                            protein: data.name.toString(),
-                            title: data.impactSpeed.toString(),
+
+                            title:data.name.toString(),
+                            protein: data.impactSpeed.toString(),
+                            //data.impactSpeed.toString(),
                             carbs: data.digestionSpeed.toString(),
                             fat: data.spike.toString(),
                             iconPath: AppImages.chicken,
@@ -118,9 +121,9 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                       ),
 
                       ListView.separated(
-                        itemCount: controller.lunchFoodList.length,
+                        itemCount: controller.filteredLunch.length,
                         itemBuilder: (context, index) {
-                          final data = controller.lunchFoodList[index];
+                          final data = controller.filteredLunch[index];
                           return FoodItemCard(
                             onTapItem: () {
                               Get.toNamed(
@@ -128,8 +131,9 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                                 arguments: {'foodId': data.id},
                               );
                             },
-                            protein: data.name.toString(),
-                            title: data.impactSpeed.toString(),
+                            title:data.name.toString(),
+                            protein: data.impactSpeed.toString(),
+                            //data.impactSpeed.toString(),
                             carbs: data.digestionSpeed.toString(),
                             fat: data.spike.toString(),
                             iconPath: AppImages.chicken,
@@ -144,9 +148,9 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                       ),
 
                       ListView.separated(
-                        itemCount: controller.dinnerFoodList.length,
+                        itemCount: controller.filteredDinner.length,
                         itemBuilder: (context, index) {
-                          final data = controller.dinnerFoodList[index];
+                          final data = controller.filteredDinner[index];
                           return FoodItemCard(
                             onTapItem: () {
                               Get.toNamed(
@@ -154,8 +158,9 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                                 arguments: {'foodId': data.id},
                               );
                             },
-                            protein: data.name.toString(),
-                            title: data.impactSpeed.toString(),
+                            title:data.name.toString(),
+                            protein: data.impactSpeed.toString(),
+                            //data.impactSpeed.toString(),
                             carbs: data.digestionSpeed.toString(),
                             fat: data.spike.toString(),
                             iconPath: AppImages.chicken,
@@ -170,12 +175,13 @@ class _RestaurantDetailsScreenState extends State<RestaurantDetailsScreen> {
                       ),
 
                       ListView.separated(
-                        itemCount: controller.snackFoodList.length,
+                        itemCount: controller.filteredSnack.length,
                         itemBuilder: (context, index) {
-                          final data = controller.snackFoodList[index];
+                          final data = controller.filteredSnack[index];
                           return FoodItemCard(
-                            protein: data.name.toString(),
-                            title: data.impactSpeed.toString(),
+                            title:data.name.toString(),
+                            protein: data.impactSpeed.toString(),
+                            //data.impactSpeed.toString(),
                             carbs: data.digestionSpeed.toString(),
                             fat: data.spike.toString(),
                             iconPath: data.restaurant?.logo ?? '',

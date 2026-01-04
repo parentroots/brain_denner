@@ -18,27 +18,35 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   Widget build(BuildContext context) {
 
     return GetBuilder<FavouriteController>(builder: (controller){
-      return Scaffold(
-        backgroundColor: AppColors.primaryColor,
-        appBar: AppBar(
-
+      return RefreshIndicator(
+        color: Colors.blue,
+        elevation: 5,
+        onRefresh: ()async{
+          controller.favouriteList;
+        }
+        ,
+        child: Scaffold(
           backgroundColor: AppColors.primaryColor,
-          centerTitle: true,
-          title: Text('Favourites',style: TextStyle(fontSize: 24.sp,
-              color: Color(0xFFFEFEFE),
-              fontWeight: FontWeight.w500),),
-        ),
-        body: Column(
-          children: [
+          appBar: AppBar(
+
+            backgroundColor: AppColors.primaryColor,
+            centerTitle: true,
+            title: Text('Favourites',style: TextStyle(fontSize: 24.sp,
+                color: Color(0xFFFEFEFE),
+                fontWeight: FontWeight.w500),),
+          ),
+          body: Column(
+            children: [
 
 
-            SizedBox(height: 24.h,),
+              SizedBox(height: 24.h,),
 
-            FavouriteItemCard()
+              FavouriteItemCard()
 
 
 
-          ],
+            ],
+          ),
         ),
       );
     });

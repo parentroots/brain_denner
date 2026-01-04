@@ -1,17 +1,18 @@
-import 'dart:convert';
 
-import 'package:brain_denner/uitls/constants/appImages/app_images.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../../core/network/end_point/api_end_point.dart';
 import '../../../../../../../services/api_services/api_response_model.dart';
 import '../../../../../../../services/api_services/api_services.dart';
-import '../../../favourite_screen/data/favourite_data_model.dart';
+import '../../../../../../../storage/storage_services.dart';
+
 import '../data/food_category_model.dart';
 
 class RestaurantDetailsController extends GetxController {
-  late int id;
+  late String id;
   late String restaurantName;
 
   int currentIndex = 0;
@@ -24,6 +25,10 @@ class RestaurantDetailsController extends GetxController {
     super.onInit();
 
     restaurantName = Get.arguments["name"];
+    id = Get.arguments["id"].toString();
+
+    searchTEController.addListener(onSearchTextChanged);
+
     fetchAllFoods();
   }
 
@@ -38,6 +43,36 @@ class RestaurantDetailsController extends GetxController {
   List<FoodData> snackFoodList = [];
 
 
+  // filtered list
+  List<FoodData> filteredBreakFast = [];
+  List<FoodData> filteredLunch = [];
+  List<FoodData> filteredDinner = [];
+  List<FoodData> filteredSnack = [];
+
+
+
+
+  void onSearchTextChanged() {
+    String query = searchTEController.text.toLowerCase();
+
+    filteredBreakFast = breakFastFoodList
+        .where((food) => food.name!.toLowerCase().contains(query))
+        .toList();
+
+    filteredLunch = lunchFoodList
+        .where((food) => food.name!.toLowerCase().contains(query))
+        .toList();
+
+    filteredDinner = dinnerFoodList
+        .where((food) => food.name!.toLowerCase().contains(query))
+        .toList();
+
+    filteredSnack = snackFoodList
+        .where((food) => food.name!.toLowerCase().contains(query))
+        .toList();
+
+    update();
+  }
 
 
 
@@ -45,7 +80,13 @@ class RestaurantDetailsController extends GetxController {
   Future<void> fetchAllFoods() async {
     update();
     try {
-      ApiResponseModel response = await ApiService.get(ApiEndPoint.getAllFood);
+      ApiResponseModel response = await ApiService.get(
+        "${ApiEndPoint.getAllFood}?restaurant=$id",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer ${LocalStorage.token}",
+        },
+      );
 
       if (response.statusCode == 200) {
 
@@ -58,7 +99,6 @@ class RestaurantDetailsController extends GetxController {
         List<FoodData> allFoods =
         jsonData.map((e) => FoodData.fromJson(e)).toList();
 
-        // Clear previous lists
 
 
         breakFastFoodList.clear();
@@ -84,6 +124,16 @@ class RestaurantDetailsController extends GetxController {
           }
         }
 
+
+        // init filtered list
+
+        filteredBreakFast = List.from(breakFastFoodList);
+        filteredLunch = List.from(lunchFoodList);
+        filteredDinner = List.from(dinnerFoodList);
+        filteredSnack = List.from(snackFoodList);
+
+
+
         update();
       } else {
         Get.snackbar(
@@ -91,6 +141,8 @@ class RestaurantDetailsController extends GetxController {
           response.message ?? "Failed to fetch foods",
           snackPosition: SnackPosition.BOTTOM,
         );
+
+        debugPrint('Error is ==============================>:${response.message}');
       }
     } catch (e) {
       Get.snackbar("Error", e.toString(), snackPosition: SnackPosition.BOTTOM);
@@ -129,6 +181,34 @@ class RestaurantDetailsController extends GetxController {
     } finally {
       update();
     }
+  }
+
+
+  Future<void>createHistory({required String foodId})async{
+
+    try{
+      ApiResponseModel response =await ApiService.post(ApiEndPoint.createHistory,
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization":"Bearer ${LocalStorage.token}"
+          },
+      body: {
+        'food':foodId
+      }
+
+      );
+
+      if(response.statusCode==200||response.statusCode==201){
+        debugPrint("History create successful=================>:${response.message}");
+      }else{
+        debugPrint("History create Failed=================>:${response.message}");
+
+      }
+
+    }catch(e){
+        debugPrint("Error is ===============================>:${e.toString()}");
+    }
+
   }
 
 

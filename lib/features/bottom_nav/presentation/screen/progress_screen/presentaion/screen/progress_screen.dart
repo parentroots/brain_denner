@@ -18,11 +18,14 @@ class ProgressScreen extends StatefulWidget {
 }
 
 class _ProgressScreenState extends State<ProgressScreen> {
+
+  final ProgressScreenController controller = Get.put(ProgressScreenController());
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _showPaymentBottomSheetDialog();
+      controller.fetchNotes();
     });
   }
 
@@ -233,12 +236,55 @@ class _ProgressScreenState extends State<ProgressScreen> {
 
                   SizedBox(height: 24.h),
 
-                  ColumnAppTextWithDot(
-                    valueWeight: FontWeight.w400,
-                    value1: '"Fried foods often spike later for me"',
-                    value2: '"Protein helps slow things down"',
-                    value3: '"Timing matters more than amount for fries"',
-                  ),
+
+
+                  Obx(() {
+                    final notes = Get.find<ProgressScreenController>().notes;
+
+                    if (notes.isEmpty) {
+                      return Text(
+                        "No notes yet.",
+                        style: TextStyle(color: Colors.white),
+                      );
+                    }
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: notes.map((note) {
+                        return Padding(
+                          padding: EdgeInsets.only(bottom: 6.h),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(top: 6.h),
+                                width: 6.w,
+                                height: 6.w,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              SizedBox(width: 8.w),
+                              Expanded(
+                                child: Text(
+                                  note.text,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20.sp,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    );
+                  }),
+
+
+
 
                   SizedBox(height: 30.h),
 
@@ -388,6 +434,8 @@ class PremiumOfferCard extends StatelessWidget {
     );
   }
 }
+
+
 
 void showFoodNotesDialog(BuildContext context) {
   Get.dialog(

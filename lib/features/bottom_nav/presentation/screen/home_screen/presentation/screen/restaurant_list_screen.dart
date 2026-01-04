@@ -79,6 +79,8 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                               "name": data.name,
                             },
                           );
+
+
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 20.w),

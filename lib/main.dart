@@ -9,10 +9,7 @@ void main()async{
   await LocalStorage.getAllPrefData();
   DependencyInjection di = DependencyInjection();
 
-
   di.dependencies();
-
-
   runApp(App());
 }
 
