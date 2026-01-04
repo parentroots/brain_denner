@@ -62,7 +62,7 @@ class _OnBoardingSecondScreenState extends State<OnBoardingSecondScreen> {
                   SizedBox(height: 71.h,),
 
                   AppButton(
-                    text: AppString.Continue,
+                    text: AppString.getStarted,
                     onPressed: () {
                       onTapNextButton();
                     },

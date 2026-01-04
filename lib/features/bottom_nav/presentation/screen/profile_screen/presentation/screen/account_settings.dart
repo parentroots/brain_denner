@@ -1,9 +1,11 @@
 import 'package:brain_denner/component/app_text/app_text.dart';
 import 'package:brain_denner/config/appRoutes/app_routes.dart';
 import 'package:brain_denner/uitls/constants/appColors/app_colors.dart';
+import 'package:brain_denner/uitls/constants/appIcons/app_icons.dart';
 import 'package:brain_denner/uitls/constants/appImages/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class AccountSettings extends StatelessWidget {
@@ -14,9 +16,17 @@ class AccountSettings extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       appBar: AppBar(
-        leading: InkWell(
-          onTap: Get.back,
-          child: Image.asset(AppImages.backImage),
+        leadingWidth:70,
+        leading: Row(
+          children: [
+
+            SizedBox(width: 10.w,),
+            InkWell(
+              onTap: Get.back,
+              child: SizedBox(
+                  child: SvgPicture.asset(AppIcons.back)),
+            ),
+          ],
         ),
         backgroundColor: AppColors.primaryColor,
         centerTitle: true,

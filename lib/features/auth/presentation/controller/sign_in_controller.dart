@@ -32,10 +32,7 @@ class SignInController extends GetxController {
 
   ///------------------ LOGIN METHOD ------------------
 
-
   Future<void> signInUser() async {
-
-
     if (emailTEController.text.trim().isEmpty ||
         passwordTEController.text.trim().isEmpty) {
       Get.snackbar("Warning", "All fields are required");
@@ -57,7 +54,6 @@ class SignInController extends GetxController {
       );
 
       if (response.statusCode == 200 || response.isSuccess) {
-
         final data = response.data;
 
         // Save token
@@ -80,10 +76,20 @@ class SignInController extends GetxController {
         emailTEController.clear();
         passwordTEController.clear();
 
+        // Update state before navigation
+        isLoading.value = false;
+        update();
+
+        // Small delay to ensure snackbar shows
+        await Future.delayed(const Duration(milliseconds: 500));
+
         // Clear stack and go home
         Get.offAllNamed(AppRoute.mainBottomNavScreen);
 
       } else {
+        isLoading.value = false;
+        update();
+
         Get.snackbar(
           "Login Failed",
           response.data?['message'] ?? "Invalid credentials",
@@ -91,22 +97,14 @@ class SignInController extends GetxController {
       }
 
     } catch (e) {
-      debugPrint("Login Error: $e");
-      Get.snackbar("Error", "Something went wrong");
-    } finally {
       isLoading.value = false;
       update();
+
+      debugPrint("Login Error: $e");
+      Get.snackbar("Error", "Something went wrong");
     }
   }
 
   ///------------------ CLEANUP ------------------
-
-  @override
-  void onClose() {
-    emailTEController.dispose();
-    passwordTEController.dispose();
-    super.onClose();
-  }
-
 
 }

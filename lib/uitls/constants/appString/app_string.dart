@@ -1,14 +1,13 @@
 class AppString {
   static const String diabetesisconfusing = 'Diabetes is confusing.';
-  static const String fastfoodbuddyhelps=
+  static const String fastfoodbuddyhelps =
       'Fast Food Buddy™\n helps you understand\n why things happen.';
   static const String Continue = 'Continue';
   static const String findFood = 'Find Food';
-  static const String itsAboutClarity = 'It’s about clarity when food\n feels stressful — so you can feel more\n in control and keep living your life.';
-  static const String whatthsiapp =
-      'What this app does For\nYou?';
-
-
+  static const String getStarted = 'Get Started';
+  static const String itsAboutClarity =
+      'It’s about clarity when food\n feels stressful — so you can feel more\n in control and keep living your life.';
+  static const String whatthsiapp = 'What this app does For\nYou?';
 
   static const String
   feelsStressFulSoYouCanFeelMoreInControlAndKeepLivingYourLife =
@@ -117,17 +116,11 @@ class AppString {
   static const String contactNumber =
       'You can contact us on this number- 123456789';
 
-  static const String singUpToBuddy='Sign up to Fastfood Buddy';
-  static const String focusesOnPatterns='Focuses on patterns, not blame';
-  static const String supporttsLearningOver='Supports learning over time — not perfection';
-  static const String helpsExplain =' Helps explain why things might happen';
-  static const String nomorestaring='No more staring at graphs wondering why things happened.  Fast Food Buddy™ helps you think through food, timing, stress, and real life — without judgment.';
-
-
-
-
-
-
-
-
+  static const String singUpToBuddy = 'Sign up to Fastfood Buddy';
+  static const String focusesOnPatterns = 'Focuses on patterns, not blame';
+  static const String supporttsLearningOver =
+      'Supports learning over time — not perfection';
+  static const String helpsExplain = ' Helps explain why things might happen';
+  static const String nomorestaring =
+      'No more staring at graphs wondering why things happened.  Fast Food Buddy™ helps you think through food, timing, stress, and real life — without judgment.';
 }

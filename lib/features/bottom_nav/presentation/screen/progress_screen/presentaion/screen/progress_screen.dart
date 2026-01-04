@@ -2,12 +2,10 @@ import 'package:brain_denner/component/app_button/app_button.dart';
 import 'package:brain_denner/component/app_text/app_text.dart';
 import 'package:brain_denner/config/appRoutes/app_routes.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/progress_screen/controller/progress_screen_controller.dart';
-import 'package:brain_denner/features/bottom_nav/presentation/screen/progress_screen/widget/nutrition_card.dart';
 import 'package:brain_denner/uitls/constants/appImages/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import '../../../../../../../component/row_text/row_text.dart';
 import '../../../../../../../uitls/constants/appColors/app_colors.dart';
 class ProgressScreen extends StatefulWidget {
@@ -237,53 +235,12 @@ class _ProgressScreenState extends State<ProgressScreen> {
                   SizedBox(height: 24.h),
 
 
-
-                  Obx(() {
-                    final notes = Get.find<ProgressScreenController>().notes;
-
-                    if (notes.isEmpty) {
-                      return Text(
-                        "No notes yet.",
-                        style: TextStyle(color: Colors.white),
-                      );
-                    }
-
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: notes.map((note) {
-                        return Padding(
-                          padding: EdgeInsets.only(bottom: 6.h),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(top: 6.h),
-                                width: 6.w,
-                                height: 6.w,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                              SizedBox(width: 8.w),
-                              Expanded(
-                                child: Text(
-                                  note.text,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 20.sp,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }).toList(),
-                    );
-                  }),
-
-
+                  ColumnAppTextWithDot(
+                    valueWeight: FontWeight.w400,
+                    value1: '“Fried foods often spike later for me”',
+                    value2: '“Protein helps slow things down”',
+                    value3: '“Timing matters more than amount for fries”',
+                  ),
 
 
                   SizedBox(height: 30.h),
@@ -382,11 +339,52 @@ class _ProgressScreenState extends State<ProgressScreen> {
 
                   SizedBox(height: 8.h),
 
-                  ColumnAppTextWithDot(
-                    valueWeight: FontWeight.w400,
-                    value1: '"Spikes later if I eat this alone"',
-                    value2: '"Works better with protein"',
-                  ),
+
+
+                  Obx(() {
+                    final notes = Get.find<ProgressScreenController>().notes;
+
+                    if (notes.isEmpty) {
+                      return Text(
+                        "No notes yet.",
+                        style: TextStyle(color: Colors.white),
+                      );
+                    }
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: notes.map((note) {
+                        return Padding(
+                          padding: EdgeInsets.only(bottom: 6.h),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(top: 6.h),
+                                width: 6.w,
+                                height: 6.w,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              SizedBox(width: 8.w),
+                              Expanded(
+                                child: Text(
+                                  note.text,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20.sp,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    );
+                  }),
 
                   SizedBox(height: 10.h),
 

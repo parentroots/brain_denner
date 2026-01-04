@@ -1,9 +1,12 @@
+import 'package:brain_denner/component/app_button/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../../component/app_text/app_text.dart';
 import '../../../../../../../uitls/constants/appColors/app_colors.dart';
+import '../../../../../../../uitls/constants/appIcons/app_icons.dart';
 import '../../../../../../../uitls/constants/appImages/app_images.dart';
 
 class SubscriptionScreen extends StatelessWidget {
@@ -12,12 +15,21 @@ class SubscriptionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
 
       backgroundColor: AppColors.primaryColor,
       appBar: AppBar(
-        leading: InkWell(
-          onTap: () => Get.back(),
-          child: Image.asset(AppImages.backImage),
+        leadingWidth:70,
+        leading: Row(
+          children: [
+
+            SizedBox(width: 10.w,),
+            InkWell(
+              onTap: Get.back,
+              child: SizedBox(
+                  child: SvgPicture.asset(AppIcons.back)),
+            ),
+          ],
         ),
         centerTitle: true,
         title: AppText(
@@ -114,7 +126,17 @@ class SubscriptionScreen extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
+          
+          
+          Spacer(),
+          
+          AppButton(text: 'Save', onPressed: (){
+
+          }),
+
+
+          SizedBox(height: 40.h,),
 
 
         ],),

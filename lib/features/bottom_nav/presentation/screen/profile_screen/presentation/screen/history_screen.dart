@@ -1,10 +1,12 @@
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/widget/history_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../../component/app_text/app_text.dart';
 import '../../../../../../../uitls/constants/appColors/app_colors.dart';
+import '../../../../../../../uitls/constants/appIcons/app_icons.dart';
 import '../../../../../../../uitls/constants/appImages/app_images.dart';
 import '../../controller/history_controller.dart';
 
@@ -32,9 +34,17 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       appBar: AppBar(
-        leading: InkWell(
-          onTap: Get.back,
-          child: Image.asset(AppImages.backImage),
+        leadingWidth:70,
+        leading: Row(
+          children: [
+
+            SizedBox(width: 10.w,),
+            InkWell(
+              onTap: Get.back,
+              child: SizedBox(
+                  child: SvgPicture.asset(AppIcons.back)),
+            ),
+          ],
         ),
         backgroundColor: AppColors.primaryColor,
         centerTitle: true,

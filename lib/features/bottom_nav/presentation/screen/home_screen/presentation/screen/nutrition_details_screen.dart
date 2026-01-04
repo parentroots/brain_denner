@@ -5,8 +5,10 @@ import 'package:brain_denner/features/bottom_nav/presentation/screen/home_screen
 import 'package:brain_denner/uitls/constants/appImages/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../../../../../uitls/constants/appColors/app_colors.dart';
+import '../../../../../../../uitls/constants/appIcons/app_icons.dart';
 import '../controller/restaurant_details_controller.dart';
 import '../widget/nutrition_card.dart';
 
@@ -40,9 +42,17 @@ class NutritionDetailsScreen extends StatelessWidget {
           backgroundColor: AppColors.primaryColor,
           appBar: AppBar(
             backgroundColor: AppColors.primaryColor,
-            leading: InkWell(
-              onTap: Get.back,
-              child: Image.asset(AppImages.backImage),
+            leadingWidth:70,
+            leading: Row(
+              children: [
+
+                SizedBox(width: 10.w,),
+                InkWell(
+                  onTap: Get.back,
+                  child: SizedBox(
+                      child: SvgPicture.asset(AppIcons.back)),
+                ),
+              ],
             ),
             title: Text(food.name??"", style: TextStyle(color: Colors.white)),
             centerTitle: true,

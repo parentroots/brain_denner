@@ -1,91 +1,97 @@
 import 'package:brain_denner/component/app_text/app_text.dart';
-import 'package:brain_denner/config/appRoutes/app_routes.dart';
-import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/controller/edit_pofile_controller.dart';
 import 'package:brain_denner/uitls/constants/appColors/app_colors.dart';
 import 'package:brain_denner/uitls/constants/appImages/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
 import '../../../../../../../component/app_button/app_button.dart';
 import '../../../../../../../component/app_text_field/app_text_field.dart';
-import '../../../../../../auth/presentation/screen/sign_up_screen.dart';
-import '../../widget/profice_card.dart';
+import '../../controller/edit_pofile_controller.dart';
 
 class EditProfileScreen extends StatelessWidget {
   const EditProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Get.put(EditProfileController());
+    final controller = Get.put(EditProfileController());
 
     return Scaffold(
-
       backgroundColor: AppColors.primaryColor,
       appBar: AppBar(
         leading: InkWell(
           onTap: Get.back,
           child: Image.asset(AppImages.backImage),
+          
         ),
         backgroundColor: AppColors.primaryColor,
-        centerTitle: true,
-        title: AppText(text: 'Edit Profile', fontSize: 24),
+
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 13.w),
+        padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 20.h),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 25.h),
+            // ---------- Profile Image ----------
+            GetBuilder<EditProfileController>(
+              builder: (_) {
+                return GestureDetector(
+                  onTap: controller.pickImage,
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: 120.w,
+                        height: 120.h,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.grey[300],
+                          image: controller.profileImage != null
+                              ? DecorationImage(
+                            image: controller.profileImage!,
+                            fit: BoxFit.cover,
+                          )
+                              : null,
+                        ),
+                        child: controller.profileImage == null
+                            ? Icon(
+                          Icons.person,
+                          size: 100,
+                          color: Colors.grey[600],
+                        )
+                            : null,
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: Container(
+                          width: 40.w,
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                            color:  Colors.black,
+                            shape: BoxShape.circle,
 
-            // ✅ Image picker
-            Center(
-              child: GetBuilder<EditProfileController>(
-                builder: (controller) {
-                  return GestureDetector(
-                    onTap: controller.pickImage,
-                    child: ProfileCard(
-                      imageFile: controller.file,
-                      size: 120,
-                      onCameraTap: controller.pickImage,
-                    ),
-                  );
-                },
-              ),
+                          ),
+                          child:Image.asset(AppImages.camera),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
+
+            SizedBox(height: 14.h),
+
+            AppText(text: controller.name,fontSize: 24.sp,),
 
             SizedBox(height: 40.h),
 
-            AppText(
-              text: 'Name',
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-
-            SizedBox(height: 5.h),
-
             GetBuilder<EditProfileController>(
               builder: (controller) {
-                 return //TextField(
-                //   controller: controller.nameController,
-                //   style: const TextStyle(color: Colors.white),
-                //   decoration: InputDecoration(
-                //     hintText: "Enter your name",
-                //     hintStyle: const TextStyle(color: Colors.grey),
-                //     enabledBorder: OutlineInputBorder(
-                //       borderSide: const BorderSide(color: Colors.blue),
-                //       borderRadius: BorderRadius.circular(10),
-                //     ),
-                //     focusedBorder: OutlineInputBorder(
-                //       borderSide: const BorderSide(color: Colors.green, width: 2),
-                //       borderRadius: BorderRadius.circular(10),
-                //     ),
-                //   ),
-                // );
+                return AppTextField(
 
-                AppTextField(
                   hintSize: 18.sp,
-                  controller: controller.nameController, hintText: 'Enter your name',);
+                  controller: controller.nameController,
+                  hintText: "Enter Your Name",
+                );
               },
             ),
           ],
@@ -93,51 +99,18 @@ class EditProfileScreen extends StatelessWidget {
       ),
 
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(bottom: 70.h),
+        padding: EdgeInsets.only(bottom: 70.h, left: 13.w, right: 13.w),
         child: GetBuilder<EditProfileController>(
           builder: (controller) {
             return AppButton(
               isLoading: controller.isLoading,
               text: 'Save Changes',
               onPressed: () {
-                if (!controller.isLoading) {
-                  controller.editProfileUpdate();
-                }
+                if (!controller.isLoading) controller.editProfileUpdate();
               },
             );
           },
         ),
-      ),
-    );
-  }
-}
-
-class InfoWidget extends StatelessWidget {
-  final String title;
-  final String image;
-  final VoidCallback onTap;
-
-  const InfoWidget({
-    super.key,
-    required this.title,
-    required this.image,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 13.w),
-        height: 60.h,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(90.r),
-          gradient: LinearGradient(
-            colors: [Color(0xFF00243F), Color(0xFF082A45)],
-          ),
-        ),
-
       ),
     );
   }

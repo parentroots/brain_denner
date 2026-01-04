@@ -81,6 +81,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                        ),
                      ),
 
+                     SizedBox(height: 16.h,),
+
                      AppText(
                        text: AppString.confirmPassword,
                        color: AppColors.white,
@@ -88,8 +90,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                      Column(
                        children: [
-                         SizedBox(height: 16.h),
-
+                         SizedBox(height: 14.h),
                          Obx(
                                () => AppTextField(
                              obscureText:

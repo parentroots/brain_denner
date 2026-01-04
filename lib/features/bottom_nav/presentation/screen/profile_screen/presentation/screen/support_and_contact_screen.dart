@@ -3,10 +3,12 @@ import 'package:brain_denner/component/app_text_field/app_text_field.dart';
 import 'package:brain_denner/features/bottom_nav/presentation/screen/profile_screen/controller/support_and_contact_screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../../component/app_text/app_text.dart';
 import '../../../../../../../uitls/constants/appColors/app_colors.dart';
+import '../../../../../../../uitls/constants/appIcons/app_icons.dart';
 import '../../../../../../../uitls/constants/appImages/app_images.dart';
 
 class SupportAndContactScreen extends StatelessWidget {
@@ -19,13 +21,17 @@ class SupportAndContactScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: AppColors.primaryColor,
           appBar: AppBar(
-            leading: InkWell(
-              onTap: () => Get.back(),
-              child: SizedBox(
-                height: 31.h,
-                width: 31.w,
-                child: Image.asset(AppImages.backImage),
-              ),
+            leadingWidth:70,
+            leading: Row(
+              children: [
+
+                SizedBox(width: 10.w,),
+                InkWell(
+                  onTap: Get.back,
+                  child: SizedBox(
+                      child: SvgPicture.asset(AppIcons.back)),
+                ),
+              ],
             ),
             centerTitle: true,
             title: AppText(

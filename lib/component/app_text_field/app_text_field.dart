@@ -30,9 +30,8 @@ class AppTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // 🔥 height বাদ দেওয়া হয়েছে
       constraints: const BoxConstraints(
-        minHeight: 60, // single line height
+        minHeight: 40,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),

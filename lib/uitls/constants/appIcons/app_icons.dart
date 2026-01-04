@@ -6,4 +6,5 @@ static const String love='assets/icons/loveIcon.svg';
 static const String person='assets/icons/person.svg';
 static const String progress='assets/icons/progressIcon.svg';
 static const String logOut='assets/icons/logout.svg';
+static const String back='assets/icons/backSvg.svg';
 }

@@ -4,9 +4,11 @@ import 'package:brain_denner/uitls/constants/appImages/app_images.dart';
 import 'package:brain_denner/uitls/constants/appString/app_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../../config/appRoutes/app_routes.dart';
+import '../../../../../../../uitls/constants/appIcons/app_icons.dart';
 import '../../../../widget/search_box_widget.dart';
 import '../controller/restaurant_list_controller.dart';
 
@@ -18,24 +20,26 @@ class RestaurantListScreen extends StatefulWidget {
 }
 
 class _RestaurantListScreenState extends State<RestaurantListScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RestaurantListController>(
       init: RestaurantListController(),
       builder: (controller) {
-
         return Scaffold(
           backgroundColor: AppColors.primaryColor,
           appBar: AppBar(
-            leading: SizedBox(
-              height: 31.31.w,
-              width: 31.31.w,
-              child: InkWell(
-                onTap: Get.back,
-                  child: Image.asset(AppImages.backImage)),
-            ),
+              leadingWidth:70,
+              leading: Row(
+                children: [
+
+                  SizedBox(width: 10.w,),
+                  InkWell(
+                    onTap: Get.back,
+                    child: SizedBox(
+                        child: SvgPicture.asset(AppIcons.back)),
+                  ),
+                ],
+              ),
             backgroundColor: AppColors.primaryColor,
             centerTitle: true,
             title: AppText(
@@ -71,7 +75,6 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                       final data = controller.restaurantList[index];
                       return InkWell(
                         onTap: () {
-
                           Get.toNamed(
                             AppRoute.restaurantDetailsScreen,
                             arguments: <String, dynamic>{
@@ -79,8 +82,6 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                               "name": data.name,
                             },
                           );
-
-
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -94,16 +95,15 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                           ),
                           child: Row(
                             children: [
-                              // Image.asset(),
-
-                              SizedBox(width: 10),
+                              SizedBox(
+                                height:24.h,
+                                  width: 24.w,
+                                  child: Image.asset(AppImages.restaurant)),
+                              SizedBox(width: 15),
 
                               AppText(fontSize: 24.sp, text: data.name),
-
                             ],
                           ),
-
-
                         ),
                       );
                     },
@@ -111,10 +111,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                     separatorBuilder: (BuildContext context, int index) {
                       return SizedBox(height: 20.h);
                     },
-
-
                   ),
-
                 ),
 
                 Align(
@@ -125,10 +122,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                   ),
                 ),
 
-                SizedBox(height: 60.h,)
-
-
-
+                SizedBox(height: 60.h),
               ],
             ),
           ),
