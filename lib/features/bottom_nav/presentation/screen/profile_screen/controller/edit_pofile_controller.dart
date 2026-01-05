@@ -30,6 +30,7 @@ class EditProfileController extends GetxController {
   }
 
   // ---------------- Pick Image ----------------
+
   void pickImage() async {
     try {
       final XFile? photo = await picker.pickImage(
@@ -69,6 +70,7 @@ class EditProfileController extends GetxController {
   }
 
   // ---------------- Get image to show ----------------
+
   ImageProvider? get profileImage {
     if (file != null) return FileImage(file!);
     if (profileData.value?.image != null &&
