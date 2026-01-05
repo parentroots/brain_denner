@@ -8,6 +8,9 @@ class AppString {
   static const String itsAboutClarity =
       'It’s about clarity when food\n feels stressful — so you can feel more\n in control and keep living your life.';
   static const String whatthsiapp = 'What this app does For\nYou?';
+  static const String itsAboutClarity =
+      'It’s about clarity when food\n feels stressful — so you can feel more\n in control and keep living your life.';
+  static const String whatthsiapp = 'What this app does For\nYou?';
 
   static const String
   feelsStressFulSoYouCanFeelMoreInControlAndKeepLivingYourLife =
