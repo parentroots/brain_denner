@@ -16,10 +16,8 @@ class AccountSettings extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       appBar: AppBar(
-        leadingWidth:70,
         leading: Row(
           children: [
-
             SizedBox(width: 10.w,),
             InkWell(
               onTap: Get.back,

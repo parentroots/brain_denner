@@ -28,7 +28,7 @@ class _OnBoardingFirstScreenState extends State<OnBoardingFirstScreen> {
             children: [
               OnBoardingWidget(
                 headerText1: AppString.diabetesisconfusing,
-                bodyText: AppString.fastfoodbuddyhelps,
+                bodyText: AppString.fastFoodBuddyHelps,
                 endtext: AppString.nomorestaring,
                  headerTextSize: 24.sp,
                  bodyTextSize: 32.sp,

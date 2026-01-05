@@ -1,16 +1,14 @@
 class AppString {
   static const String diabetesisconfusing = 'Diabetes is confusing.';
-  static const String fastfoodbuddyhelps =
+  static const String fastFoodBuddyHelps =
       'Fast Food Buddy™\n helps you understand\n why things happen.';
   static const String Continue = 'Continue';
   static const String findFood = 'Find Food';
   static const String getStarted = 'Get Started';
   static const String itsAboutClarity =
       'It’s about clarity when food\n feels stressful — so you can feel more\n in control and keep living your life.';
-  static const String whatthsiapp = 'What this app does For\nYou?';
-  static const String itsAboutClarity =
-      'It’s about clarity when food\n feels stressful — so you can feel more\n in control and keep living your life.';
-  static const String whatthsiapp = 'What this app does For\nYou?';
+  static const String whatIsApp = 'What this app does For\nYou?';
+
 
   static const String
   feelsStressFulSoYouCanFeelMoreInControlAndKeepLivingYourLife =
@@ -41,10 +39,10 @@ class AppString {
   static const String update = 'Update';
   static const String verifyAccount = 'Verify Account';
   static const String welcomeBrian = 'Welcome, Brian';
-  static const String letsthinklhrough = 'Let’s think through your next meal';
+  static const String letsThinkThrough = 'Let’s think through your next meal';
   static const String searchFoodOrRestaurants = 'Search Food or Restaurants';
   static const String showRestaurants = 'Show Restaurants';
-  static const String todaysCarbs = 'Today’s Carbs';
+  static const String todayCarbs = 'Today’s Carbs';
   static const String fries = 'Fries';
   static const String chickenSandwich = 'Chicken Sandwich';
   static const String updatedMenusAvailable = 'Updated menus available';

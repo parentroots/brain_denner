@@ -40,7 +40,9 @@ class ChangePasswordScreenController extends GetxController {
       if (currentPasswordTEController.text.isEmpty ||
           newPasswordTEController.text.isEmpty ||
           confirmNewPasswordTEController.text.isEmpty) {
-        Get.snackbar('error', 'All Field is required');
+        Get.snackbar(
+            backgroundColor:Color(0xffffffff),
+            'error', 'All Field is required');
       }
 
       isLoading = true;
@@ -85,12 +87,15 @@ class ChangePasswordScreenController extends GetxController {
         update();
         Get.snackbar(
           "Failed",
-          "Status Code: ${response.statusCode}",
+          backgroundColor:Color(0xffffffff),
+          "Status Code: ${response.message}",
           snackPosition: SnackPosition.BOTTOM,
         );
       }
     } catch (e) {
-      Get.snackbar("Error", "Something went wrong");
+      Get.snackbar(
+          backgroundColor:Color(0xffffffff),
+          "Error", "Something went wrong");
       print("Error==============================: $e");
     } finally {
       isLoading = false;

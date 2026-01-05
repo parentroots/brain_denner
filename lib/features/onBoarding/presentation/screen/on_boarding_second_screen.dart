@@ -51,7 +51,7 @@ class _OnBoardingSecondScreenState extends State<OnBoardingSecondScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
 
-                  Text("${AppString.whatthsiapp}",style: TextStyle(color: AppColors.endcolors,fontSize: 36.sp,fontWeight: FontWeight.w600),),
+                  Text("${AppString.whatIsApp}",style: TextStyle(color: AppColors.endcolors,fontSize: 36.sp,fontWeight: FontWeight.w600),),
 
                   SizedBox(height: 20.h,),
 

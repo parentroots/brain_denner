@@ -72,6 +72,7 @@ class SupportAndContactScreenController extends GetxController {
         debugPrint("Support Message Successful${response.data}");
 
           Get.snackbar(
+            backgroundColor:Color(0xffffffff),
             "Success",
             response.data["message"] ?? "Support created successfully",
 

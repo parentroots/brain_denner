@@ -78,11 +78,9 @@ class EditProfileScreen extends StatelessWidget {
               },
             ),
 
-            SizedBox(height: 14.h),
+            // AppText(text:controller.name),
 
-            AppText(text: controller.name,fontSize: 24.sp,),
-
-            SizedBox(height: 40.h),
+            SizedBox(height: 26.h),
 
             GetBuilder<EditProfileController>(
               builder: (controller) {

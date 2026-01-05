@@ -92,6 +92,7 @@ class SignInController extends GetxController {
 
         Get.snackbar(
           "Login Failed",
+          backgroundColor:Color(0xffffffff),
           response.data?['message'] ?? "Invalid credentials",
         );
       }
@@ -101,7 +102,9 @@ class SignInController extends GetxController {
       update();
 
       debugPrint("Login Error: $e");
-      Get.snackbar("Error", "Something went wrong");
+      Get.snackbar(
+          backgroundColor:Color(0xffffffff),
+          "Error", "Something went wrong");
     }
   }
 

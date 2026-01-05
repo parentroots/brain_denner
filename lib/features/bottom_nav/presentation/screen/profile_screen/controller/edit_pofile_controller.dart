@@ -16,11 +16,12 @@ class EditProfileController extends GetxController {
   TextEditingController nameController = TextEditingController();
   final ImagePicker picker = ImagePicker();
 
-  String name=LocalStorage.myName;
 
   File? file;
   bool isLoading = false;
   var profileData = Rxn<ProfileDataModel>();
+
+ // late String name;
 
   @override
   void onInit() {
@@ -184,15 +185,23 @@ class EditProfileController extends GetxController {
           : response.data;
 
       profileData.value = ProfileDataModel.fromJson(jsonResponse['data']);
+       nameController.text = profileData.value?.name ?? "";
+      // name=profileData.value?.name??'';
       update();
+
     } else {
+
       Get.snackbar("Error", response.message ?? "Failed to load profile");
     }
+
   }
 
   @override
   void onClose() {
+
     nameController.dispose();
     super.onClose();
+
   }
+
 }

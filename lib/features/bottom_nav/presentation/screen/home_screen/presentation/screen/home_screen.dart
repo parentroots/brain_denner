@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   SizedBox(height: 10.h),
                   AppText(
-                    text: AppString.letsthinklhrough,
+                    text: AppString.letsThinkThrough,
                     fontSize: 20.sp,
                     color: AppColors.nextmealcolor,
                   ),

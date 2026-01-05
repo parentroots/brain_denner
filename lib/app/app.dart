@@ -16,6 +16,10 @@ class App extends StatelessWidget {
       splitScreenMode: true,
       builder: (_,child){
        return GetMaterialApp(
+
+         theme: ThemeData(
+
+         ),
          defaultTransition: Transition.fade,
          debugShowCheckedModeBanner: false,
          initialRoute: AppRoute.splashScreen,
